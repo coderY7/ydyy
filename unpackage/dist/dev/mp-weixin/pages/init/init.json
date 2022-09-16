@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "niu-guide": "/uni_modules/niu-guide/components/niu-guide/niu-guide"
+  }
+}

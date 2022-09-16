@@ -1,0 +1,1 @@
+<view class="container"><view>{{work.InfoTypeName}}</view><view>{{work.InfoContent}}</view><view>{{work.InfoDate}}</view><view>{{work.whoseFDBH}}</view></view>

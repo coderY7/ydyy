@@ -1,0 +1,1 @@
+<view class="content data-v-71ad41f4"><block wx:if="{{showGuide}}"><niu-guide vue-id="1e0302c0-1" fStyle="{{fStyle}}" layout="{{layout}}" elements="{{elements}}" data-ref="guide" class="data-v-71ad41f4 vue-ref" bind:__l="__l"></niu-guide></block></view>
