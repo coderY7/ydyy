@@ -205,18 +205,23 @@ var _api = __webpack_require__(/*! @/network/api.js */ 160); //
 //
 //
 //
-var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx'), fdbh: '' };}, onLoad: function onLoad() {if (uni.getStorageSync('login')) {uni.reLaunch({ url: '/pages/home/home' });}}, methods: { useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (rescheck.error_code == 0) {uni.setStorageSync("companyid", rescheck.companyid);_this.fdbh = rescheck.fdlist[0].fdbh;uni.setStorageSync("fdbh", rescheck.fdlist[0].fdbh);_this.selectRange = [];for (var u in rescheck.fdlist) {_this.selectRange.push({ "value": rescheck.fdlist[u].fdbh, "text": rescheck.fdlist[u].fdmc });
+var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx'), fdbh: '', selectRange: '' };}, onLoad: function onLoad() {this.userid = uni.getStorageSync('scandata').userid;if (uni.getStorageSync('login')) {uni.reLaunch({ url: '/pages/home/home' });}}, methods: { //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.selectRange = [];for (var u in res.fdlist) {
+            _this.selectRange.push({
+              "value": res.fdlist[u].fdbh,
+              "text": res.fdlist[u].fdmc });
 
           }
         } else {
           uni.showToast({
             icon: 'none',
-            title: rescheck.message });
+            title: res.message });
 
 
         }
       });
     },
+    //登录
     bindLogin: function bindLogin() {var _this2 = this;
       if (this.userid.length != 5) {
         uni.showToast({
@@ -243,8 +248,8 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
         "ipaddress": uni.getStorageSync("ip") };
 
       (0, _api.usercheck)(logindata).then(function (res) {
-        if (res.err_code == '0') {
-          uni.setStorageSync('dlmc', res.data[0].dlmc);
+        if (res.message == 'success') {
+          uni.setStorageSync('dlmc', res.companyinfo.erp_fdmc);
           uni.setStorageSync('login', true);
           // 获取用户信息
           uni.login({
@@ -276,10 +281,10 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
         } else {
           uni.showToast({
             icon: 'none',
-            title: res[0].Descrption });
+            title: res.message });
 
         }
-        // uni.navigateBack();
+
       });
     },
     //微信登录

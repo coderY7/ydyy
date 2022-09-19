@@ -109,7 +109,25 @@ __webpack_require__.r(__webpack_exports__);
     if (!uni.getStorageSync('openid')) {
       console.log('登录退出了，请重新登录');
     }
-    console.log('App Show');
+    // 获取设备的ip地址
+    uni.getStorage({
+      key: 'ip',
+      fail: function fail(err) {
+        uni.request({
+          url: "http://pv.sohu.com/cityjson?ie=utf-8",
+          data: {},
+          method: "POST",
+          header: {
+            "Content-Type": "application/json" },
+
+          success: function success(res) {
+            var reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+            var ip = reg.exec(res.data);
+            uni.setStorageSync("ip", ip[0]);
+          } });
+
+      } });
+
   },
   onHide: function onHide() {
     console.log('App Hide');

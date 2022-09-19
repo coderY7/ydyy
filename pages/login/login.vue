@@ -44,13 +44,15 @@
 	export default {
 		data() {
 			return {
-				userid: '',
+				userid:'',
 				password: '',
         iswx:uni.getStorageSync('iswx'),
-        fdbh:''
+        fdbh:'',
+        selectRange:''
 			};
 		},
 		onLoad() {
+      this.userid=uni.getStorageSync('scandata').userid
 			if (uni.getStorageSync('login')) {
 				uni.reLaunch({
 					url: '/pages/home/home'
@@ -58,31 +60,34 @@
 			}
 		},
 		methods: {
+      //用户验证
 			useryz(){
 				let user={
 					userid:this.userid
 				}
 				usercheckapp(user).then((res)=>{
-          if(rescheck.error_code==0){
-            uni.setStorageSync("companyid", rescheck.companyid)
-            this.fdbh=rescheck.fdlist[0].fdbh
-            uni.setStorageSync("fdbh", rescheck.fdlist[0].fdbh)
+          if(res.error_code==0){
+            uni.setStorageSync("companyid", res.companyid)
+            this.fdbh=res.fdlist[0].fdbh
+
+            uni.setStorageSync("fdbh", res.fdlist[0].fdbh)
             this.selectRange=[]
-            for(var u in rescheck.fdlist){
+            for(var u in res.fdlist){
               this.selectRange.push({
-                "value":rescheck.fdlist[u].fdbh,
-                "text":rescheck.fdlist[u].fdmc
+                "value":res.fdlist[u].fdbh,
+                "text":res.fdlist[u].fdmc
               })
             }
           }else{
             uni.showToast({
               icon: 'none',
-              title: rescheck.message
+              title: res.message
             });
 
           }
 				})
 			},
+      //登录
 			bindLogin() {
 				if (this.userid.length != 5) {
 					uni.showToast({
@@ -109,8 +114,8 @@
           "ipaddress": uni.getStorageSync("ip")
 				}
 				usercheck(logindata).then((res) => {
-					if (res.err_code == '0') {
-						uni.setStorageSync('dlmc',res.data[0].dlmc)
+					if (res.message == 'success') {
+						uni.setStorageSync('dlmc',res.companyinfo.erp_fdmc)
 						uni.setStorageSync('login', true)
 						// 获取用户信息
 						uni.login({
@@ -142,10 +147,10 @@
 					} else {
 						uni.showToast({
 							icon: 'none',
-							title: res[0].Descrption
+							title: res.message
 						});
 					}
-					// uni.navigateBack();
+
 				})
 			},
       //微信登录
