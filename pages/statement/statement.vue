@@ -5,15 +5,15 @@
 		<view class="unit1">
 			<ul>
 				<li v-for="(item,index) in Alllist" :key="index">
-				<view class="unit1_box" @click="enter(item)">
-				<view class="boxs">
-					<view>
-						
+					<view class="unit1_box" @click="enter(item)">
+						<view class="boxs">
+							<view>
+
+							</view>
+							<view>{{item.report}}</view>
+						</view>
+
 					</view>
-					<view>{{item.report}}</view>
-				</view>
-			
-				</view>
 				</li>
 			</ul>
 		</view>
@@ -21,35 +21,58 @@
 </template>
 
 <script>
-	import{reportForm}from"../../network/api.js"
+	import {
+		reportForm,
+		usercheckapp
+	} from "../../network/api.js"
 	export default {
 		data() {
 			return {
-				Alllist:[],
-				title:'报表查询',
-querylist:[{name:'商家销售'},{name:'收银缴款查询'},{name:'销售日报'},{name:'部门分析'},{name:'大类分析'},{name:'门店分析'},{name:'大类指标'},{name:'应付账款'},{name:'商品详情'}]
+				Alllist: [],
+				title: '报表查询',
+				querylist: [{
+					name: '商家销售'
+				}, {
+					name: '收银缴款查询'
+				}, {
+					name: '销售日报'
+				}, {
+					name: '部门分析'
+				}, {
+					name: '大类分析'
+				}, {
+					name: '门店分析'
+				}, {
+					name: '大类指标'
+				}, {
+					name: '应付账款'
+				}, {
+					name: '商品详情'
+				}]
 			};
 		},
 		onLoad() {
 			this.isreportForm()
 		},
-		methods:{
+		methods: {
 			//获取报表
 			isreportForm() {
-				let reportFormdata={
-					sn:uni.getStorageSync('sn'),
-					vtype:'All'
+				
+				let reportFormdata = {
+					access_token: '',
+					vtype: 'All',
+					userid: uni.getStorageSync('userid')
 				}
-				reportForm(reportFormdata).then((res)=>{
-					console.log('报表查询',res)
-					this.Alllist=res.data
+				reportForm(reportFormdata).then((res) => {
+					console.log('报表查询', res)
+					this.Alllist = res.data
 				})
 			},
-			enter(item){
-				let items=JSON.stringify(item)
+			enter(item) {
+				let items = JSON.stringify(item)
 				console.log(items)
 				uni.navigateTo({
-					url:`../../pagesA/condition/condition?item=${items}`
+					url: `../../pagesA/condition/condition?item=${items}`
 				})
 			}
 		}
@@ -57,50 +80,54 @@ querylist:[{name:'商家销售'},{name:'收银缴款查询'},{name:'销售日报
 </script>
 
 <style lang="scss">
-	.container{
+	.container {
 		margin: 0 20rpx;
 	}
+
 	ul {
 		padding: 0;
 	}
-	
-	li { 
-	  list-style: none;
-	  text-align: center;
-	  border-radius: 5px;
-	  background: skyblue;
-	}
-	ul {
-	  display: flex;
-	  flex-wrap: wrap;
-	  width: 100%;
-	  height: 100%;
-	}
+
 	li {
-	  width: 30%;
+		list-style: none;
+		text-align: center;
+		border-radius: 5px;
+		background: skyblue;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		height: 100%;
+	}
+
+	li {
+		width: 30%;
 		height: 200rpx;
-	  margin-right: 5%;
-	  margin-bottom: 5%;
+		margin-right: 5%;
+		margin-bottom: 5%;
 	}
-	
-	li:nth-of-type(3n){ 
-	  margin-right: 0;
+
+	li:nth-of-type(3n) {
+		margin-right: 0;
 	}
-	
-	li:nth-of-type(n+99){ 
-	  margin-bottom: 0;
+
+	li:nth-of-type(n+99) {
+		margin-bottom: 0;
 	}
-	.unit1_box{
+
+	.unit1_box {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		.boxs{
+
+		.boxs {
 			display: flex;
 			flex-direction: column;
-			
+
 		}
 	}
-	
 </style>

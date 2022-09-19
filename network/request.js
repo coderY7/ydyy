@@ -4,7 +4,8 @@ module.exports = (vm) => {
 	uni.$u.http.setConfig((config) => {
 		/* config 为默认全局配置*/
 		// config.baseURL = "http://webapibeta.mzsale.com/mzato/main/app"; /* 根域名 */
-		config.baseURL = "http://webapibeta.mzsale.com/mzato"; /* 根域名 */
+		// config.baseURL = "http://webapibeta.mzsale.com/"; /* 根域名 */
+		config.baseURL = "http://self.mzsale.com"
 		return config
 	})
 

@@ -200,8 +200,31 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 160); //
 //
 //
 //
-var _default = { data: function data() {return { Alllist: [], title: '报表查询', querylist: [{ name: '商家销售' }, { name: '收银缴款查询' }, { name: '销售日报' }, { name: '部门分析' }, { name: '大类分析' }, { name: '门店分析' }, { name: '大类指标' }, { name: '应付账款' }, { name: '商品详情' }] };}, onLoad: function onLoad() {this.isreportForm();}, methods: { //获取报表
-    isreportForm: function isreportForm() {var _this = this;var reportFormdata = { sn: uni.getStorageSync('sn'), vtype: 'All' };(0, _api.reportForm)(reportFormdata).then(function (res) {console.log('报表查询', res);_this.Alllist = res.data;});},
+var _default = { data: function data() {return { Alllist: [], title: '报表查询', querylist: [{ name: '商家销售' }, { name: '收银缴款查询' }, { name: '销售日报' }, { name: '部门分析' }, { name: '大类分析' }, { name: '门店分析' }, { name: '大类指标' },
+      {
+        name: '应付账款' },
+      {
+        name: '商品详情' }] };
+
+
+  },
+  onLoad: function onLoad() {
+    this.isreportForm();
+  },
+  methods: {
+    //获取报表
+    isreportForm: function isreportForm() {var _this = this;
+
+      var reportFormdata = {
+        access_token: '',
+        vtype: 'All',
+        userid: uni.getStorageSync('userid') };
+
+      (0, _api.reportForm)(reportFormdata).then(function (res) {
+        console.log('报表查询', res);
+        _this.Alllist = res.data;
+      });
+    },
     enter: function enter(item) {
       var items = JSON.stringify(item);
       console.log(items);

@@ -9,6 +9,7 @@
 				<image class="img" src="/static/shilu-login/1.png"></image>
 				<input class="sl-input" v-model="userid" type="number" maxlength="6" placeholder="输入工号" />
 			</view>
+			<button @click="useryz()">用户验证</button>
 			<view class="list-call">
 				<image class="img" src="/static/shilu-login/2.png"></image>
 				<input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
@@ -37,14 +38,16 @@
 	import {
 		usercheck,
 		userfast,
-		getopenid
+		getopenid,
+		usercheckapp
 	} from "@/network/api.js";
 	export default {
 		data() {
 			return {
 				userid: '',
 				password: '',
-        iswx:uni.getStorageSync('iswx')
+        iswx:uni.getStorageSync('iswx'),
+        fdbh:''
 			};
 		},
 		onLoad() {
@@ -55,6 +58,31 @@
 			}
 		},
 		methods: {
+			useryz(){
+				let user={
+					userid:this.userid
+				}
+				usercheckapp(user).then((res)=>{
+          if(rescheck.error_code==0){
+            uni.setStorageSync("companyid", rescheck.companyid)
+            this.fdbh=rescheck.fdlist[0].fdbh
+            uni.setStorageSync("fdbh", rescheck.fdlist[0].fdbh)
+            this.selectRange=[]
+            for(var u in rescheck.fdlist){
+              this.selectRange.push({
+                "value":rescheck.fdlist[u].fdbh,
+                "text":rescheck.fdlist[u].fdmc
+              })
+            }
+          }else{
+            uni.showToast({
+              icon: 'none',
+              title: rescheck.message
+            });
+
+          }
+				})
+			},
 			bindLogin() {
 				if (this.userid.length != 5) {
 					uni.showToast({
@@ -71,11 +99,14 @@
 					return;
 				}
 				let logindata = {
-					"uuid": uni.getStorageSync("uuid"),
+          "access_token": "",
+          "companyid": uni.getStorageSync("companyid"),
+          "computerid": uni.getStorageSync("uuid"),//设备唯一标识
+          "fdbh": this.fdbh,
 					"userid": this.userid,
 					"password": this.password,
-					"phonename": uni.getStorageSync("model"),
-					"dowhat": "login"
+          "vtype": "login",
+          "ipaddress": uni.getStorageSync("ip")
 				}
 				usercheck(logindata).then((res) => {
 					if (res.err_code == '0') {

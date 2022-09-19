@@ -766,8 +766,8 @@ function populateParameters(result) {var _result$brand =
     appVersion: "1.0.0",
     appVersionCode: "100",
     appLanguage: getAppLanguage(hostLanguage),
-    uniCompileVersion: "3.6.2",
-    uniRuntimeVersion: "3.6.2",
+    uniCompileVersion: "3.6.3",
+    uniRuntimeVersion: "3.6.3",
     uniPlatform: undefined || "mp-weixin",
     deviceBrand: deviceBrand,
     deviceModel: model,
@@ -2359,7 +2359,6 @@ function parseBasePage(vuePageOptions, _ref6)
   var pageOptions = parseComponent(vuePageOptions);
 
   initHooks(pageOptions.methods, hooks$1, vuePageOptions);
-  initUnknownHooks(pageOptions.methods, vuePageOptions);
 
   pageOptions.methods.onLoad = function (query) {
     this.options = query;
@@ -2371,6 +2370,7 @@ function parseBasePage(vuePageOptions, _ref6)
     this.$vm.$mp.query = query; // 兼容 mpvue
     this.$vm.__call_hook('onLoad', query);
   };
+  initUnknownHooks(pageOptions.methods, vuePageOptions, ['onReady']);
 
   return pageOptions;
 }
@@ -18351,7 +18351,8 @@ module.exports = function (vm) {
   uni.$u.http.setConfig(function (config) {
     /* config 为默认全局配置*/
     // config.baseURL = "http://webapibeta.mzsale.com/mzato/main/app"; /* 根域名 */
-    config.baseURL = "http://webapibeta.mzsale.com/mzato"; /* 根域名 */
+    // config.baseURL = "http://webapibeta.mzsale.com/"; /* 根域名 */
+    config.baseURL = "http://self.mzsale.com";
     return config;
   });
 
@@ -18633,7 +18634,7 @@ function _default() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.reportForm = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.reportForm = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.usercheckapp = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
 
 // post请求，获取菜单
 //export const postMenu = (params, config = {}) => http.post("/ebapi/public_api/index", params, config)
@@ -18641,135 +18642,137 @@ function _default() {
 //export const getMenu = (data) => http.get("/ebapi/public_api/index", data)
 
 //商家预付款
-var businessprepay = function businessprepay(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/businessprepay", params, config);};exports.businessprepay = businessprepay;
-var sendmessage = function sendmessage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/sendmessage", params, config);};
+var businessprepay = function businessprepay(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/businessprepay", params, config);};exports.businessprepay = businessprepay;
+var sendmessage = function sendmessage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/sendmessage", params, config);};
 //永续采购 流程图 公用接口
-exports.sendmessage = sendmessage;var commonMain = function commonMain(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main", params, config);};
+exports.sendmessage = sendmessage;var commonMain = function commonMain(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main", params, config);};
 
 //手机验证码
-exports.commonMain = commonMain;var bindphone = function bindphone(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/bindphone", params, config);};
+exports.commonMain = commonMain;var bindphone = function bindphone(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/bindphone", params, config);};
 //用户注册接口
-exports.bindphone = bindphone;var usercheck = function usercheck(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/usercheck", params, config);};
+exports.bindphone = bindphone;var usercheck = function usercheck(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/usercheck", params, config);};
 //检测门店是否在线门店接口
-exports.usercheck = usercheck;var ckonlinefd = function ckonlinefd(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/ckonlinefd", params, config);};
+exports.usercheck = usercheck;var ckonlinefd = function ckonlinefd(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/ckonlinefd", params, config);};
+//用户验证
+exports.ckonlinefd = ckonlinefd;var usercheckapp = function usercheckapp(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzsale/web/login/usercheckapp", params, config);};
 //第三方登录
-exports.ckonlinefd = ckonlinefd;var logintype = function logintype(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/logintype", params, config);};
+exports.usercheckapp = usercheckapp;var logintype = function logintype(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/logintype", params, config);};
 //
-exports.logintype = logintype;var sendCheck = function sendCheck(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/sendCheck", params, config);};
+exports.logintype = logintype;var sendCheck = function sendCheck(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/sendCheck", params, config);};
 //微信获取openid
-exports.sendCheck = sendCheck;var getopenid = function getopenid(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getopenid", params, config);};
+exports.sendCheck = sendCheck;var getopenid = function getopenid(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getopenid", params, config);};
 
 //三方验证
-exports.getopenid = getopenid;var userfast = function userfast(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/userfast", params, config);};
+exports.getopenid = getopenid;var userfast = function userfast(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/userfast", params, config);};
 //登录日志
-exports.userfast = userfast;var getlogin = function getlogin(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getlogin", params, config);};
+exports.userfast = userfast;var getlogin = function getlogin(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getlogin", params, config);};
 //问题反馈
-exports.getlogin = getlogin;var getQuestion = function getQuestion(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getQuestion", params, config);};
+exports.getlogin = getlogin;var getQuestion = function getQuestion(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getQuestion", params, config);};
 //公告拉取,验收完成处理
-exports.getQuestion = getQuestion;var oaNoticec = function oaNoticec(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/oaNoticec", params, config);};
+exports.getQuestion = getQuestion;var oaNoticec = function oaNoticec(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/oaNoticec", params, config);};
 //获取最新工作信息
-exports.oaNoticec = oaNoticec;var oaWorkFlow = function oaWorkFlow(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/oaWorkFlow", params, config);};
+exports.oaNoticec = oaNoticec;var oaWorkFlow = function oaWorkFlow(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/oaWorkFlow", params, config);};
 // app获取首页仪表盘分析数据
-exports.oaWorkFlow = oaWorkFlow;var getpctodayssale = function getpctodayssale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getpctodayssale", params, config);};
+exports.oaWorkFlow = oaWorkFlow;var getpctodayssale = function getpctodayssale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getpctodayssale", params, config);};
 //工作流快速处理
-exports.getpctodayssale = getpctodayssale;var oaWorkFlowWCk = function oaWorkFlowWCk(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/oaWorkFlowWCk", params, config);};
+exports.getpctodayssale = getpctodayssale;var oaWorkFlowWCk = function oaWorkFlowWCk(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/oaWorkFlowWCk", params, config);};
 //公告内容预览
-exports.oaWorkFlowWCk = oaWorkFlowWCk;var getnotice = function getnotice(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getnotice", params, config);};
+exports.oaWorkFlowWCk = oaWorkFlowWCk;var getnotice = function getnotice(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getnotice", params, config);};
 //公告回复操作
-exports.getnotice = getnotice;var oaNoticeRey = function oaNoticeRey(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/oaNoticeRey", params, config);};
+exports.getnotice = getnotice;var oaNoticeRey = function oaNoticeRey(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/oaNoticeRey", params, config);};
 //应用检查更新
-exports.oaNoticeRey = oaNoticeRey;var appCheckVersion = function appCheckVersion(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/appCheckVersion", params, config);};
+exports.oaNoticeRey = oaNoticeRey;var appCheckVersion = function appCheckVersion(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/appCheckVersion", params, config);};
 //工作流内容预览
-exports.appCheckVersion = appCheckVersion;var getDJdata = function getDJdata(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getDJdata", params, config);};
+exports.appCheckVersion = appCheckVersion;var getDJdata = function getDJdata(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getDJdata", params, config);};
 //工作流内容处理
-exports.getDJdata = getDJdata;var oaNoticeCk = function oaNoticeCk(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/oaNoticeCk", params, config);};
+exports.getDJdata = getDJdata;var oaNoticeCk = function oaNoticeCk(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/oaNoticeCk", params, config);};
 //OA与APP获取必要信息
-exports.oaNoticeCk = oaNoticeCk;var getother = function getother(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getother", params, config);};
+exports.oaNoticeCk = oaNoticeCk;var getother = function getother(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getother", params, config);};
 
 //商品采购接口
 //更新商店信息
-exports.getother = getother;var getFenDian = function getFenDian(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getFenDian", params, config);};
+exports.getother = getother;var getFenDian = function getFenDian(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getFenDian", params, config);};
 //商品上传更新
-exports.getFenDian = getFenDian;var uploadgoshoping = function uploadgoshoping(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/uploadgoshoping", params, config);};
+exports.getFenDian = getFenDian;var uploadgoshoping = function uploadgoshoping(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/uploadgoshoping", params, config);};
 //在线查找商品
-exports.uploadgoshoping = uploadgoshoping;var searchGoods = function searchGoods(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/searchGoods", params, config);};
+exports.uploadgoshoping = uploadgoshoping;var searchGoods = function searchGoods(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/searchGoods", params, config);};
 //在线查找商家
-exports.searchGoods = searchGoods;var searchSupplier = function searchSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/searchSupplier", params, config);};
+exports.searchGoods = searchGoods;var searchSupplier = function searchSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/searchSupplier", params, config);};
 //更新供货方式信息
-exports.searchSupplier = searchSupplier;var getSupplyType = function getSupplyType(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getSupplyType", params, config);};
+exports.searchSupplier = searchSupplier;var getSupplyType = function getSupplyType(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getSupplyType", params, config);};
 //更新部门信息
-exports.getSupplyType = getSupplyType;var getDepart = function getDepart(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getDepart", params, config);};
+exports.getSupplyType = getSupplyType;var getDepart = function getDepart(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getDepart", params, config);};
 
 //报表查询接口
 //更新商家信息
-exports.getDepart = getDepart;var getSupplier = function getSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getSupplier", params, config);};
+exports.getDepart = getDepart;var getSupplier = function getSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getSupplier", params, config);};
 //商家销售
-exports.getSupplier = getSupplier;var checkSjSale = function checkSjSale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/checkSjSale", params, config);};
+exports.getSupplier = getSupplier;var checkSjSale = function checkSjSale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/checkSjSale", params, config);};
 //收银缴款查询
-exports.checkSjSale = checkSjSale;var getQuerySyySaleJK = function getQuerySyySaleJK(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getQuerySyySaleJK", params, config);};
+exports.checkSjSale = checkSjSale;var getQuerySyySaleJK = function getQuerySyySaleJK(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getQuerySyySaleJK", params, config);};
 //销售日报
-exports.getQuerySyySaleJK = getQuerySyySaleJK;var saleCWbb = function saleCWbb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/saleCWbb", params, config);};
+exports.getQuerySyySaleJK = getQuerySyySaleJK;var saleCWbb = function saleCWbb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/saleCWbb", params, config);};
 //部门分析
-exports.saleCWbb = saleCWbb;var queryBMSalebb = function queryBMSalebb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/queryBMSalebb", params, config);};
+exports.saleCWbb = saleCWbb;var queryBMSalebb = function queryBMSalebb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/queryBMSalebb", params, config);};
 //大类分析
-exports.queryBMSalebb = queryBMSalebb;var fdSuperSale = function fdSuperSale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/fdSuperSale", params, config);};
+exports.queryBMSalebb = queryBMSalebb;var fdSuperSale = function fdSuperSale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/fdSuperSale", params, config);};
 //门店分析
-exports.fdSuperSale = fdSuperSale;var fdSaleAnalyze = function fdSaleAnalyze(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/fdSaleAnalyze", params, config);};
+exports.fdSuperSale = fdSuperSale;var fdSaleAnalyze = function fdSaleAnalyze(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/fdSaleAnalyze", params, config);};
 //大类指标
-exports.fdSaleAnalyze = fdSaleAnalyze;var fdSPTypeAnalyze = function fdSPTypeAnalyze(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/fdSPTypeAnalyze", params, config);};
+exports.fdSaleAnalyze = fdSaleAnalyze;var fdSPTypeAnalyze = function fdSPTypeAnalyze(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/fdSPTypeAnalyze", params, config);};
 //应付账款
-exports.fdSPTypeAnalyze = fdSPTypeAnalyze;var cwsjjxcInfo = function cwsjjxcInfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/cwsjjxcInfo", params, config);};
+exports.fdSPTypeAnalyze = fdSPTypeAnalyze;var cwsjjxcInfo = function cwsjjxcInfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/cwsjjxcInfo", params, config);};
 //商品详情
-exports.cwsjjxcInfo = cwsjjxcInfo;var spkcinfo = function spkcinfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/spkcinfo", params, config);};
+exports.cwsjjxcInfo = cwsjjxcInfo;var spkcinfo = function spkcinfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/spkcinfo", params, config);};
 //商品库存详情
-exports.spkcinfo = spkcinfo;var qySpkcinfo = function qySpkcinfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/qySpkcinfo", params, config);};
+exports.spkcinfo = spkcinfo;var qySpkcinfo = function qySpkcinfo(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/qySpkcinfo", params, config);};
 //销售客单统计
-exports.qySpkcinfo = qySpkcinfo;var custombb = function custombb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/custombb", params, config);};
+exports.qySpkcinfo = qySpkcinfo;var custombb = function custombb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/custombb", params, config);};
 //顾客消费分析
-exports.custombb = custombb;var query002 = function query002(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/query002", params, config);};
+exports.custombb = custombb;var query002 = function query002(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/query002", params, config);};
 //商品销售综合
-exports.query002 = query002;var querySPSalebb = function querySPSalebb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/querySPSalebb", params, config);};
+exports.query002 = query002;var querySPSalebb = function querySPSalebb(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/querySPSalebb", params, config);};
 //实时获取报表数据
-exports.querySPSalebb = querySPSalebb;var getAPPSaleReport = function getAPPSaleReport(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getAPPSaleReport", params, config);};
+exports.querySPSalebb = querySPSalebb;var getAPPSaleReport = function getAPPSaleReport(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getAPPSaleReport", params, config);};
 //获取采购数据
-exports.getAPPSaleReport = getAPPSaleReport;var getCGDdata = function getCGDdata(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getCGDdata", params, config);};
+exports.getAPPSaleReport = getAPPSaleReport;var getCGDdata = function getCGDdata(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getCGDdata", params, config);};
 //验收完成处理
-exports.getCGDdata = getCGDdata;var getCGDdataCK = function getCGDdataCK(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getCGDdataCK", params, config);};
+exports.getCGDdata = getCGDdata;var getCGDdataCK = function getCGDdataCK(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getCGDdataCK", params, config);};
 //获取实时报表数据
-exports.getCGDdataCK = getCGDdataCK;var getToDaySale = function getToDaySale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getToDaySale", params, config);};
+exports.getCGDdataCK = getCGDdataCK;var getToDaySale = function getToDaySale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getToDaySale", params, config);};
 //综合报表
-exports.getToDaySale = getToDaySale;var reportForm = function reportForm(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/reportForm", params, config);};
+exports.getToDaySale = getToDaySale;var reportForm = function reportForm(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/reportForm", params, config);};
 
 //商品补货接口
 //离线上传补货单
-exports.reportForm = reportForm;var uploadList = function uploadList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/uploadList", params, config);};
+exports.reportForm = reportForm;var uploadList = function uploadList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/uploadList", params, config);};
 //获取永续补货数据
-exports.uploadList = uploadList;var getYXBHData = function getYXBHData(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getYXBHData", params, config);};
+exports.uploadList = uploadList;var getYXBHData = function getYXBHData(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getYXBHData", params, config);};
 
 //商品入库
 //更新仓库信息
-exports.getYXBHData = getYXBHData;var getCheckStorage = function getCheckStorage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getCheckStorage", params, config);};
+exports.getYXBHData = getYXBHData;var getCheckStorage = function getCheckStorage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getCheckStorage", params, config);};
 //离线上传入库单
-exports.getCheckStorage = getCheckStorage;var uploadstorage = function uploadstorage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/uploadstorage", params, config);};
+exports.getCheckStorage = getCheckStorage;var uploadstorage = function uploadstorage(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/uploadstorage", params, config);};
 //查询商品库存概况
-exports.uploadstorage = uploadstorage;var getGoodsStock = function getGoodsStock(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getGoodsStock", params, config);};
+exports.uploadstorage = uploadstorage;var getGoodsStock = function getGoodsStock(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getGoodsStock", params, config);};
 //商品拣货处理
-exports.getGoodsStock = getGoodsStock;var getPickArea = function getPickArea(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/getPickArea", params, config);};
+exports.getGoodsStock = getGoodsStock;var getPickArea = function getPickArea(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getPickArea", params, config);};
 
 //商品盘点接口
 //离线盘点单上传
-exports.getPickArea = getPickArea;var uploadCheckList = function uploadCheckList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/uploadCheckList", params, config);};
+exports.getPickArea = getPickArea;var uploadCheckList = function uploadCheckList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/uploadCheckList", params, config);};
 
 //录标价签
 //上传标价签
-exports.uploadCheckList = uploadCheckList;var uploadLabelList = function uploadLabelList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/uploadLabelList", params, config);};
+exports.uploadCheckList = uploadCheckList;var uploadLabelList = function uploadLabelList(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/uploadLabelList", params, config);};
 //永续补货 上传
-exports.uploadLabelList = uploadLabelList;var upload = function upload(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/upload", params, config);};
+exports.uploadLabelList = uploadLabelList;var upload = function upload(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/upload", params, config);};
 
 
 //手动生成离线包
 //手动生成离线数据包
-exports.upload = upload;var eCAppBaseData = function eCAppBaseData(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/main/app/eCAppBaseData", params, config);};exports.eCAppBaseData = eCAppBaseData;
+exports.upload = upload;var eCAppBaseData = function eCAppBaseData(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/eCAppBaseData", params, config);};exports.eCAppBaseData = eCAppBaseData;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

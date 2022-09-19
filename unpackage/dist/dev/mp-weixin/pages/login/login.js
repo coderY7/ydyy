@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! @/network/api.js */ 160); //
 //
 //
@@ -203,13 +204,43 @@ var _api = __webpack_require__(/*! @/network/api.js */ 160); //
 //
 //
 //
-var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx') };}, onLoad: function onLoad() {if (uni.getStorageSync('login')) {uni.reLaunch({ url: '/pages/home/home' });}}, methods: { bindLogin: function bindLogin() {var _this = this;if (this.userid.length != 5) {uni.showToast({ icon: 'none', title: '工号不正确' });return;}if (this.password.length < 4) {uni.showToast({ icon: 'none', title: '密码不正确' });return;}
+//
+var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx'), fdbh: '' };}, onLoad: function onLoad() {if (uni.getStorageSync('login')) {uni.reLaunch({ url: '/pages/home/home' });}}, methods: { useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (rescheck.error_code == 0) {uni.setStorageSync("companyid", rescheck.companyid);_this.fdbh = rescheck.fdlist[0].fdbh;uni.setStorageSync("fdbh", rescheck.fdlist[0].fdbh);_this.selectRange = [];for (var u in rescheck.fdlist) {_this.selectRange.push({ "value": rescheck.fdlist[u].fdbh, "text": rescheck.fdlist[u].fdmc });
+
+          }
+        } else {
+          uni.showToast({
+            icon: 'none',
+            title: rescheck.message });
+
+
+        }
+      });
+    },
+    bindLogin: function bindLogin() {var _this2 = this;
+      if (this.userid.length != 5) {
+        uni.showToast({
+          icon: 'none',
+          title: '工号不正确' });
+
+        return;
+      }
+      if (this.password.length < 4) {
+        uni.showToast({
+          icon: 'none',
+          title: '密码不正确' });
+
+        return;
+      }
       var logindata = {
-        "uuid": uni.getStorageSync("uuid"),
+        "access_token": "",
+        "companyid": uni.getStorageSync("companyid"),
+        "computerid": uni.getStorageSync("uuid"), //设备唯一标识
+        "fdbh": this.fdbh,
         "userid": this.userid,
         "password": this.password,
-        "phonename": uni.getStorageSync("model"),
-        "dowhat": "login" };
+        "vtype": "login",
+        "ipaddress": uni.getStorageSync("ip") };
 
       (0, _api.usercheck)(logindata).then(function (res) {
         if (res.err_code == '0') {
@@ -232,7 +263,7 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
                 //存储openid
                 uni.setStorageSync('openid', res.openid);
                 uni.setStorageSync('session_key', res.session_key);
-                uni.setStorageSync('userid', _this.userid);
+                uni.setStorageSync('userid', _this2.userid);
                 var openid = res.openid;
                 uni.switchTab({
                   url: '/pages/home/home' });
