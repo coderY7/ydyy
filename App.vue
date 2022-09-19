@@ -31,6 +31,37 @@
           })
         }
       });
+      //获取token
+      // loadRefresh(){
+      //   let dataes = {
+      //     "access_token": "",
+      //     "vtype": "login",
+      //     "companyid": uni.getStorageSync("companyid"),
+      //     "userid": uni.getStorageSync("userid"),
+      //     "password": uni.getStorageSync("password"),
+      //     "fdbh": uni.getStorageSync("fdbh"),
+      //     "computerid": uni.getStorageSync("uuid"),//设备唯一标识
+      //     "ipaddress": uni.getStorageSync("ip")
+      //   }
+      //   uni.request({
+      //     url: "http://self.mzsale.com/mzato/main/app/usercheck",
+      //     data: dataes,
+      //     method: "POST",
+      //     header: {
+      //       "Content-Type": "application/json"
+      //     },
+      //     success: (res) => {
+      //       console.log("APP 刷新 refresh_token res", res)
+      //       if (res.data.error_code == 0) {
+      //         uni.setStorageSync("access_token", res.data.access_token);
+      //         uni.setStorageSync("refresh_token", res.data.refresh_token);
+      //         uni.setStorageSync("expires_in", res.data.expires_in);
+      //       } else {
+      //
+      //       }
+      //     }
+      //   })
+      // }
 		},
 		onHide: function() {
 			console.log('App Hide')

@@ -287,7 +287,9 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
     this.getServerDataB();
     console.log((0, _dayjs.default)().format('YYYY-MM-DD')); // 获取当前时间
     (0, _api.getFenDian)({
-      sn: uni.getStorageSync('sn') }).
+      "access_token": uni.getStorageSync("access_token"),
+      "sn": uni.getStorageSync("sn"),
+      "condtion": 'fendian' }).
     then(function (res) {
       console.log('获取门店信息', res.data);
       _this.dianmin = res.data[0]; //默认分店

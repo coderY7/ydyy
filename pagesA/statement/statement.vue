@@ -118,7 +118,9 @@
 			this.getServerDataB();
 			console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
 			getFenDian({
-				sn: uni.getStorageSync('sn')
+        "access_token": uni.getStorageSync("access_token"),
+        "sn": uni.getStorageSync("sn"),
+        "condtion": 'fendian'
 			}).then((res) => {
 				console.log('获取门店信息', res.data)
 				this.dianmin=res.data[0]//默认分店

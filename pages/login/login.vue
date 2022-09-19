@@ -115,6 +115,8 @@
 				}
 				usercheck(logindata).then((res) => {
 					if (res.message == 'success') {
+            uni.setStorageSync('access_token',res.access_token)//token
+            uni.setStorageSync('refresh_token',res.refresh_token)//刷新
 						uni.setStorageSync('dlmc',res.companyinfo.erp_fdmc)
 						uni.setStorageSync('login', true)
 						// 获取用户信息
