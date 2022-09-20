@@ -211,8 +211,9 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
   }, watch: { // question侦听的data中的属性的名称
     // newValue变化后的新值
     // oldValue变化前的旧值
-    userid: function userid(newValue, oldValue) {console.log("新值: ", newValue, "旧值", oldValue);if (this.userid.length == '5') {this.useryz();}} }, methods: { //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
+    userid: function userid(newValue, oldValue) {if (this.userid.length == '5') {1222;console.log("新值: ", newValue, "旧值", oldValue);this.useryz();}} }, methods: { //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);
+          _this.fdbh = res.fdlist[0].fdbh;
 
           uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
           _this.selectRange = [];

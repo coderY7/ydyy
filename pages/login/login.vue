@@ -7,12 +7,12 @@
 		<view class="list">
 			<view class="list-call">
 				<image class="img" src="/static/shilu-login/1.png"></image>
-				<input class="sl-input" v-model="userid" type="number" maxlength="6" placeholder="输入工号" />
+				<input class="sl-input" v-model="userid" type="number" maxlength="5" placeholder="输入工号" />
 			</view>
 			<view class="list-call">
 				<image class="img" src="/static/shilu-login/2.png"></image>
 				<input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
-					password="true" />
+					password="true"/>
 			</view>
 
 		</view>
@@ -63,8 +63,9 @@
       // newValue变化后的新值
       // oldValue变化前的旧值
       userid: function(newValue, oldValue) {
-        console.log("新值: ", newValue, "旧值", oldValue);
-        if(this.userid.length=='5'){
+        if(this.userid.length=='5'){1222
+          console.log("新值: ", newValue, "旧值", oldValue);
+
           this.useryz()
         }
       }
