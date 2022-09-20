@@ -45,12 +45,13 @@
 			return {
 				userid:'',
 				password: '',
-        iswx:uni.getStorageSync('iswx'),
+        iswx:'',
         fdbh:'',
         selectRange:''
 			};
 		},
 		onLoad() {
+      this.iswx=uni.getStorageSync('iswx')//判断微信绑定
       this.userid=uni.getStorageSync('scandata').userid
 			// if (uni.getStorageSync('login')) {
 			// 	uni.reLaunch({
@@ -256,7 +257,7 @@
 		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 100rpx;
+		margin-top: 80rpx;
 	}
 
 	.button-hover {
