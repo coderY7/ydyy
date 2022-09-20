@@ -241,7 +241,8 @@ var _api = __webpack_require__(/*! @/network/api.js */ 160); //
 var _default = { data: function data() {return { bgColor: '#5199ff', tmplIds: 'Qj4DRaFxP2mLOwfFuyW0QHc3J0RGXgg5BalSDWwVclw' //推送模版
     };}, methods: { //快报
     leftClick: function leftClick() {uni.navigateTo({ url: '../../pagesA/statement/statement' });}, //工作
-    work: function work() {var data = { sn: uni.getStorageSync('sn'), fdbh: uni.getStorageSync('fdbh'), userid: uni.getStorageSync('userid'), groupld: 'G001', dtmark: 'app2', recordID: '-99' };(0, _api.oaWorkFlow)(data).then(function (res) {if (res.err_code == '0') {console.log('最新工作', res);var item = JSON.stringify(res.data);uni.navigateTo({ url: "../../pagesA/work/work?item=".concat(item) });}});}, notice: function notice() {var datas = { sn: uni.getStorageSync('sn'),
+    work: function work() {var data = { sn: uni.getStorageSync('sn'), fdbh: uni.getStorageSync('fdbh'), userid: uni.getStorageSync('userid'), groupld: 'G001', dtmark: 'app2', recordID: '-99', access_token: uni.getStorageSync('access_token') };(0, _api.oaWorkFlow)(data).then(function (res) {if (res.err_code == '0') {console.log('最新工作', res);var item = JSON.stringify(res.data);uni.navigateTo({ url: "../../pagesA/work/work?item=".concat(item) });}});}, notice: function notice() {var datas = {
+        sn: uni.getStorageSync('sn'),
         id: '0',
         userid: uni.getStorageSync('userid'),
         nid: '0',
@@ -251,7 +252,8 @@ var _default = { data: function data() {return { bgColor: '#5199ff', tmplIds: 'Q
         vtype: 'sel',
         content: '',
         keywords: '',
-        remark: "app2" };
+        remark: "app2",
+        access_token: uni.getStorageSync('access_token') };
 
       (0, _api.oaNoticec)(datas).then(function (res) {
         if (res.err_code == '0') {

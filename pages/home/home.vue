@@ -68,7 +68,8 @@ export default {
         userid: uni.getStorageSync('userid'),
         groupld: 'G001',
         dtmark: 'app2',
-        recordID: '-99'
+        recordID: '-99',
+        access_token:uni.getStorageSync('access_token')
       }
       oaWorkFlow(data).then((res) => {
         if (res.err_code == '0') {
@@ -95,6 +96,7 @@ export default {
         content: '',
         keywords: '',
         remark: "app2",
+        access_token:uni.getStorageSync('access_token')
       }
       oaNoticec(datas).then((res) => {
         if (res.err_code == '0') {

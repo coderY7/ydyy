@@ -47,7 +47,7 @@
 				password: '',
         iswx:'',
         fdbh:'',
-        selectRange:''
+        fdlist:''//分店列表
 			};
 		},
 		onLoad() {
@@ -83,11 +83,11 @@
             this.fdbh=res.fdlist[0].fdbh
 
             uni.setStorageSync("fdbh", res.fdlist[0].fdbh)
-            this.selectRange=[]
+            this.fdlist=[]
             for(var u in res.fdlist){
-              this.selectRange.push({
-                "value":res.fdlist[u].fdbh,
-                "text":res.fdlist[u].fdmc
+              this.fdlist.push({
+                fdbh:res.fdlist[u].fdbh,
+                fdmc:res.fdlist[u].fdmc
               })
             }
           }else{
