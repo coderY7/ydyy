@@ -53,11 +53,11 @@
 		},
 		onLoad() {
       this.userid=uni.getStorageSync('scandata').userid
-			if (uni.getStorageSync('login')) {
-				uni.reLaunch({
-					url: '/pages/home/home'
-				});
-			}
+			// if (uni.getStorageSync('login')) {
+			// 	uni.reLaunch({
+			// 		url: '/pages/home/home'
+			// 	});
+			// }
 		},
 		methods: {
       //用户验证

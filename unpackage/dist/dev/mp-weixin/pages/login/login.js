@@ -205,13 +205,13 @@ var _api = __webpack_require__(/*! @/network/api.js */ 160); //
 //
 //
 //
-var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx'), fdbh: '', selectRange: '' };}, onLoad: function onLoad() {this.userid = uni.getStorageSync('scandata').userid;if (uni.getStorageSync('login')) {uni.reLaunch({ url: '/pages/home/home' });}}, methods: { //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.selectRange = [];for (var u in res.fdlist) {
-            _this.selectRange.push({
-              "value": res.fdlist[u].fdbh,
-              "text": res.fdlist[u].fdmc });
-
-          }
+var _default = { data: function data() {return { userid: '', password: '', iswx: uni.getStorageSync('iswx'), fdbh: '', selectRange: '' };}, onLoad: function onLoad() {this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('login')) {
+    // 	uni.reLaunch({
+    // 		url: '/pages/home/home'
+    // 	});
+    // }
+  }, methods: { //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.selectRange = [];for (var u in res.fdlist) {_this.selectRange.push({ "value": res.fdlist[u].fdbh, "text": res.fdlist[u].fdmc });}
         } else {
           uni.showToast({
             icon: 'none',
@@ -249,6 +249,8 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
 
       (0, _api.usercheck)(logindata).then(function (res) {
         if (res.message == 'success') {
+          uni.setStorageSync('access_token', res.access_token); //token
+          uni.setStorageSync('refresh_token', res.refresh_token); //刷新
           uni.setStorageSync('dlmc', res.companyinfo.erp_fdmc);
           uni.setStorageSync('login', true);
           // 获取用户信息

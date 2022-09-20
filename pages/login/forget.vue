@@ -92,11 +92,14 @@
 			bindLogin() {
 				//修改密码
 				let data = {
-					uuid: uni.getStorageSync('uuid'),
+          access_token:uni.getStorageSync('access_token'),
+          ipaddress: uni.getStorageSync('uuid'),
 					userid: uni.getStorageSync('userid'),
 					password: this.password,
-					phonename: "Tast",
-					dowhat: 'setkey'
+          companyid:uni.getStorageSync('companyid'),
+          computerid:uni.getStorageSync('openid'),//设备唯一标识码
+          fdbh:uni.getStorageSync('fdbh'),
+          vtype: 'updatepw'
 				}
 				usercheck(data).then((res) => {
 					console.log('密码修改', res)

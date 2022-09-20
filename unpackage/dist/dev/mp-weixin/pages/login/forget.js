@@ -226,11 +226,14 @@ var _this, js;var _default = { data: function data() {return { phone: '', second
     bindLogin: function bindLogin() {
       //修改密码
       var data = {
-        uuid: uni.getStorageSync('uuid'),
+        access_token: uni.getStorageSync('access_token'),
+        ipaddress: uni.getStorageSync('uuid'),
         userid: uni.getStorageSync('userid'),
         password: this.password,
-        phonename: "Tast",
-        dowhat: 'setkey' };
+        companyid: uni.getStorageSync('companyid'),
+        computerid: uni.getStorageSync('openid'), //设备唯一标识码
+        fdbh: uni.getStorageSync('fdbh'),
+        vtype: 'updatepw' };
 
       (0, _api.usercheck)(data).then(function (res) {
         console.log('密码修改', res);
