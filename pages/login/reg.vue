@@ -48,11 +48,16 @@
 	export default {
 		onLoad() {
 			_this = this;
-
-		},
+      // if (uni.getStorageSync('openid')) {
+      //   uni.reLaunch({
+      //     url: '/pages/home/home'
+      //   });
+      // }
+      },
 		onUnload() {
 			clearInterval(js)
 			this.second = 0;
+      this.clear()
 		},
 		data() {
 			return {
@@ -83,9 +88,6 @@
 					}
 				}
 			}
-		},
-		onUnload() {
-			this.clear()
 		},
 		methods: {
 			clear() {

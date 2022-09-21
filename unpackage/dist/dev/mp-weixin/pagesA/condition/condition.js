@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 279))
+    },
     uniDatetimePicker: function() {
       return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 356))
     }
@@ -194,13 +197,16 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 160); //
 //
 //
 //
-var _default = { data: function data() {return { title: '', start: '', //开始时间
+var _default = { data: function data() {return { dqbb: '', //当前报表
+      title: '',
+      start: '', //开始时间
       end: '' //结束时间
     };
   },
   onLoad: function onLoad(option) {
-    var query = JSON.parse(option.item);
-    this.title = query.report;
+    var cxdj = JSON.parse(option.cxdj);
+    this.dqbb = uni.getStorageSync('dqbb');
+    console.log(cxdj, this.dqbb.cxmc);
   },
   methods: {
     //自定义返回
@@ -214,52 +220,58 @@ var _default = { data: function data() {return { title: '', start: '', //开始�
     },
     //查询
     isquery: function isquery() {
-      var port;
-      switch (this.title) {
-        case '商家销售':
-          port = _api.checkSjSale;
-          break;
-        case '收银缴款查询':
-          port = _api.getQuerySyySaleJK;
-          break;
-        case '销售日报':
-          port = _api.saleCWbb;
-          break;
-        case '部门分析':
-          port = _api.queryBMSalebb;
-          break;
-        case '大类分析':
-          port = _api.fdSuperSale;
-          break;
-        case '门店分析':
-          port = _api.fdSaleAnalyze;
-          break;
-        case '大类指标':
-          port = _api.fdSPTypeAnalyze;
-          break;
-        case '应付账款':
-          port = _api.cwsjjxcInfo;
-          break;
-        case '商品详情':
-          port = _api.spkcinfo;
-          break;
-        case '销售客单统计':
-          port = _api.custombb;
-          break;
-        case '顾客消费分析':
-          port = _api.query002;
-          break;
-        case '商品销售综合':
-          port = _api.querySPSalebb;
-          break;
-        default:
-          console.log('未必配接口');
-          break;}
-
-      port().then(function (res) {
-        console.log('查询到的数据', res);
+      (0, _api.getlist)(data).then(function (res) {
+        console.log('查询', res);
       });
-    } } };exports.default = _default;
+    }
+    // isquery(){
+    // 	var port;
+    // 	switch(this.title){
+    // 		case '商家销售':
+    // 		port=checkSjSale
+    // 		break;
+    // 		case '收银缴款查询':
+    // 		port=getQuerySyySaleJK
+    // 		break;
+    // 		case '销售日报':
+    // 		port=saleCWbb
+    // 		break;
+    // 		case '部门分析':
+    // 		port=queryBMSalebb
+    // 		break;
+    // 		case '大类分析':
+    // 		port=fdSuperSale
+    // 		break;
+    // 		case '门店分析':
+    // 		port=fdSaleAnalyze
+    // 		break;
+    // 		case '大类指标':
+    // 		port=fdSPTypeAnalyze
+    // 		break;
+    // 		case '应付账款':
+    // 		port=cwsjjxcInfo
+    // 		break;
+    // 		case '商品详情':
+    // 		port=spkcinfo
+    // 		break;
+    // 		case '销售客单统计':
+    // 		port=custombb
+    // 		break;
+    // 		case '顾客消费分析':
+    // 		port=query002
+    // 		break;
+    // 		case '商品销售综合':
+    // 		port=querySPSalebb
+    // 		break;
+    // 		default:
+    // 		console.log('未必配接口');
+    // 		break;
+    // 	}
+    // 	port().then((res)=>{
+    // 		console.log('查询到的数据',res)
+    // 	})
+    // }
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

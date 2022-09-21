@@ -3,8 +3,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/home/home",
-          "pathName": "pages/init/init",
+          "name": "login",
+          "pathName": "pages/login/login",
           "query": "",
           "launchMode": "default",
           "scene": null

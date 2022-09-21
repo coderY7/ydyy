@@ -3,7 +3,16 @@
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
 
-	"pages": [{
+	"pages": [
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
 			"path": "pages/init/init",
 			"style": {
 				"navigationBarTitleText": "",
@@ -19,14 +28,7 @@
 				"navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
 
-		},
 		{
 			"path": "pages/login/reg",
 			"style": {
@@ -99,6 +101,7 @@
 			}, {
 				"path": "condition/condition",
 				"style": {
+					"navigationStyle": "custom",
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
 				}

@@ -23,7 +23,7 @@
 <script>
 	import {
 		reportForm,
-		usercheckapp
+		condition
 	} from "../../network/api.js"
 	export default {
 		data() {
@@ -58,10 +58,8 @@
 		methods: {
 			//获取报表
 			isreportForm() {
-				
 				let reportFormdata = {
 					access_token:uni.getStorageSync('access_token'),
-					vtype: 'All',
 					userid: '00000'
 				}
 				reportForm(reportFormdata).then((res) => {
@@ -70,11 +68,20 @@
 				})
 			},
 			enter(item) {
-				let items = JSON.stringify(item)
-				console.log(items)
-				uni.navigateTo({
-					url: `../../pagesA/condition/condition?item=${items}`
-				})
+        uni.setStorageSync('dqbb',item)//当前报表
+        let dataes={
+          access_token: uni.getStorageSync('access_token'),
+          cxbh:item.cxbh
+        }
+        condition(dataes).then((res)=>{
+          console.log('查询条件',res)
+          let items = JSON.stringify(res)
+          uni.navigateTo({
+          	url: `../../pagesA/condition/condition?cxdj=${items}`
+          })
+        })
+
+
 			}
 		}
 	}

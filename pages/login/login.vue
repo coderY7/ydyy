@@ -53,18 +53,18 @@
 		onLoad() {
       this.iswx=uni.getStorageSync('iswx')//判断微信绑定
       this.userid=uni.getStorageSync('scandata').userid
-			// if (uni.getStorageSync('login')) {
-			// 	uni.reLaunch({
-			// 		url: '/pages/home/home'
-			// 	});
-			// }
+			if (uni.getStorageSync('openid')) {
+				uni.reLaunch({
+					url: '/pages/home/home'
+				});
+			}
 		},
     watch: {
       // question侦听的data中的属性的名称
       // newValue变化后的新值
       // oldValue变化前的旧值
       userid: function(newValue, oldValue) {
-        if(this.userid.length=='5'){1222
+        if(this.userid.length=='5'){
           console.log("新值: ", newValue, "旧值", oldValue);
 
           this.useryz()
@@ -150,7 +150,7 @@
 									uni.setStorageSync('openid', res.openid)
 									uni.setStorageSync('session_key', res.session_key)
 									uni.setStorageSync('userid', this.userid)
-									let openid = res.openid
+									this.openid = res.openid
 									uni.switchTab({
 										url: '/pages/home/home'
 									});

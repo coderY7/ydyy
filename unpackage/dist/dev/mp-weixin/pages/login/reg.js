@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _onLoad$onUnload$data;function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -178,15 +178,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-var _this, js;var _default = (_onLoad$onUnload$data = {
-
+var _this, js;var _default =
+{
   onLoad: function onLoad() {
     _this = this;
-
+    // if (uni.getStorageSync('openid')) {
+    //   uni.reLaunch({
+    //     url: '/pages/home/home'
+    //   });
+    // }
   },
   onUnload: function onUnload() {
     clearInterval(js);
     this.second = 0;
+    this.clear();
   },
   data: function data() {
     return {
@@ -216,96 +221,93 @@ var _this, js;var _default = (_onLoad$onUnload$data = {
           return '重新获取' + this.second;
         }
       }
-    } } }, _defineProperty(_onLoad$onUnload$data, "onUnload", function onUnload()
+    } },
 
-{
-  this.clear();
-}), _defineProperty(_onLoad$onUnload$data, "methods",
-{
-  clear: function clear() {
-    clearInterval(js);
-    js = null;
-    this.second = 0;
-  },
-  display: function display() {
-    this.showPassword = !this.showPassword;
-  },
-  agreementSuccess: function agreementSuccess() {
-    this.agreement = !this.agreement;
-  },
-  getcode: function getcode() {
-    if (this.phone.length != 11) {
-      uni.showToast({
-        icon: 'none',
-        title: '手机号不正确' });
+  methods: {
+    clear: function clear() {
+      clearInterval(js);
+      js = null;
+      this.second = 0;
+    },
+    display: function display() {
+      this.showPassword = !this.showPassword;
+    },
+    agreementSuccess: function agreementSuccess() {
+      this.agreement = !this.agreement;
+    },
+    getcode: function getcode() {
+      if (this.phone.length != 11) {
+        uni.showToast({
+          icon: 'none',
+          title: '手机号不正确' });
 
-      return;
-    }
-    if (this.second > 0) {
-      return;
-    }
-    this.second = 60;
-    //请求业务
-    js = setInterval(function () {
-      _this.second--;
-      if (_this.second == 0) {
-        _this.clear();
+        return;
       }
-    }, 1000);
-
-  },
-  bindLogin: function bindLogin() {
-    var reg = /^[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}$/;
-    var results = reg.test(this.userInfo.sn);
-    if (results) {
-      console.log('注册成功');
-      uni.navigateTo({
-        url: '/pages/login/login' });
-
-    } else {
-      uni.showToast({
-        icon: 'none',
-        title: '请先扫描注册二维码，获取注册信息' });
-
-      return;
-    }
-    if (this.agreement == false) {
-      uni.showToast({
-        icon: 'none',
-        title: '请先阅读《软件用户协议》' });
-
-    }
-  },
-  //扫码登录
-  scan: function scan() {var _this2 = this;
-    uni.scanCode({
-      success: function success(res) {
-        var URL = "http://resource.ecsun.cn/init.html";
-        console.log('扫码内容', res.result);
-        var urls = res.result.split('?')[0];
-        if (URL == urls) {
-          var parame = res.result.split('?')[1];
-          var userid = parame.split('#')[0];
-          var sn = parame.split('#')[1];
-          var fdbh = parame.split('#')[2];
-          var fdlx = parame.split('#')[3];
-          _this2.userInfo.fdbh = fdbh;
-          _this2.userInfo.sn = sn;
-          _this2.userInfo.fdlx = fdlx;
-          _this2.userInfo.userid = userid;
-          _this2.bindLogin();
-          uni.setStorageSync('scandata', _this2.userInfo);
-        } else {
-          uni.showToast({
-            icon: 'none',
-            title: '二维码错误，请重新扫码' });
-
+      if (this.second > 0) {
+        return;
+      }
+      this.second = 60;
+      //请求业务
+      js = setInterval(function () {
+        _this.second--;
+        if (_this.second == 0) {
+          _this.clear();
         }
+      }, 1000);
+
+    },
+    bindLogin: function bindLogin() {
+      var reg = /^[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}-[A-Z0-9]{6}$/;
+      var results = reg.test(this.userInfo.sn);
+      if (results) {
+        console.log('注册成功');
+        uni.navigateTo({
+          url: '/pages/login/login' });
+
+      } else {
+        uni.showToast({
+          icon: 'none',
+          title: '请先扫描注册二维码，获取注册信息' });
+
+        return;
+      }
+      if (this.agreement == false) {
+        uni.showToast({
+          icon: 'none',
+          title: '请先阅读《软件用户协议》' });
+
+      }
+    },
+    //扫码登录
+    scan: function scan() {var _this2 = this;
+      uni.scanCode({
+        success: function success(res) {
+          var URL = "http://resource.ecsun.cn/init.html";
+          console.log('扫码内容', res.result);
+          var urls = res.result.split('?')[0];
+          if (URL == urls) {
+            var parame = res.result.split('?')[1];
+            var userid = parame.split('#')[0];
+            var sn = parame.split('#')[1];
+            var fdbh = parame.split('#')[2];
+            var fdlx = parame.split('#')[3];
+            _this2.userInfo.fdbh = fdbh;
+            _this2.userInfo.sn = sn;
+            _this2.userInfo.fdlx = fdlx;
+            _this2.userInfo.userid = userid;
+            _this2.bindLogin();
+            uni.setStorageSync('scandata', _this2.userInfo);
+          } else {
+            uni.showToast({
+              icon: 'none',
+              title: '二维码错误，请重新扫码' });
+
+          }
 
 
-      } });
+        } });
 
-  } }), _onLoad$onUnload$data);exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
