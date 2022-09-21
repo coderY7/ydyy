@@ -49,7 +49,8 @@
 	import dayjs from 'dayjs'; // ES 2015
 	import {
 		getFenDian,
-		getpctodayssale
+		getpctodayssale,
+    getpcadmindaysale//仪表盘数据
 	} from '../../network/api.js'
 	export default {
 		data() {
@@ -105,12 +106,13 @@
 			};
 		},
 		onLoad() {
-			//getpctodayssale
-			let getpctodayssaledata={
-				saleData:'2022-01-06'
+			let getpcadmindaysaledata={
+				access_token:uni.getStorageSync('access_token'),
+        sdate:dayjs().format('YYYY-MM-DD')// 获取当前时间
+//销售日期
 			}
-			getpctodayssale(getpctodayssaledata).then((res)=>{
-				console.log('快报数据',res)
+      getpcadmindaysale(getpcadmindaysaledata).then((res)=>{
+				console.log('仪表盘数据',res)
 			})
 		},
 		onReady() {
@@ -130,12 +132,15 @@
 		methods: {
 			showDrawer() {
 				this.$refs.showRight.open();
-				getFenDian({
-					sn: uni.getStorageSync('sn')
-				}).then((res) => {
-					console.log('获取门店信息', res.data)
-					this.fendian = res.data
-				})
+        getFenDian({
+          "access_token": uni.getStorageSync("access_token"),
+          "sn": uni.getStorageSync("sn"),
+          "condtion": 'fendian'
+        }).then((res) => {
+          console.log('获取门店信息', res.data)
+          this.dianmin=res.data[0]//默认分店
+          this.fendian = res.data
+        })
 			},
 			closeDrawer() {
 				this.$refs.showRight.close();

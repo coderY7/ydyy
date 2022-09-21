@@ -272,14 +272,16 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
       optsB: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15, border: true, borderWidth: 3, borderColor: "#FFFFFF", linearType: "custom" } } } };
 
 
+
   },
   onLoad: function onLoad() {
-    //getpctodayssale
-    var getpctodayssaledata = {
-      saleData: '2022-01-06' };
-
-    (0, _api.getpctodayssale)(getpctodayssaledata).then(function (res) {
-      console.log('快报数据', res);
+    var getpcadmindaysaledata = {
+      access_token: uni.getStorageSync('access_token'),
+      sdate: (0, _dayjs.default)().format('YYYY-MM-DD') // 获取当前时间
+      //销售日期
+    };
+    (0, _api.getpcadmindaysale)(getpcadmindaysaledata).then(function (res) {
+      console.log('仪表盘数据', res);
     });
   },
   onReady: function onReady() {var _this = this;
@@ -300,9 +302,12 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
     showDrawer: function showDrawer() {var _this2 = this;
       this.$refs.showRight.open();
       (0, _api.getFenDian)({
-        sn: uni.getStorageSync('sn') }).
+        "access_token": uni.getStorageSync("access_token"),
+        "sn": uni.getStorageSync("sn"),
+        "condtion": 'fendian' }).
       then(function (res) {
         console.log('获取门店信息', res.data);
+        _this2.dianmin = res.data[0]; //默认分店
         _this2.fendian = res.data;
       });
     },

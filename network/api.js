@@ -53,7 +53,8 @@ export const oaNoticeCk=(params, config = {}) => http.post("mzato/main/app/oaNot
 //OA与APP获取必要信息
 export const getother=(params, config = {}) => http.post("mzato/main/app/getother", params, config)
 
-//商品采购接口
+//仪表盘数据
+export const getpcadmindaysale=(params, config = {}) => http.post("mzsale/web/basic/getpcadmindaysale", params, config)
 //更新商店信息
 export const getFenDian=(params, config = {}) => http.post("mzato/main/app/getFenDian", params, config)
 //商品上传更新
