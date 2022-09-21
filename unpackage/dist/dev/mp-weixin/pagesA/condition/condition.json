@@ -3,7 +3,6 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
-    "uni-datetime-picker": "/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker"
+    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar"
   }
 }
