@@ -68,6 +68,7 @@ export const getSupplyType=(params, config = {}) => http.post("mzato/main/app/ge
 export const getDepart=(params, config = {}) => http.post("mzato/main/app/getDepart", params, config)
 
 //报表查询接口
+export const getcolumns=(params, config = {}) => http.post("mzsale/web/report/condition/getcolumns", params, config)
 //更新商家信息
 export const getSupplier=(params, config = {}) => http.post("mzato/main/app/getSupplier", params, config)
 //商家销售

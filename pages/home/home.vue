@@ -66,7 +66,7 @@ export default {
         sn: uni.getStorageSync('sn'),
         fdbh: uni.getStorageSync('fdbh'),
         userid: uni.getStorageSync('userid'),
-        groupld: 'G001',
+        groupld: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
         dtmark: 'app2',
         recordID: '-99',
         access_token:uni.getStorageSync('access_token')

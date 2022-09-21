@@ -18350,9 +18350,11 @@ module.exports = function (vm) {
   // 初始化请求配置
   uni.$u.http.setConfig(function (config) {
     /* config 为默认全局配置*/
-    // config.baseURL = "http://webapibeta.mzsale.com/mzato/main/app"; /* 根域名 */
     // config.baseURL = "http://webapibeta.mzsale.com/"; /* 根域名 */
     config.baseURL = "http://self.mzsale.com";
+    if (uni.getStorageSync('cxbb') == true) {
+      console.log('查询表域名更换');
+    }
     return config;
   });
 
@@ -18634,7 +18636,7 @@ function _default() {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.reportForm = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.usercheckapp = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.reportForm = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getcolumns = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.usercheckapp = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
 
 // post请求，获取菜单
 //export const postMenu = (params, config = {}) => http.post("/ebapi/public_api/index", params, config)
@@ -18704,8 +18706,9 @@ exports.searchSupplier = searchSupplier;var getSupplyType = function getSupplyTy
 exports.getSupplyType = getSupplyType;var getDepart = function getDepart(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getDepart", params, config);};
 
 //报表查询接口
+exports.getDepart = getDepart;var getcolumns = function getcolumns(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzsale/web/report/condition/getcolumns", params, config);};
 //更新商家信息
-exports.getDepart = getDepart;var getSupplier = function getSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getSupplier", params, config);};
+exports.getcolumns = getcolumns;var getSupplier = function getSupplier(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/getSupplier", params, config);};
 //商家销售
 exports.getSupplier = getSupplier;var checkSjSale = function checkSjSale(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzato/main/app/checkSjSale", params, config);};
 //收银缴款查询

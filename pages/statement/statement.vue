@@ -10,7 +10,7 @@
 							<view>
 
 							</view>
-							<view>{{item.report}}</view>
+							<view>{{item.cxmc}}</view>
 						</view>
 
 					</view>
@@ -30,38 +30,39 @@
 			return {
 				Alllist: [],
 				title: '报表查询',
-				querylist: [{
-					name: '商家销售'
-				}, {
-					name: '收银缴款查询'
-				}, {
-					name: '销售日报'
-				}, {
-					name: '部门分析'
-				}, {
-					name: '大类分析'
-				}, {
-					name: '门店分析'
-				}, {
-					name: '大类指标'
-				}, {
-					name: '应付账款'
-				}, {
-					name: '商品详情'
-				}]
+				// querylist: [{
+				// 	name: '商家销售'
+				// }, {
+				// 	name: '收银缴款查询'
+				// }, {
+				// 	name: '销售日报'
+				// }, {
+				// 	name: '部门分析'
+				// }, {
+				// 	name: '大类分析'
+				// }, {
+				// 	name: '门店分析'
+				// }, {
+				// 	name: '大类指标'
+				// }, {
+				// 	name: '应付账款'
+				// }, {
+				// 	name: '商品详情'
+				// }]
 			};
 		},
 		onLoad() {
 			this.isreportForm()
+      uni.setStorageSync('cxbb',true)
 		},
 		methods: {
 			//获取报表
 			isreportForm() {
 				
 				let reportFormdata = {
-					access_token: '',
+					access_token:uni.getStorageSync('access_token'),
 					vtype: 'All',
-					userid: uni.getStorageSync('userid')
+					userid: '00000'
 				}
 				reportForm(reportFormdata).then((res) => {
 					console.log('报表查询', res)

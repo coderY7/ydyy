@@ -129,7 +129,8 @@
 					if (res.message == 'success') {
             uni.setStorageSync('access_token',res.access_token)//token
             uni.setStorageSync('refresh_token',res.refresh_token)//刷新
-						uni.setStorageSync('dlmc',res.companyinfo.erp_fdmc)
+						uni.setStorageSync('dlmc',res.companyinfo.erp_fdmc)//分店名称
+            uni.setStorageSync('loginaccess',res)//登录成功返回的数据
 						uni.setStorageSync('login', true)
 						// 获取用户信息
 						uni.login({

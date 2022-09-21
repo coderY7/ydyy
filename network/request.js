@@ -3,9 +3,11 @@ module.exports = (vm) => {
 	// 初始化请求配置
 	uni.$u.http.setConfig((config) => {
 		/* config 为默认全局配置*/
-		// config.baseURL = "http://webapibeta.mzsale.com/mzato/main/app"; /* 根域名 */
 		// config.baseURL = "http://webapibeta.mzsale.com/"; /* 根域名 */
 		config.baseURL = "http://self.mzsale.com"
+		if(uni.getStorageSync('cxbb')==true){
+			console.log('查询表域名更换')
+		}
 		return config
 	})
 
