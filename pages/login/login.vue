@@ -60,15 +60,8 @@
 			}
 		},
     watch: {
-      // question侦听的data中的属性的名称
-      // newValue变化后的新值
-      // oldValue变化前的旧值
       userid: function(newValue, oldValue) {
-        if(this.userid.length=='5'){
-          console.log("新值: ", newValue, "旧值", oldValue);
-
           this.useryz()
-        }
       }
     },
 		methods: {

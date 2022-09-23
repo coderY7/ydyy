@@ -155,108 +155,133 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      dlmc: uni.getStorageSync('dlmc') };
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-  },
-  methods: {
-    quits: function quits() {
-      uni.showModal({
-        title: '提示',
-        content: '确认退出,清除缓存',
-        success: function success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定');
-            uni.navigateTo({
-              url: '/pages/login/login' });
 
-            uni.removeStorageSync('login');
 
-            // uni.clearStorageSync();
-          } else if (res.cancel) {
-            console.log('用户点击取消');
-          }
-        } });
 
-      uni.setStorageSync('launchflag', true); //引导页
-    },
-    //应用反馈
-    feedback: function feedback() {
-      uni.navigateTo({
-        url: './component/jianyi' });
 
-    },
-    //应用设置
-    set: function set() {
-      console.log('打开应用设置');
-      uni.navigateTo({
-        url: './component/weixin' });
 
-    } } };exports.default = _default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _api = __webpack_require__(/*! ../../network/api */ 143); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { dlmc: uni.getStorageSync('dlmc') };}, methods: { quits: function quits() {uni.showModal({ title: '提示', content: '确认退出,清除缓存', success: function success(res) {if (res.confirm) {console.log('用户点击确定');uni.navigateTo({ url: '/pages/login/login' });uni.clearStorageSync();var data = { vtype: 'logout', access_token: uni.getStorageSync('access_token'), companyid: uni.getStorageSync('companyid'), userid: uni.getStorageSync('userid'), fdbh: uni.getStorageSync('fdbh'), computerid: uni.getStorageSync('openid') };console.log('退出登录成功', res);(0, _api.usercheck)(data).then(function (res) {});} else if (res.cancel) {console.log('用户点击取消');}} }); //uni.setStorageSync('launchflag',true)//引导页
+    }, //应用反馈
+    feedback: function feedback() {uni.navigateTo({ url: './component/jianyi' });}, //应用设置
+    set: function set() {console.log('打开应用设置');uni.navigateTo({ url: './component/weixin' });} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

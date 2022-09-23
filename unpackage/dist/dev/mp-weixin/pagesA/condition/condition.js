@@ -168,9 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
-//
 //
 //
 //
@@ -185,17 +183,23 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 var _default = { data: function data() {return { dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
-      cxtj: '' //查询条件
-    };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
+      cxtj: '', //查询条件
+      tj: [] };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前分店
-  }, methods: { //自定义返回
-    leftClick: function leftClick() {uni.navigateBack({ delta: 1 });
+  }, watch: {
+    tj: function tj(newvalue, oldvalue) {
+
+    } },
+
+  methods: {
+    //自定义返回
+    leftClick: function leftClick() {
+      uni.navigateBack({
+        delta: 1 });
 
     },
     cxtjs: function cxtjs(item) {
-      item.push({ Convalue: '' });
-      console.log(item.recordid);
-      var data = { recordid: item.recordid };
+      this.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });
     },
     maskClick: function maskClick(e) {
       console.log('----maskClick事件:', e);
@@ -208,9 +212,9 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
         groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
         username: uni.getStorageSync('loginaccess').userinfo.erp_username,
         fdbh: uni.getStorageSync('fdbh'),
-        condition: conditondata };
+        condition: this.tj };
 
-      (0, _api.getlist)(data).then(function (res) {
+      (0, _api.query)(data).then(function (res) {
         console.log('查询', res);
       });
     } } };exports.default = _default;

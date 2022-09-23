@@ -76,6 +76,14 @@ export const condition = (params, config = {}) => http.post("/mzsale/web/report/
 //查询报表明细
 export const getlist = (params, config = {}) => http.post("/mzsale/web/report/getlist", params, config)
 
+//通用动态条件查询
+export const  query= (params, config = {}) => http.post("mzsale/web/report/auto/condition/query", params, config)
+
+
+
+
+
+
 
 export const getcolumns=(params, config = {}) => http.post("mzsale/web/report/condition/getcolumns", params, config)
 //更新商家信息

@@ -60,7 +60,9 @@
 </template>
 
 <script>
-	export default {
+import {logintype,usercheck} from "../../network/api";
+
+export default {
 		data() {
 			return {
 dlmc:uni.getStorageSync('dlmc')
@@ -77,15 +79,24 @@ dlmc:uni.getStorageSync('dlmc')
               uni.navigateTo({
                 url:'/pages/login/login'
               })
-              uni.removeStorageSync('login');
-
-							// uni.clearStorageSync();
+							 uni.clearStorageSync();
+              let data={
+                vtype:'logout',
+                access_token:uni.getStorageSync('access_token'),
+                companyid:uni.getStorageSync('companyid'),
+                userid:uni.getStorageSync('userid'),
+                fdbh:uni.getStorageSync('fdbh'),
+                computerid:uni.getStorageSync('openid')
+              }
+              console.log('退出登录成功',res)
+              usercheck(data).then((res)=> {
+              })
 						} else if (res.cancel) {
 							console.log('用户点击取消');
 						}
 					}
 				});
-				uni.setStorageSync('launchflag',true)//引导页
+				//uni.setStorageSync('launchflag',true)//引导页
 			},
 			//应用反馈
 			feedback(){

@@ -18414,7 +18414,7 @@ module.exports = function (vm) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getcolumns = exports.getlist = exports.condition = exports.reportForm = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getpcadmindaysale = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.usercheckapp = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.eCAppBaseData = exports.upload = exports.uploadLabelList = exports.uploadCheckList = exports.getPickArea = exports.getGoodsStock = exports.uploadstorage = exports.getCheckStorage = exports.getYXBHData = exports.uploadList = exports.getToDaySale = exports.getCGDdataCK = exports.getCGDdata = exports.getAPPSaleReport = exports.querySPSalebb = exports.query002 = exports.custombb = exports.qySpkcinfo = exports.spkcinfo = exports.cwsjjxcInfo = exports.fdSPTypeAnalyze = exports.fdSaleAnalyze = exports.fdSuperSale = exports.queryBMSalebb = exports.saleCWbb = exports.getQuerySyySaleJK = exports.checkSjSale = exports.getSupplier = exports.getcolumns = exports.query = exports.getlist = exports.condition = exports.reportForm = exports.getDepart = exports.getSupplyType = exports.searchSupplier = exports.searchGoods = exports.uploadgoshoping = exports.getFenDian = exports.getpcadmindaysale = exports.getother = exports.oaNoticeCk = exports.getDJdata = exports.appCheckVersion = exports.oaNoticeRey = exports.getnotice = exports.oaWorkFlowWCk = exports.getpctodayssale = exports.oaWorkFlow = exports.oaNoticec = exports.getQuestion = exports.getlogin = exports.userfast = exports.getopenid = exports.sendCheck = exports.logintype = exports.usercheckapp = exports.ckonlinefd = exports.usercheck = exports.bindphone = exports.commonMain = exports.sendmessage = exports.businessprepay = void 0;var http = uni.$u.http;
 
 // post请求，获取菜单
 //export const postMenu = (params, config = {}) => http.post("/ebapi/public_api/index", params, config)
@@ -18490,7 +18490,15 @@ exports.getDepart = getDepart;var reportForm = function reportForm(params) {var 
 //查询动态报表条件
 exports.reportForm = reportForm;var condition = function condition(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/mzsale/web/report/condition", params, config);};
 //查询报表明细
-exports.condition = condition;var getlist = function getlist(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/mzsale/web/report/getlist", params, config);};exports.getlist = getlist;
+exports.condition = condition;var getlist = function getlist(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("/mzsale/web/report/getlist", params, config);};
+
+//通用动态条件查询
+exports.getlist = getlist;var query = function query(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzsale/web/report/auto/condition/query", params, config);};exports.query = query;
+
+
+
+
+
 
 
 var getcolumns = function getcolumns(params) {var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};return http.post("mzsale/web/report/condition/getcolumns", params, config);};

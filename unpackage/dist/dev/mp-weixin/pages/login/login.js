@@ -205,15 +205,8 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: '' //分店列表
     };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
-    this.userid = uni.getStorageSync('scandata').userid;if (uni.getStorageSync('openid')) {uni.reLaunch({ url: '/pages/home/home' });}}, watch: { // question侦听的data中的属性的名称
-    // newValue变化后的新值
-    // oldValue变化前的旧值
-    userid: function userid(newValue, oldValue) {if (this.userid.length == '5') {console.log("新值: ", newValue, "旧值", oldValue);this.useryz();}} }, methods: { //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };
-
-      (0, _api.usercheckapp)(user).then(function (res) {
-        if (res.error_code == 0) {
-          uni.setStorageSync("companyid", res.companyid);
+    this.userid = uni.getStorageSync('scandata').userid;if (uni.getStorageSync('openid')) {uni.reLaunch({ url: '/pages/home/home' });}}, watch: { userid: function userid(newValue, oldValue) {this.useryz();} }, methods: { //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);
           _this.fdbh = res.fdlist[0].fdbh;
 
           uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
