@@ -200,31 +200,13 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { Alllist: [], title: '报表查询' // querylist: [{
-      // 	name: '商家销售'
-      // }, {
-      // 	name: '收银缴款查询'
-      // }, {
-      // 	name: '销售日报'
-      // }, {
-      // 	name: '部门分析'
-      // }, {
-      // 	name: '大类分析'
-      // }, {
-      // 	name: '门店分析'
-      // }, {
-      // 	name: '大类指标'
-      // }, {
-      // 	name: '应付账款'
-      // }, {
-      // 	name: '商品详情'
-      // }]
-    };}, onLoad: function onLoad() {this.isreportForm();uni.setStorageSync('cxbb', true);}, methods: { //获取报表
+var _default = { data: function data() {return { Alllist: [], title: '报表查询' };}, onLoad: function onLoad() {this.isreportForm();uni.setStorageSync('cxbb', true);}, methods: { //获取报表
     isreportForm: function isreportForm() {var _this = this;var reportFormdata = { access_token: uni.getStorageSync('access_token'), userid: '00000' };(0, _api.reportForm)(reportFormdata).then(function (res) {console.log('报表查询', res);
         _this.Alllist = res.data;
       });
     },
     enter: function enter(item) {
+      console.log(item);
       uni.setStorageSync('dqbb', item); //当前报表
       var dataes = {
         access_token: uni.getStorageSync('access_token'),
@@ -237,8 +219,6 @@ var _default = { data: function data() {return { Alllist: [], title: '报表查�
           url: "../../pagesA/condition/condition?cxdj=".concat(items) });
 
       });
-
-
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

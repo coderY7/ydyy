@@ -185,7 +185,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       end: '', //结束时间
       cxtj: '', //查询条件
       tj: [] };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
-    this.dqbb = uni.getStorageSync('dqbb'); //当前分店
+    this.dqbb = uni.getStorageSync('dqbb'); //当前报表
   }, watch: {
     tj: function tj(newvalue, oldvalue) {
 
@@ -207,7 +207,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
     //查询
     isquery: function isquery() {
       var data = {
-        djtype: this.cxtj.cxbh,
+        djtype: this.dqbb.cxbh,
         access_token: uni.getStorageSync('access_token'),
         userid: uni.getStorageSync('userid'),
         groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,

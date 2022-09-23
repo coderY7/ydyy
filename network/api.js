@@ -73,8 +73,12 @@ export const getDepart=(params, config = {}) => http.post("mzato/main/app/getDep
 export const reportForm = (params, config = {}) => http.post("/mzato/main/app/reportForm", params, config)
 //查询动态报表条件
 export const condition = (params, config = {}) => http.post("/mzsale/web/report/condition", params, config)
+//获取报表列头
+export const getcolumns = (params, config = {}) => http.post("mzsale/web/report/condition/getcolumns", params, config)
+
 //查询报表明细
-export const getlist = (params, config = {}) => http.post("/mzsale/web/report/getlist", params, config)
+export const getlist = (params, config = {}) => http.post("mzsale/web/report/condition/getlist", params, config)
+
 
 //通用动态条件查询
 export const  query= (params, config = {}) => http.post("mzsale/web/report/auto/condition/query", params, config)

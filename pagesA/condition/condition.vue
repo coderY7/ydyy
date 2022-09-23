@@ -13,7 +13,7 @@
 <script>
 	import {
 		getlist,
-      query
+    getcolumns
 	} from '../../network/api.js'
 	export default {
 		data() {
@@ -27,7 +27,7 @@
 		},
 		onLoad(option) {
 			this.cxtj = JSON.parse(option.cxdj).data //查询条件
-			this.dqbb = uni.getStorageSync('dqbb') //当前分店
+			this.dqbb = uni.getStorageSync('dqbb') //当前报表
 		},
     watch:{
       tj:function (newvalue,oldvalue){
@@ -50,7 +50,7 @@
 			//查询
 			isquery() {
 				let data={
-          djtype:this.cxtj.cxbh,
+          djtype:this.dqbb.cxbh,
 					access_token:uni.getStorageSync('access_token'),
 					userid:uni.getStorageSync('userid'),
 					groupid:uni.getStorageSync('loginaccess').userinfo.erp_groupid,
