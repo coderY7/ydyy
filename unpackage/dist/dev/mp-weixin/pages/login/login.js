@@ -205,10 +205,13 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: '' //分店列表
     };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
-    this.userid = uni.getStorageSync('scandata').userid;if (uni.getStorageSync('openid')) {uni.reLaunch({ url: '/pages/home/home' });}}, watch: { userid: function userid(newValue, oldValue) {this.useryz();} }, methods: { //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);
-          _this.fdbh = res.fdlist[0].fdbh;
-
+    this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('openid')) {
+    // 	uni.reLaunch({
+    // 		url: '/pages/home/home'
+    // 	});
+    // }
+  }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
           uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
           _this.fdlist = [];
           for (var u in res.fdlist) {

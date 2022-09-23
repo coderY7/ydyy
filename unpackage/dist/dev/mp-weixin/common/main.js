@@ -106,9 +106,6 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('secret', '4d4c042b2ca5c9e9c5a2b07049991f41');
   },
   onShow: function onShow() {
-    if (!uni.getStorageSync('openid')) {
-      console.log('登录退出了，请重新登录');
-    }
     // 获取设备的ip地址
     uni.getStorage({
       key: 'ip',

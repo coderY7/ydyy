@@ -4,7 +4,7 @@ module.exports = (vm) => {
 	uni.$u.http.setConfig((config) => {
 		/* config 为默认全局配置*/
 		// config.baseURL = "http://webapibeta.mzsale.com/"; /* 根域名 */
-		config.baseURL = "http://self.mzsale.com"
+		config.baseURL = "http://self.mzsale.com/"
 		if(uni.getStorageSync('cxbb')==true){
 			console.log('查询表域名更换')
 		}

@@ -53,15 +53,18 @@
 		onLoad() {
       this.iswx=uni.getStorageSync('iswx')//判断微信绑定
       this.userid=uni.getStorageSync('scandata').userid
-			if (uni.getStorageSync('openid')) {
-				uni.reLaunch({
-					url: '/pages/home/home'
-				});
-			}
+			// if (uni.getStorageSync('openid')) {
+			// 	uni.reLaunch({
+			// 		url: '/pages/home/home'
+			// 	});
+			// }
 		},
     watch: {
       userid: function(newValue, oldValue) {
+        if(newValue.length=='5'){
           this.useryz()
+        }else {
+        }
       }
     },
 		methods: {

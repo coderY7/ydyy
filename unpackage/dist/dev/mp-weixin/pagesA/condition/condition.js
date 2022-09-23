@@ -186,7 +186,11 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       cxtj: '', //查询条件
       tj: [] };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
-  }, watch: {
+  }, onShow: function onShow() {
+    console.log('表头查询');
+    this.getcol();
+  },
+  watch: {
     tj: function tj(newvalue, oldvalue) {
 
     } },
@@ -203,6 +207,18 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
     },
     maskClick: function maskClick(e) {
       console.log('----maskClick事件:', e);
+    },
+    //列表头
+    getcol: function getcol() {
+      var data = {
+        access_token: uni.getStorageSync('access_token'),
+        userid: uni.getStorageSync('userid'),
+        djtype: uni.getStorageSync('dqbb').cxbh,
+        fdbh: uni.getStorageSync('fdbh') };
+
+      (0, _api.getcolumns)(data).then(function (res) {
+        console.log('表单头', res);
+      });
     },
     //查询
     isquery: function isquery() {
