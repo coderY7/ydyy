@@ -207,6 +207,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
     //查询
     isquery: function isquery() {
       var data = {
+        djtype: this.cxtj.cxbh,
         access_token: uni.getStorageSync('access_token'),
         userid: uni.getStorageSync('userid'),
         groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
@@ -214,7 +215,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
         fdbh: uni.getStorageSync('fdbh'),
         condition: this.tj };
 
-      (0, _api.query)(data).then(function (res) {
+      (0, _api.getlist)(data).then(function (res) {
         console.log('查询', res);
       });
     } } };exports.default = _default;

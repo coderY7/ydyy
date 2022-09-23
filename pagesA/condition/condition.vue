@@ -50,6 +50,7 @@
 			//查询
 			isquery() {
 				let data={
+          djtype:this.cxtj.cxbh,
 					access_token:uni.getStorageSync('access_token'),
 					userid:uni.getStorageSync('userid'),
 					groupid:uni.getStorageSync('loginaccess').userinfo.erp_groupid,
@@ -57,7 +58,7 @@
 					fdbh:uni.getStorageSync('fdbh'),
 					condition:this.tj
 				}
-				query(data).then((res) => {
+        getlist(data).then((res) => {
 					console.log('查询', res)
 				})
 			}
