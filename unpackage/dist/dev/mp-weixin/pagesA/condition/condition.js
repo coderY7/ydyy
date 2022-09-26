@@ -168,7 +168,65 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -186,42 +244,18 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       cxtj: '', //查询条件
       tj: [] };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
-  }, onShow: function onShow() {
-    console.log('表头查询');
-    this.getcol();
-  },
-  watch: {
-    tj: function tj(newvalue, oldvalue) {
-
-    } },
-
-  methods: {
-    //自定义返回
-    leftClick: function leftClick() {
-      uni.navigateBack({
-        delta: 1 });
-
-    },
-    cxtjs: function cxtjs(item) {
-      this.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });
-    },
-    maskClick: function maskClick(e) {
-      console.log('----maskClick事件:', e);
-    },
-    //列表头
-    getcol: function getcol() {
-      var data = {
-        access_token: uni.getStorageSync('access_token'),
-        userid: uni.getStorageSync('userid'),
-        djtype: uni.getStorageSync('dqbb').cxbh,
-        fdbh: uni.getStorageSync('fdbh') };
-
+  }, onShow: function onShow() {console.log('表头查询');this.getcol();}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
+    leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, cxtjs: function cxtjs(item) {}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
+    getcol: function getcol() {var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };
       (0, _api.getcolumns)(data).then(function (res) {
         console.log('表单头', res);
       });
     },
     //查询
-    isquery: function isquery() {
+    isquery: function isquery() {var _this = this;
+      this.cxtj.forEach(function (item) {
+        _this.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });
+      });
       var data = {
         djtype: this.dqbb.cxbh,
         access_token: uni.getStorageSync('access_token'),
