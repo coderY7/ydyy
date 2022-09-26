@@ -98,7 +98,10 @@ var components
 try {
   components = {
     uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 279))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 272))
+    },
+    uniDatetimePicker: function() {
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 330))
     }
   }
 } catch (e) {
@@ -197,7 +200,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -245,7 +258,9 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       tj: [] };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
   }, onShow: function onShow() {console.log('表头查询');this.getcol();}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
-    leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, cxtjs: function cxtjs(item) {}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
+    leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, //开始日期
+    startdate: function startdate(e) {console.log(e);this.start = e;}, //结束日期
+    enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
     getcol: function getcol() {var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };
       (0, _api.getcolumns)(data).then(function (res) {
         console.log('表单头', res);

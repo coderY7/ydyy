@@ -2,21 +2,26 @@
   <view>
     <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()">
     </u-navbar>
-    <input id="start" max="2018-12-31" min="2018-01-01"
-           name="trip-start"
-           type="date" value="2018-07-22">
-
-    <view v-for="(item,index) in cxtj" @click="cxtjs(item,index)">
+    <view v-for="(item,index) in cxtj">
       <view v-if="item.type=='字符'">
         <view>{{ item.colname }}</view>
         <input v-model="item.defval" type="text">
       </view>
-      <view v-if="item.type=='开始日期'">
+      <view v-if="item.type=='开始日期'" >
         <view>{{ item.colname }}</view>
+        <uni-datetime-picker
+            type="date"
+            :value="single"
+            @change="startdate()"
+        />
       </view>
-      <view v-if="item.type=='结束日期'">
+      <view v-if="item.type=='结束日期'" >
         <view>{{ item.colname }}</view>
-
+        <uni-datetime-picker
+            type="date"
+            :value="single"
+            @change="enddate()"
+        />
       </view>
       <view v-if="item.type=='多选下拉框'">
         <view>{{ item.colname }}</view>
@@ -75,8 +80,15 @@ export default {
         delta: 1
       });
     },
-    cxtjs(item) {
-
+    //开始日期
+    startdate(e){
+      console.log(e);
+      this.start=e
+    },
+    //结束日期
+    enddate(e){
+      console.log(e);
+      this.end=e
 
     },
     maskClick(e) {

@@ -98,19 +98,13 @@ var components
 try {
   components = {
     uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 279))
-    },
-    uniDrawer: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-drawer/components/uni-drawer/uni-drawer */ "uni_modules/uni-drawer/components/uni-drawer/uni-drawer").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-drawer/components/uni-drawer/uni-drawer.vue */ 321))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 272))
     },
     uRadioGroup: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio-group/u-radio-group.vue */ 328))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio-group/u-radio-group.vue */ 314))
     },
     uRadio: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio/u-radio.vue */ 336))
-    },
-    qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 344))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio/u-radio.vue */ 322))
     }
   }
 } catch (e) {
