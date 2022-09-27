@@ -5,9 +5,13 @@
     <view v-for="(item,index) in cxtj">
       <view v-if="item.type=='字符'">
         <view>{{ item.colname }}</view>
-        <input v-model="item.defval" type="text">
+        <u-input
+            placeholder="请输入查询内容"
+            border="surround"
+            v-model="item.defval"
+        ></u-input>
       </view>
-      <view v-if="item.type=='开始日期'" >
+      <view v-if="item.type=='开始日期'">
         <view>{{ item.colname }}</view>
         <uni-datetime-picker
             type="date"
@@ -15,7 +19,7 @@
             @change="startdate()"
         />
       </view>
-      <view v-if="item.type=='结束日期'" >
+      <view v-if="item.type=='结束日期'">
         <view>{{ item.colname }}</view>
         <uni-datetime-picker
             type="date"
@@ -41,6 +45,20 @@
       </view>
     </view>
     <button @click="isquery()">查询</button>
+
+<!--    表格数据展示-->
+    <view>
+      <uni-table border stripe emptyText="暂无更多数据" >
+        <!-- 表头行 -->
+        <uni-tr>
+          <uni-th align="center" v-for="(item,index) in bdt">{{item}}</uni-th>
+        </uni-tr>
+        <!-- 表格数据行 -->
+        <uni-tr v-for="(item,index) in result">
+          <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>
+        </uni-tr>
+      </uni-table>
+    </view>
   </view>
 </template>
 
@@ -57,7 +75,10 @@ export default {
       start: '', //开始时间
       end: '', //结束时间
       cxtj: '',//查询条件
-      tj: []
+      tj: [],
+      bdt:'',//表单头
+      bdtdata:'',
+      result:''//查询结果
     };
   },
   onLoad(option) {
@@ -104,6 +125,7 @@ export default {
       }
       getcolumns(data).then((res) => {
         console.log('表单头', res)
+        this.bdt=res.data
       })
     },
     //查询
@@ -121,10 +143,10 @@ export default {
         condition: this.tj
       }
       getlist(data).then((res) => {
-        console.log('查询', res)
+        this.result=res.data
+        this.bdt=Object.keys(this.result[0])
       })
     }
-
   }
 }
 </script>
