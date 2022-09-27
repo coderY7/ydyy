@@ -57,13 +57,24 @@
           </uni-section>
         </view>
 
+
+
       </view>
       <view v-if="item.type=='选择'">
         <view>{{ item.colname }}</view>
 
       </view>
       <view v-if="item.type=='查询下拉框'">
-        <view>{{ item.colname }}</view>
+        <view v-if="item.colname=='商家合同'">
+          <view>{{ item.colname }}</view>
+          <uni-section  type="line">
+            <uni-data-select
+                v-model="item.defval"
+                :localdata="cxsjht"
+                @change="change"
+            ></uni-data-select>
+          </uni-section>
+        </view>
 
       </view>
     </view>
@@ -105,6 +116,7 @@ export default {
       result:'',//查询结果
       cxfdbh:'',//查询分店编号
       cxsppp:'',//查询商品品牌
+      cxsjht:''//查询商家合同
     };
   },
   onLoad(option) {
@@ -114,6 +126,7 @@ export default {
   onShow() {
    this.cxfdbh=uni.getStorageSync('basic').FDINFO
     this.cxsppp=uni.getStorageSync('basic').PPINFO
+    this.cxsjht=uni.getStorageSync('basic').SJHTTYPE
     //处理分店下拉框数据
     let cxfdbh=[];
    this.cxfdbh.forEach((item)=>{
@@ -132,6 +145,16 @@ export default {
       cxsppp.push(datas)
     })
     this.cxsppp=cxsppp
+
+    //处理商家合同下拉框数据
+    let cxsjht=[];
+    this.cxsjht.forEach((item)=>{
+      let datas={}
+      datas.value=item.htlxid;
+      datas.text=item.htlxmc
+      cxsjht.push(datas)
+    })
+    this.cxsjht=cxsjht
   },
   watch: {
     tj: function (newvalue, oldvalue) {
