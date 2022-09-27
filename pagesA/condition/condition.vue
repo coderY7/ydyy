@@ -111,9 +111,7 @@ export default {
      cxfdbh.push(datas)
    })
     this.cxfdbh=cxfdbh
-    //this.xzfdbh=this.cxfdbh[0]
-    //this.getcol()
-    this.querys()
+
   },
   watch: {
     tj: function (newvalue, oldvalue) {

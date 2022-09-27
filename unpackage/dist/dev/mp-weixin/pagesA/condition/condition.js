@@ -357,9 +357,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       xzfdbh: '' };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
   }, onShow: function onShow() {this.cxfdbh = uni.getStorageSync('basic').FDINFO; //处理分店下拉框数据
-    var cxfdbh = [];this.cxfdbh.forEach(function (item) {var datas = {};datas.value = item.fdbh;datas.text = item.fdmc;cxfdbh.push(datas);});this.cxfdbh = cxfdbh; //this.xzfdbh=this.cxfdbh[0]
-    //this.getcol()
-    this.querys();}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
+    var cxfdbh = [];this.cxfdbh.forEach(function (item) {var datas = {};datas.value = item.fdbh;datas.text = item.fdmc;cxfdbh.push(datas);});this.cxfdbh = cxfdbh;}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
     leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, //开始日期
     startdate: function startdate(e) {console.log(e);this.start = e;}, //结束日期
     enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, querys: function querys() {var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), fdbh: uni.getStorageSync('fdbh'), reportid: uni.getStorageSync('dqbb').cxbh };(0, _api.query)(data).then(function (res) {console.log(res);});}, //列表头
