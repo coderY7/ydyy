@@ -46,6 +46,17 @@
           </uni-section>
         </view>
 
+        <view v-if="item.colname=='商品品牌'">
+          <view>{{ item.colname }}</view>
+          <uni-section  type="line">
+            <uni-data-select
+                v-model="item.defval"
+                :localdata="cxsppp"
+                @change="change"
+            ></uni-data-select>
+          </uni-section>
+        </view>
+
       </view>
       <view v-if="item.type=='选择'">
         <view>{{ item.colname }}</view>
@@ -93,7 +104,7 @@ export default {
       bdtdata:'',
       result:'',//查询结果
       cxfdbh:'',//查询分店编号
-      xzfdbh:''
+      cxsppp:'',//查询商品品牌
     };
   },
   onLoad(option) {
@@ -102,6 +113,7 @@ export default {
   },
   onShow() {
    this.cxfdbh=uni.getStorageSync('basic').FDINFO
+    this.cxsppp=uni.getStorageSync('basic').PPINFO
     //处理分店下拉框数据
     let cxfdbh=[];
    this.cxfdbh.forEach((item)=>{
@@ -111,7 +123,15 @@ export default {
      cxfdbh.push(datas)
    })
     this.cxfdbh=cxfdbh
-
+//处理商品品牌下拉框数据
+    let cxsppp=[];
+    this.cxsppp.forEach((item)=>{
+      let datas={}
+      datas.value=item.ppbmid;
+      datas.text=item.ppmc
+      cxsppp.push(datas)
+    })
+    this.cxsppp=cxsppp
   },
   watch: {
     tj: function (newvalue, oldvalue) {
