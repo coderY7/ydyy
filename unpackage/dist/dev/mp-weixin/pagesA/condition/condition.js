@@ -106,6 +106,9 @@ try {
     uniDatetimePicker: function() {
       return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 338))
     },
+    uniDataSelect: function() {
+      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 475))
+    },
     uniTable: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 349))
     },
@@ -256,7 +259,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -325,17 +352,30 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       end: '', //结束时间
       cxtj: '', //查询条件
       tj: [], bdt: '', //表单头
-      bdtdata: '', result: '' //查询结果
-    };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
+      bdtdata: '', result: '', //查询结果
+      cxfdbh: '', //查询分店编号
+      xzfdbh: '' };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
-  }, onShow: function onShow() {console.log('表头查询'); //this.getcol()
-  }, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
+  }, onShow: function onShow() {this.cxfdbh = uni.getStorageSync('basic').FDINFO; //处理分店下拉框数据
+    var cxfdbh = [];this.cxfdbh.forEach(function (item) {var datas = {};datas.value = item.fdbh;datas.text = item.fdmc;cxfdbh.push(datas);});this.cxfdbh = cxfdbh; //this.xzfdbh=this.cxfdbh[0]
+    //this.getcol()
+    this.querys();}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
     leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, //开始日期
     startdate: function startdate(e) {console.log(e);this.start = e;}, //结束日期
-    enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
+    enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, querys: function querys() {var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), fdbh: uni.getStorageSync('fdbh'), reportid: uni.getStorageSync('dqbb').cxbh };(0, _api.query)(data).then(function (res) {console.log(res);});}, //列表头
     getcol: function getcol() {var _this = this;var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };(0, _api.getcolumns)(data).then(function (res) {console.log('表单头', res);_this.bdt = res.data;});}, //查询
     isquery: function isquery() {var _this2 = this;this.tj = []; //清空之前填写
-      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid, username: uni.getStorageSync('loginaccess').userinfo.erp_username, fdbh: uni.getStorageSync('fdbh'), condition: this.tj };
+      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });
+      });
+      var data = {
+        djtype: this.dqbb.cxbh,
+        access_token: uni.getStorageSync('access_token'),
+        userid: uni.getStorageSync('userid'),
+        groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
+        username: uni.getStorageSync('loginaccess').userinfo.erp_username,
+        fdbh: uni.getStorageSync('fdbh'),
+        condition: this.tj };
+
       (0, _api.getlist)(data).then(function (res) {
         _this2.result = res.data;
         _this2.bdt = Object.keys(_this2.result[0]);

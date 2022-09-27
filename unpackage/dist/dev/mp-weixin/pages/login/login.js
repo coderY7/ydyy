@@ -212,6 +212,7 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
     // }
   }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //用户验证
     useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
+
           uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
           _this.fdlist = [];
           for (var u in res.fdlist) {
@@ -284,6 +285,7 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
                 uni.switchTab({
                   url: '/pages/home/home' });
 
+                _this2.basics();
               });
 
             } });
@@ -319,6 +321,28 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
         }
 
       });
+    },
+    basics: function basics() {
+      var data = {
+        access_token: uni.getStorageSync('access_token'),
+        dtype: 'GetBufferAll',
+        companyid: uni.getStorageSync('companyid') };
+
+      // basic(data).then((res)=>{
+      //   console.log(res);
+      // })
+      uni.request({
+        url: 'http://erpai.mzsale.com/mzsale/web/basic', //仅为示例，并非真实接口地址。
+        data: data,
+        method: 'POST',
+        header: {
+          'custom-header': 'hello' //自定义请求头信息
+        },
+        success: function success(res) {
+          console.log(res);
+          uni.setStorageSync('basic', res.data);
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

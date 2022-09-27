@@ -81,9 +81,9 @@ export const getlist = (params, config = {}) => http.post("mzsale/web/report/con
 
 
 //通用动态条件查询
-export const  query= (params, config = {}) => http.post("mzsale/web/report/auto/condition/query", params, config)
-
-
+export const  query= (params, config = {}) => http.post("mzsale/web/report/conditon/query", params, config)
+//基础信息查询接口
+export const  basic= (params, config = {}) => http.post("mzsale/web/basic", params, config)
 
 //更新商家信息
 export const getSupplier=(params, config = {}) => http.post("mzato/main/app/getSupplier", params, config)

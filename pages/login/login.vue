@@ -38,7 +38,8 @@
 		usercheck,
 		userfast,
 		getopenid,
-		usercheckapp
+		usercheckapp,
+    basic
 	} from "@/network/api.js";
 	export default {
 		data() {
@@ -150,6 +151,7 @@
 									uni.switchTab({
 										url: '/pages/home/home'
 									});
+                  this.basics()
 								})
 
 							}
@@ -185,6 +187,28 @@
 					}
          
         })
+      },
+      basics(){
+        let data={
+          access_token: uni.getStorageSync('access_token'),
+          dtype:'GetBufferAll',
+          companyid:uni.getStorageSync('companyid')
+        }
+        // basic(data).then((res)=>{
+        //   console.log(res);
+        // })
+        uni.request({
+          url: 'http://erpai.mzsale.com/mzsale/web/basic', //仅为示例，并非真实接口地址。
+         data:data,
+          method:'POST',
+          header: {
+            'custom-header': 'hello' //自定义请求头信息
+          },
+          success: (res) => {
+            console.log(res);
+uni.setStorageSync('basic',res.data)
+          }
+        });
       }
 		}
 	}

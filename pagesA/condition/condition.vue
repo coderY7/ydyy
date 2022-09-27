@@ -16,6 +16,7 @@
         <uni-datetime-picker
             type="date"
             :value="single"
+            v-model="item.defval"
             @change="startdate()"
         />
       </view>
@@ -24,7 +25,9 @@
         <uni-datetime-picker
             type="date"
             :value="single"
+            v-model="item.defval"
             @change="enddate()"
+
         />
       </view>
       <view v-if="item.type=='多选下拉框'">
@@ -32,7 +35,16 @@
 
       </view>
       <view v-if="item.type=='下拉框'">
-        <view>{{ item.colname }}</view>
+        <view v-if="item.colname=='分店编号'">
+          <view>{{ item.colname }}</view>
+          <uni-section title="本地数据" type="line">
+            <uni-data-select
+                v-model="item.defval"
+                :localdata="cxfdbh"
+                @change="change"
+            ></uni-data-select>
+          </uni-section>
+        </view>
 
       </view>
       <view v-if="item.type=='选择'">
@@ -48,7 +60,7 @@
 
 <!--    表格数据展示-->
     <view>
-      <uni-table border stripe emptyText="暂无更多数据" >
+      <uni-table border stripe emptyText="暂无更多数据">
         <!-- 表头行 -->
         <uni-tr>
           <uni-th align="center" v-for="(item,index) in bdt">{{item}}</uni-th>
@@ -65,7 +77,8 @@
 <script>
 import {
   getlist,
-  getcolumns
+  getcolumns,
+    query
 } from '../../network/api.js'
 
 export default {
@@ -78,7 +91,9 @@ export default {
       tj: [],
       bdt:'',//表单头
       bdtdata:'',
-      result:''//查询结果
+      result:'',//查询结果
+      cxfdbh:'',//查询分店编号
+      xzfdbh:''
     };
   },
   onLoad(option) {
@@ -86,8 +101,19 @@ export default {
     this.dqbb = uni.getStorageSync('dqbb') //当前报表
   },
   onShow() {
-    console.log('表头查询')
+   this.cxfdbh=uni.getStorageSync('basic').FDINFO
+    //处理分店下拉框数据
+    let cxfdbh=[];
+   this.cxfdbh.forEach((item)=>{
+     let datas={}
+     datas.value=item.fdbh;
+     datas.text=item.fdmc
+     cxfdbh.push(datas)
+   })
+    this.cxfdbh=cxfdbh
+    //this.xzfdbh=this.cxfdbh[0]
     //this.getcol()
+    this.querys()
   },
   watch: {
     tj: function (newvalue, oldvalue) {
@@ -114,6 +140,17 @@ export default {
     },
     maskClick(e) {
       console.log('----maskClick事件:', e);
+    },
+    querys(){
+      let data= {
+        access_token: uni.getStorageSync('access_token'),
+        userid: uni.getStorageSync('userid'),
+        fdbh: uni.getStorageSync('fdbh'),
+        reportid:uni.getStorageSync('dqbb').cxbh
+      }
+      query(data).then((res)=>{
+        console.log(res);
+      })
     },
     //列表头
     getcol() {
