@@ -87,7 +87,7 @@ export default {
   },
   onShow() {
     console.log('表头查询')
-    this.getcol()
+    //this.getcol()
   },
   watch: {
     tj: function (newvalue, oldvalue) {
@@ -130,6 +130,7 @@ export default {
     },
     //查询
     isquery() {
+      this.tj=[];//清空之前填写
       this.cxtj.forEach((item) => {
         this.tj.push({'Convalue': item.defval, 'recordid': item.recordid})
       })
