@@ -37,7 +37,7 @@
       <view v-if="item.type=='下拉框'">
         <view v-if="item.colname=='分店编号'">
           <view>{{ item.colname }}</view>
-          <uni-section title="本地数据" type="line">
+          <uni-section  type="line">
             <uni-data-select
                 v-model="item.defval"
                 :localdata="cxfdbh"
