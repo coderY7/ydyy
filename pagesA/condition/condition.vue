@@ -4,12 +4,16 @@
     </u-navbar>
     <view v-for="(item,index) in cxtj">
       <view v-if="item.type=='字符'">
-        <view>{{ item.colname }}</view>
-        <u-input
-            placeholder="请输入查询内容"
-            border="surround"
-            v-model="item.defval"
-        ></u-input>
+        <view class="boxname">{{ item.colname }}</view>
+        <view class="boxinput">
+          <u-input
+              placeholder="请输入查询内容"
+              border="surround"
+              v-model="item.defval"
+              clearable
+          ></u-input>
+        </view>
+
       </view>
       <view v-if="item.type=='开始日期'">
         <view>{{ item.colname }}</view>
@@ -75,10 +79,22 @@
             ></uni-data-select>
           </uni-section>
         </view>
+      </view>
 
+      <view v-if="item.type=='选择'">
+        <view v-if="item.colname=='数据安全'">
+          <view>{{ item.colname }}</view>
+          <view>{{item.defval}}</view>
+        </view>
       </view>
     </view>
-    <button @click="isquery()">查询</button>
+
+<view class="unit3">
+  <view class="unit3_box">
+    <u-button @click="isquery()" type="primary">查询</u-button>
+  </view>
+</view>
+
 
 <!--    表格数据展示-->
     <view>
@@ -182,17 +198,6 @@ export default {
     maskClick(e) {
       console.log('----maskClick事件:', e);
     },
-    querys(){
-      let data= {
-        access_token: uni.getStorageSync('access_token'),
-        userid: uni.getStorageSync('userid'),
-        fdbh: uni.getStorageSync('fdbh'),
-        reportid:uni.getStorageSync('dqbb').cxbh
-      }
-      query(data).then((res)=>{
-        console.log(res);
-      })
-    },
     //列表头
     getcol() {
       let data = {
@@ -223,7 +228,14 @@ export default {
       }
       getlist(data).then((res) => {
         this.result=res.data
-        this.bdt=Object.keys(this.result[0])
+        //this.bdt=Object.keys(this.result[0])
+        //表单头处理
+        let cl=res.columns
+        let a=[];
+        cl.forEach((item)=>{
+          a.push(item.title)
+        })
+        this.bdt=a
       })
     }
   }
@@ -231,9 +243,22 @@ export default {
 </script>
 
 <style lang="scss">
-.unit1_box {
-  display: flex;
-  justify-content: center;
+.boxname{
+  margin-bottom: 5rpx;
+}
+.boxinput{
 
+}
+.unit3{
+  width: 100%;
+  margin:30rpx 0;
+  display: flex;
+  justify-content:content;
+  align-items: center;
+}
+.unit3_box{
+height: 100%;
+  width: 200px;
+  margin: auto;
 }
 </style>

@@ -7,6 +7,7 @@
     "u-input": "/node-modules/uview-ui/components/u-input/u-input",
     "uni-datetime-picker": "/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker",
     "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
     "uni-table": "/uni_modules/uni-table/components/uni-table/uni-table",
     "uni-tr": "/uni_modules/uni-table/components/uni-tr/uni-tr",
     "uni-th": "/uni_modules/uni-table/components/uni-th/uni-th",

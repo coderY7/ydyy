@@ -107,19 +107,22 @@ try {
       return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 338))
     },
     uniDataSelect: function() {
-      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 475))
+      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 349))
+    },
+    uButton: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 296))
     },
     uniTable: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 349))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 359))
     },
     uniTr: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 356))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-tr/uni-tr */ "uni_modules/uni-table/components/uni-tr/uni-tr").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-tr/uni-tr.vue */ 366))
     },
     uniTh: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 363))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-th/uni-th */ "uni_modules/uni-table/components/uni-th/uni-th").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-th/uni-th.vue */ 373))
     },
     uniTd: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 370))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-td/uni-td */ "uni_modules/uni-table/components/uni-td/uni-td").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-td/uni-td.vue */ 380))
     }
   }
 } catch (e) {
@@ -195,6 +198,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -391,6 +410,22 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = { data: function data() {return { dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
@@ -408,20 +443,12 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
     var cxsjht = [];this.cxsjht.forEach(function (item) {var datas = {};datas.value = item.htlxid;datas.text = item.htlxmc;cxsjht.push(datas);});this.cxsjht = cxsjht;}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
     leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, //开始日期
     startdate: function startdate(e) {console.log(e);this.start = e;}, //结束日期
-    enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, querys: function querys() {var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), fdbh: uni.getStorageSync('fdbh'), reportid: uni.getStorageSync('dqbb').cxbh };(0, _api.query)(data).then(function (res) {console.log(res);});}, //列表头
+    enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
     getcol: function getcol() {var _this = this;var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };(0, _api.getcolumns)(data).then(function (res) {console.log('表单头', res);_this.bdt = res.data;});}, //查询
     isquery: function isquery() {var _this2 = this;this.tj = []; //清空之前填写
-      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'),
-        groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
-        username: uni.getStorageSync('loginaccess').userinfo.erp_username,
-        fdbh: uni.getStorageSync('fdbh'),
-        condition: this.tj };
-
-      (0, _api.getlist)(data).then(function (res) {
-        _this2.result = res.data;
-        _this2.bdt = Object.keys(_this2.result[0]);
-      });
-    } } };exports.default = _default;
+      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid, username: uni.getStorageSync('loginaccess').userinfo.erp_username, fdbh: uni.getStorageSync('fdbh'), condition: this.tj };(0, _api.getlist)(data).then(function (res) {_this2.result = res.data; //this.bdt=Object.keys(this.result[0])
+        //表单头处理
+        var cl = res.columns;var a = [];cl.forEach(function (item) {a.push(item.title);});_this2.bdt = a;});} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

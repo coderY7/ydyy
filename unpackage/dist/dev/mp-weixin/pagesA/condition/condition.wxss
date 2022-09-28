@@ -24,8 +24,19 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.unit1_box {
+.boxname {
+  margin-bottom: 5rpx;
+}
+.unit3 {
+  width: 100%;
+  margin: 30rpx 0;
   display: flex;
-  justify-content: center;
+  justify-content: content;
+  align-items: center;
+}
+.unit3_box {
+  height: 100%;
+  width: 200px;
+  margin: auto;
 }
 

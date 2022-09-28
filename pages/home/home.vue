@@ -78,6 +78,12 @@ export default {
           uni.navigateTo({
             url: `../../pagesA/work/work?item=${item}`
           })
+        }else {
+          uni.showToast({
+            title: '未查询到工作信息',
+            duration: 2000,
+            icon:'none'
+          });
         }
       })
 
@@ -99,11 +105,18 @@ export default {
         access_token:uni.getStorageSync('access_token')
       }
       oaNoticec(datas).then((res) => {
+
         if (res.err_code == '0') {
           let item = JSON.stringify(res.data)
           uni.navigateTo({
             url: `../../pagesA/notice/notice?item=${item}`
           })
+        }else {
+          uni.showToast({
+            title: '未查询到公告信息',
+            duration: 2000,
+            icon:'none'
+          });
         }
       })
     }
