@@ -4,36 +4,8 @@
 		</u-navbar>
 		<!-- 选择门店 -->
 		<view class="unit1">
-			<view class="unit1_box">
-				<view>选择门店</view>
-				<view>
-					<view @click="showDrawer" type="primary">{{dianmin.fdbh}}--{{dianmin.fdmc}}</view>
-					<uni-drawer ref="showRight" mode="right" :mask-click="false" >
-						<view class="status_bar"></view>
-						<!-- <button @click="closeDrawer" type="primary">关闭</button> -->
-						<scroll-view style="height: 100%;" scroll-y="true">
-							<u-radio-group 
-							    v-model="fendian"
-									:borderBottom="true"
-									placement="column"
-							    iconPlacement="right"
-									>
-								<u-radio
-								 :customStyle="{marginBottom: '16px'}"
-								 v-for="(item,key) in fendian" :key="item" :label="`${item.fdbh}-${item.fdmc}`" :name="item"  @change='groupChange()'>
-								 </u-radio>
-							</u-radio-group>
-						</scroll-view>
-						
-					</uni-drawer>
-				</view>
-			</view>
-			<view class="unit1_box">
-				<view>选择时间</view>
-				
-				
-				
-			</view>
+
+
 		</view>
 
 		<view class="charts-box">
@@ -55,10 +27,6 @@
 	export default {
 		data() {
 			return {
-				mdshow: false,
-				fendian: [], //分店信息
-				dianmin:null,//默认店名为分店第一个
-				fendianitem: null, //选择的分店
 				getpctodayssaledata:'',//快报查询日期
 				chartDataA: {},
 				optsA: {
@@ -85,7 +53,6 @@
 					}
 				},
 				chartDataB: {},
-				//您可以通过修改 config-ucharts.js 文件中下标为 ['pie'] 的节点来配置全局默认参数，如都是默认参数，此处可以不传 opts 。实际应用过程中 opts 只需传入与全局默认参数中不一致的【某一个属性】即可实现同类型的图表显示不同的样式，达到页面简洁的需求。
 				optsB: {
 					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
 					padding: [5, 5, 5, 5],
@@ -119,37 +86,10 @@
 			this.getServerDataA();
 			this.getServerDataB();
 			console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
-			getFenDian({
-        "access_token": uni.getStorageSync("access_token"),
-        "sn": uni.getStorageSync("sn"),
-        "condtion": 'fendian'
-			}).then((res) => {
-				console.log('获取门店信息', res.data)
-				this.dianmin=res.data[0]//默认分店
-				this.fendian = res.data
-			})
+
 		},
 		methods: {
-			showDrawer() {
-				this.$refs.showRight.open();
-        getFenDian({
-          "access_token": uni.getStorageSync("access_token"),
-          "sn": uni.getStorageSync("sn"),
-          "condtion": 'fendian'
-        }).then((res) => {
-          console.log('获取门店信息', res.data)
-          this.dianmin=res.data[0]//默认分店
-          this.fendian = res.data
-        })
-			},
-			closeDrawer() {
-				this.$refs.showRight.close();
-			},
-			groupChange(n){
-				console.log(n)
-				this.dianmin=n
-				this.closeDrawer()
-			},
+
 			
 			//可视化面板
 			getServerDataA() {

@@ -4,7 +4,6 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
-    "u-radio-group": "/node-modules/uview-ui/components/u-radio-group/u-radio-group",
-    "u-radio": "/node-modules/uview-ui/components/u-radio/u-radio"
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts"
   }
 }

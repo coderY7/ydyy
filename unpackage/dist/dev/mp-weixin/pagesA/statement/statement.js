@@ -100,11 +100,8 @@ try {
     uNavbar: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 272))
     },
-    uRadioGroup: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio-group/u-radio-group.vue */ 314))
-    },
-    uRadio: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-radio/u-radio.vue */ 322))
+    qiunDataCharts: function() {
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 314))
     }
   }
 } catch (e) {
@@ -181,34 +178,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 231));
 var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -229,41 +198,36 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 // ES 2015
-var _default = { data: function data() {return { mdshow: false, fendian: [], //分店信息
-      dianmin: null, //默认店名为分店第一个
-      fendianitem: null, //选择的分店
-      getpctodayssaledata: '', //快报查询日期
-      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 20, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataB: {}, //您可以通过修改 config-ucharts.js 文件中下标为 ['pie'] 的节点来配置全局默认参数，如都是默认参数，此处可以不传 opts 。实际应用过程中 opts 只需传入与全局默认参数中不一致的【某一个属性】即可实现同类型的图表显示不同的样式，达到页面简洁的需求。
-      optsB: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15, border: true, borderWidth: 3, borderColor: "#FFFFFF", linearType: "custom" } } } };
+var _default = { data: function data() {return { getpctodayssaledata: '', //快报查询日期
+      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] },
+
+
+        extra: {
+          column: {
+            type: "group",
+            width: 20,
+            activeBgColor: "#000000",
+            activeBgOpacity: 0.08 } } },
+
+
+
+      chartDataB: {},
+      optsB: {
+        color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+        padding: [5, 5, 5, 5],
+        extra: {
+          pie: {
+            activeOpacity: 0.5,
+            activeRadius: 10,
+            offsetAngle: 0,
+            labelWidth: 15,
+            border: true,
+            borderWidth: 3,
+            borderColor: "#FFFFFF",
+            linearType: "custom" } } } };
+
+
 
 
 
@@ -278,44 +242,17 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
       console.log('仪表盘数据', res);
     });
   },
-  onReady: function onReady() {var _this = this;
+  onReady: function onReady() {
     this.getServerDataA();
     this.getServerDataB();
     console.log((0, _dayjs.default)().format('YYYY-MM-DD')); // 获取当前时间
-    (0, _api.getFenDian)({
-      "access_token": uni.getStorageSync("access_token"),
-      "sn": uni.getStorageSync("sn"),
-      "condtion": 'fendian' }).
-    then(function (res) {
-      console.log('获取门店信息', res.data);
-      _this.dianmin = res.data[0]; //默认分店
-      _this.fendian = res.data;
-    });
+
   },
   methods: {
-    showDrawer: function showDrawer() {var _this2 = this;
-      this.$refs.showRight.open();
-      (0, _api.getFenDian)({
-        "access_token": uni.getStorageSync("access_token"),
-        "sn": uni.getStorageSync("sn"),
-        "condtion": 'fendian' }).
-      then(function (res) {
-        console.log('获取门店信息', res.data);
-        _this2.dianmin = res.data[0]; //默认分店
-        _this2.fendian = res.data;
-      });
-    },
-    closeDrawer: function closeDrawer() {
-      this.$refs.showRight.close();
-    },
-    groupChange: function groupChange(n) {
-      console.log(n);
-      this.dianmin = n;
-      this.closeDrawer();
-    },
+
 
     //可视化面板
-    getServerDataA: function getServerDataA() {var _this3 = this;
+    getServerDataA: function getServerDataA() {var _this = this;
       //模拟从服务器获取数据时的延时
       setTimeout(function () {
         //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
@@ -331,10 +268,10 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
 
 
 
-        _this3.chartDataA = JSON.parse(JSON.stringify(res));
+        _this.chartDataA = JSON.parse(JSON.stringify(res));
       }, 500);
     },
-    getServerDataB: function getServerDataB() {var _this4 = this;
+    getServerDataB: function getServerDataB() {var _this2 = this;
       //模拟从服务器获取数据时的延时
       setTimeout(function () {
         //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
@@ -358,7 +295,7 @@ var _default = { data: function data() {return { mdshow: false, fendian: [], //�
 
 
 
-        _this4.chartDataB = JSON.parse(JSON.stringify(res));
+        _this2.chartDataB = JSON.parse(JSON.stringify(res));
       }, 500);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
