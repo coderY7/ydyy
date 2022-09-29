@@ -146,13 +146,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.__map(_vm.result, function(item, index) {
+  var l2 = _vm.__map(_vm.sumdata, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
-    var l0 = Object.values(item)
+    var l0 = Object.keys(item)
+    var l1 = Object.values(item)
     return {
       $orig: $orig,
-      l0: l0
+      l0: l0,
+      l1: l1
+    }
+  })
+
+  var l4 = _vm.__map(_vm.result, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var l3 = Object.values(item)
+    return {
+      $orig: $orig,
+      l3: l3
     }
   })
 
@@ -160,7 +172,8 @@ var render = function() {
     {},
     {
       $root: {
-        l1: l1
+        l2: l2,
+        l4: l4
       }
     }
   )
@@ -334,7 +347,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
+//
+//
+//
+//
 //
 //
 //

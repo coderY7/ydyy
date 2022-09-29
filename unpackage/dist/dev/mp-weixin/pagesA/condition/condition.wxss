@@ -47,9 +47,6 @@
 }
 .unit4_box {
   display: flex;
-}
-.bottom {
-  display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 

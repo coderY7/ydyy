@@ -109,12 +109,16 @@
     <u-button @click="isquery()" type="primary">查询</u-button>
   </view>
 </view>
-<!--      <view>-->
-<!--        <view v-for="(item,index) in sumdata" class="unit4_box">-->
-<!--         <view class="bottom" v-for="(items,key) in Object.keys(item)">{{items}}</view>-->
-<!--          <view class="bottom" v-for="(items,key) in Object.values(item)">{{items}}</view>-->
-<!--        </view>-->
-<!--      </view>-->
+      <view>
+        <view v-for="(item,index) in sumdata" class="unit4_box">
+          <view>
+            <view  v-for="(items,key) in Object.keys(item)">{{items}}</view>
+          </view>
+          <view>
+            <view  v-for="(items,key) in Object.values(item)">{{items}}</view>
+          </view>
+        </view>
+      </view>
 
 <!--    表格数据展示-->
     <view>
@@ -290,9 +294,10 @@ height: 100%;
 }
 .unit4_box{
   display: flex;
+  justify-content: space-around;
+
 }
 .bottom{
-  display: flex;
-  justify-content: space-between;
+
 }
 </style>
