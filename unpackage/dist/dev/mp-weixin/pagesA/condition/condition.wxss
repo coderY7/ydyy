@@ -24,8 +24,14 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+#pages {
+  margin: 5rpx 20rpx 0 20rpx;
+}
 .boxname {
-  margin-bottom: 5rpx;
+  margin-bottom: 10rpx;
+}
+.boxinput {
+  margin: 0 20rpx;
 }
 .unit3 {
   width: 100%;
