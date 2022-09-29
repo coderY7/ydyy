@@ -98,7 +98,7 @@ var components
 try {
   components = {
     uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 272))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 306))
     },
     uInput: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-input/u-input.vue */ 326))
@@ -110,7 +110,7 @@ try {
       return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 345))
     },
     uButton: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 296))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 288))
     },
     uniTable: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-table/components/uni-table/uni-table */ "uni_modules/uni-table/components/uni-table/uni-table").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-table/components/uni-table/uni-table.vue */ 352))
@@ -198,6 +198,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
 
 
 
@@ -458,6 +464,12 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = { data: function data() {return { dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
@@ -466,7 +478,8 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
       bdtdata: '', result: '', //查询结果
       cxfdbh: '', //查询分店编号
       cxsppp: '', //查询商品品牌
-      cxsjht: '' //查询商家合同
+      cxsjht: '', //查询商家合同
+      sumdata: '' //查询到的汇总
     };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
   }, onShow: function onShow() {this.cxfdbh = uni.getStorageSync('basic').FDINFO;this.cxsppp = uni.getStorageSync('basic').PPINFO;this.cxsjht = uni.getStorageSync('basic').SJHTTYPE; //处理分店下拉框数据
@@ -478,7 +491,7 @@ var _default = { data: function data() {return { dqbb: '', //当前报表
     enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
     getcol: function getcol() {var _this = this;var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };(0, _api.getcolumns)(data).then(function (res) {console.log('表单头', res);_this.bdt = res.data;});}, //查询
     isquery: function isquery() {var _this2 = this;this.tj = []; //清空之前填写
-      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid, username: uni.getStorageSync('loginaccess').userinfo.erp_username, fdbh: uni.getStorageSync('fdbh'), condition: this.tj };(0, _api.getlist)(data).then(function (res) {_this2.result = res.data; //this.bdt=Object.keys(this.result[0])
+      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid, username: uni.getStorageSync('loginaccess').userinfo.erp_username, fdbh: uni.getStorageSync('fdbh'), condition: this.tj };(0, _api.getlist)(data).then(function (res) {_this2.result = res.data;_this2.sumdata = res.sumdata; //this.bdt=Object.keys(this.result[0])
         //表单头处理
         var cl = res.columns;var a = [];cl.forEach(function (item) {a.push(item.title);});_this2.bdt = a;});} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

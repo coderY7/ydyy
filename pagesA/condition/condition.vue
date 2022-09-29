@@ -109,7 +109,12 @@
     <u-button @click="isquery()" type="primary">查询</u-button>
   </view>
 </view>
-
+<!--      <view>-->
+<!--        <view v-for="(item,index) in sumdata" class="unit4_box">-->
+<!--         <view class="bottom" v-for="(items,key) in Object.keys(item)">{{items}}</view>-->
+<!--          <view class="bottom" v-for="(items,key) in Object.values(item)">{{items}}</view>-->
+<!--        </view>-->
+<!--      </view>-->
 
 <!--    表格数据展示-->
     <view>
@@ -124,6 +129,7 @@
         </uni-tr>
       </uni-table>
     </view>
+
   </view>
   </view>
 </template>
@@ -148,7 +154,8 @@ export default {
       result:'',//查询结果
       cxfdbh:'',//查询分店编号
       cxsppp:'',//查询商品品牌
-      cxsjht:''//查询商家合同
+      cxsjht:'',//查询商家合同
+      sumdata:''//查询到的汇总
     };
   },
   onLoad(option) {
@@ -244,6 +251,7 @@ export default {
       }
       getlist(data).then((res) => {
         this.result=res.data
+        this.sumdata=res.sumdata
         //this.bdt=Object.keys(this.result[0])
         //表单头处理
         let cl=res.columns
@@ -279,5 +287,12 @@ margin: 0 20rpx;
 height: 100%;
   width: 200px;
   margin: auto;
+}
+.unit4_box{
+  display: flex;
+}
+.bottom{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

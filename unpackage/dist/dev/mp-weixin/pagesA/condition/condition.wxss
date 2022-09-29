@@ -45,4 +45,11 @@
   width: 200px;
   margin: auto;
 }
+.unit4_box {
+  display: flex;
+}
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
 

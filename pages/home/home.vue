@@ -16,24 +16,24 @@
         </view>
         <view class="unit1_right">待处理工作</view>
       </view>
-      <view class="unit2">
-        <div class="unit2box">
-          <view class="unit2box_top">20</view>
-          <view>待审核</view>
-        </div>
-        <div class="unit2box">
-          <view class="unit2box_top">20</view>
-          <view>待补货</view>
-        </div>
-        <div class="unit2box">
-          <view class="unit2box_top">20</view>
-          <view>待入库</view>
-        </div>
-        <div class="unit2box">
-          <view class="unit2box_top">20</view>
-          <view>库存量</view>
-        </div>
-      </view>
+<!--    <view class="unit2">-->
+<!--        <div class="unit2box">-->
+<!--         <view class="unit2box_top">20</view>-->
+<!--          <view>待审核</view>-->
+<!--        </div>-->
+<!--        <div class="unit2box">-->
+<!--         <view class="unit2box_top">20</view>-->
+<!--          <view>待补货</view>-->
+<!--        </div>-->
+<!--        <div class="unit2box">-->
+<!--          <view class="unit2box_top">20</view>-->
+<!--          <view>待入库</view>-->
+<!--        </div>-->
+<!--        <div class="unit2box">-->
+<!--          <view class="unit2box_top">20</view>-->
+<!--          <view>库存量</view>-->
+<!--        </div>-->
+<!--      </view>-->
     </view>
 
   </view>
@@ -131,8 +131,7 @@ export default {
 }
 
 .unit1 {
-  border: 2px solid red;
-  border-style: dashed solid;
+
   margin: 20rpx 0;
   display: flex;
   align-items: center;
