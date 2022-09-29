@@ -175,9 +175,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 231));
 var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
@@ -195,25 +192,27 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 //
 //
 //
-//
-//
-//
 // ES 2015
 var _default = { data: function data() {return { getpctodayssaledata: '', //快报查询日期
-      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] },
+      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true },
+        yAxis: {
+          data: [{
+            min: 0 }] },
 
 
         extra: {
           column: {
             type: "group",
-            width: 20,
+            width: 30,
             activeBgColor: "#000000",
             activeBgOpacity: 0.08 } } },
 
 
 
-      chartDataB: {},
-      optsB: {
+
+      chartDataC: {},
+      ybpdata: '',
+      optsC: {
         color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
         padding: [5, 5, 5, 5],
         extra: {
@@ -230,9 +229,8 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
 
 
 
-
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
     var getpcadmindaysaledata = {
       access_token: uni.getStorageSync('access_token'),
       sdate: (0, _dayjs.default)().format('YYYY-MM-DD') // 获取当前时间
@@ -240,11 +238,14 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
     };
     (0, _api.getpcadmindaysale)(getpcadmindaysaledata).then(function (res) {
       console.log('仪表盘数据', res);
+      _this.ybpdata = res.data;
     });
   },
   onReady: function onReady() {
     this.getServerDataA();
-    this.getServerDataB();
+
+    this.getServerDataC();
+
     console.log((0, _dayjs.default)().format('YYYY-MM-DD')); // 获取当前时间
 
   },
@@ -252,7 +253,7 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
 
 
     //可视化面板
-    getServerDataA: function getServerDataA() {var _this = this;
+    getServerDataA: function getServerDataA() {var _this2 = this;
       //模拟从服务器获取数据时的延时
       setTimeout(function () {
         //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
@@ -268,34 +269,48 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
 
 
 
-        _this.chartDataA = JSON.parse(JSON.stringify(res));
+
+        //处理条形图数据
+        var coldata = [];
+        var cbe = [];
+        var ose = [];
+        _this2.ybpdata.Table2.forEach(function (item) {
+          cbe.push(item.库存成本额);
+          ose.push(item.库存零售额);
+          coldata.push(item.大类名称);
+        });
+        res.categories = coldata;
+        res.series = [{
+          name: '库存成本额',
+          data: cbe },
+        {
+          name: '库存零售额',
+          data: ose }];
+
+
+
+        _this2.chartDataA = JSON.parse(JSON.stringify(res));
       }, 500);
     },
-    getServerDataB: function getServerDataB() {var _this2 = this;
+
+    getServerDataC: function getServerDataC() {var _this3 = this;
       //模拟从服务器获取数据时的延时
       setTimeout(function () {
         //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+
+        var data = [];
+        _this3.ybpdata.Table3.forEach(function (item) {
+          var a = {};
+          a.name = item.部门分组名;
+          a.value = item.库存零售额;
+          data.push(a);
+        });
         var res = {
           series: [{
-            data: [{
-              "name": "一班",
-              "value": 50 },
-            {
-              "name": "二班",
-              "value": 30 },
-            {
-              "name": "三班",
-              "value": 20 },
-            {
-              "name": "四班",
-              "value": 18 },
-            {
-              "name": "五班",
-              "value": 8 }] }] };
+            data: data }] };
 
 
-
-        _this2.chartDataB = JSON.parse(JSON.stringify(res));
+        _this3.chartDataC = JSON.parse(JSON.stringify(res));
       }, 500);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

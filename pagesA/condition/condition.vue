@@ -101,7 +101,7 @@
       <uni-table border stripe emptyText="暂无更多数据">
         <!-- 表头行 -->
         <uni-tr>
-          <uni-th align="center" v-for="(item,index) in bdt">{{item}}</uni-th>
+          <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>
         </uni-tr>
         <!-- 表格数据行 -->
         <uni-tr v-for="(item,index) in result">

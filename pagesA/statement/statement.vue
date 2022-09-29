@@ -4,16 +4,13 @@
 		</u-navbar>
 		<!-- 选择门店 -->
 		<view class="unit1">
-
-
 		</view>
-
 		<view class="charts-box">
 			<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
 		</view>
-		<view class="charts-box">
-			<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
-		</view>
+    <view class="charts-box">
+      <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
+    </view>
 	</view>
 </template>
 
@@ -46,30 +43,31 @@
 					extra: {
 						column: {
 							type: "group",
-							width: 20,
+							width: 30,
 							activeBgColor: "#000000",
 							activeBgOpacity: 0.08
 						}
 					}
 				},
-				chartDataB: {},
-				optsB: {
-					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
-					padding: [5, 5, 5, 5],
-					extra: {
-						pie: {
-							activeOpacity: 0.5,
-							activeRadius: 10,
-							offsetAngle: 0,
-							labelWidth: 15,
-							border: true,
-							borderWidth: 3,
-							borderColor: "#FFFFFF",
-							linearType: "custom"
-						}
-					}
-				}
 
+        chartDataC: {},
+        ybpdata:'',
+        optsC: {
+          color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+          padding: [5, 5, 5, 5],
+          extra: {
+            pie: {
+              activeOpacity: 0.5,
+              activeRadius: 10,
+              offsetAngle: 0,
+              labelWidth: 15,
+              border: true,
+              borderWidth: 3,
+              borderColor: "#FFFFFF",
+              linearType: "custom"
+            }
+          }
+        },
 			};
 		},
 		onLoad() {
@@ -80,12 +78,15 @@
 			}
       getpcadmindaysale(getpcadmindaysaledata).then((res)=>{
 				console.log('仪表盘数据',res)
+        this.ybpdata=res.data
 			})
 		},
 		onReady() {
 			this.getServerDataA();
-			this.getServerDataB();
-			console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
+
+      this.getServerDataC();
+
+      console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
 
 		},
 		methods: {
@@ -108,36 +109,51 @@
 							}
 						]
 					};
-					this.chartDataA = JSON.parse(JSON.stringify(res));
+
+          //处理条形图数据
+          let coldata=[]
+          let cbe=[]
+          let ose=[]
+          this.ybpdata.Table2.forEach((item)=>{
+            cbe.push(item.库存成本额)
+            ose.push(item.库存零售额)
+            coldata.push(item.大类名称)
+          })
+          res.categories=coldata
+          res.series=[{
+            name:'库存成本额',
+            data:cbe
+          },{
+            name:'库存零售额',
+            data:ose
+          }]
+
+
+          this.chartDataA = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-			getServerDataB() {
-				//模拟从服务器获取数据时的延时
-				setTimeout(() => {
-					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-					let res = {
-						series: [{
-							data: [{
-								"name": "一班",
-								"value": 50
-							}, {
-								"name": "二班",
-								"value": 30
-							}, {
-								"name": "三班",
-								"value": 20
-							}, {
-								"name": "四班",
-								"value": 18
-							}, {
-								"name": "五班",
-								"value": 8
-							}]
-						}]
-					};
-					this.chartDataB = JSON.parse(JSON.stringify(res));
-				}, 500);
-			},
+
+      getServerDataC() {
+        //模拟从服务器获取数据时的延时
+        setTimeout(() => {
+          //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+
+          let data=[];
+          this.ybpdata.Table3.forEach((item)=>{
+            let a={}
+            a.name=item.部门分组名
+            a.value=item.库存零售额
+            data.push(a)
+          })
+          let res = {
+            series: [{
+              data:data
+            }]
+          };
+          this.chartDataC = JSON.parse(JSON.stringify(res));
+        }, 500);
+      },
+
 		}
 	}
 </script>
