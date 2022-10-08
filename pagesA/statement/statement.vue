@@ -9,7 +9,7 @@
         <view class="unit1box">
           <view class="box" >
             <view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.Table[0])">
-              <view class="box_left">
+              <view class="box_left" :style="{background:color}">
                 <image></image>
               </view>
               <view class="box_right">
@@ -41,6 +41,7 @@
 	export default {
 		data() {
 			return {
+        color:'',//动态背景
 				getpctodayssaledata:'',//快报查询日期
 				chartDataA: {},
 				optsA: {
@@ -97,6 +98,7 @@
 				console.log('仪表盘数据',res)
         this.ybpdata=res.data
 			})
+      this.colors()
 		},
 		onReady() {
 			this.getServerDataA();
@@ -107,8 +109,19 @@
 
 		},
 		methods: {
-
-			
+//随机颜色
+      colors(){
+        let str = '#'
+        let arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+        // 利用for 循环 循环数组 6次 累加到str里面 得到 #ff0044
+        for (let i = 1; i <= 6; i++) {
+          // random数组里面的索引号 随机的  每次循环都是从数组里面随机抽取一个
+          let random = Math.floor(Math.random() * arr.length)
+          str += arr[random]
+        }
+        console.log(str)
+        return str
+      },
 			//可视化面板
 			getServerDataA() {
 				//模拟从服务器获取数据时的延时

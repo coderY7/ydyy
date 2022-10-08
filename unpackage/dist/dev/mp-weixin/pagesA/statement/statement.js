@@ -236,7 +236,8 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 //
 //
 // ES 2015
-var _default = { data: function data() {return { getpctodayssaledata: '', //快报查询日期
+var _default = { data: function data() {return { color: '', //动态背景
+      getpctodayssaledata: '', //快报查询日期
       chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '',
       optsC: {
         color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
@@ -266,6 +267,7 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
       console.log('仪表盘数据', res);
       _this.ybpdata = res.data;
     });
+    this.colors();
   },
   onReady: function onReady() {
     this.getServerDataA();
@@ -276,8 +278,19 @@ var _default = { data: function data() {return { getpctodayssaledata: '', //快�
 
   },
   methods: {
-
-
+    //随机颜色
+    colors: function colors() {
+      var str = '#';
+      var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+      // 利用for 循环 循环数组 6次 累加到str里面 得到 #ff0044
+      for (var i = 1; i <= 6; i++) {
+        // random数组里面的索引号 随机的  每次循环都是从数组里面随机抽取一个
+        var random = Math.floor(Math.random() * arr.length);
+        str += arr[random];
+      }
+      console.log(str);
+      return str;
+    },
     //可视化面板
     getServerDataA: function getServerDataA() {var _this2 = this;
       //模拟从服务器获取数据时的延时
