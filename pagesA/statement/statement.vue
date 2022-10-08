@@ -3,14 +3,29 @@
 		<u-navbar title="快报" @leftClick="leftClick" :placeholder="true" :autoBack="true" leftIconColor='#f60506'>
 		</u-navbar>
 		<!-- 选择门店 -->
-		<view class="unit1">
-		</view>
-		<view class="charts-box">
-			<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
-		</view>
-    <view class="charts-box">
-      <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
+    <view class="container">
+      <view class="unit1">
+        <view>实时销售分析</view>
+        <view class="unit1box">
+          <view class="box" >
+            <view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.Table[0])">
+              <view class="box_left">图</view>
+              <view class="box_right">
+                <view>{{item[0]}}</view>
+                <view>{{item[1]}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="charts-box">
+        <qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
+      </view>
+      <view class="charts-box">
+        <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
+      </view>
     </view>
+
 	</view>
 </template>
 
@@ -159,10 +174,32 @@
 </script>
 
 <style lang="scss">
-	.unit1 {}
+  .container{
+    margin: 0 20rpx;
+  }
 	.status_bar{
 		        height: var(--status-bar-height);
 		        width: 100%;   
 	}
-	
+	.box{
+    .boxitem{
+      width: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .box_left{
+      width: 100rpx;
+      height: 100rpx;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .box_right{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 </style>

@@ -24,8 +24,30 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.container {
+  margin: 0 20rpx;
+}
 .status_bar {
   height: 25px;
   width: 100%;
+}
+.box .boxitem {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.box .box_left {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box .box_right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
