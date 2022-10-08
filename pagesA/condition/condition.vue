@@ -108,30 +108,8 @@
     <u-button @click="isquery()" type="primary">查询</u-button>
   </view>
 </view>
-      <view>
-        <view v-for="(item,index) in sumdata" class="unit4_box">
-          <view>
-            <view  v-for="(items,key) in Object.keys(item)">{{items}}</view>
-          </view>
-          <view>
-            <view  v-for="(items,key) in Object.values(item)">{{items}}</view>
-          </view>
-        </view>
-      </view>
 
-<!--    表格数据展示-->
-    <view>
-      <uni-table border stripe emptyText="暂无更多数据">
-        <!-- 表头行 -->
-        <uni-tr>
-          <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>
-        </uni-tr>
-        <!-- 表格数据行 -->
-        <uni-tr v-for="(item,index) in result">
-          <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>
-        </uni-tr>
-      </uni-table>
-    </view>
+
 
   </view>
   </view>
@@ -152,7 +130,7 @@ export default {
       end: '', //结束时间
       cxtj: '',//查询条件
       tj: [],
-      bdt:'',//表单头
+      bdt:[],//表单头
       bdtdata:'',
       result:'',//查询结果
       cxfdbh:'',//查询分店编号
@@ -263,7 +241,15 @@ export default {
           a.push(item.title)
         })
         this.bdt=a
+        //跳转新页面
+        let bdt = JSON.stringify(this.bdt)
+        let result = JSON.stringify(this.result)
+        let sumdata = JSON.stringify(this.sumdata)
+        uni.navigateTo({
+          url: `../../pagesA/result/result?bdt=${bdt}&result=${result}&sumdata=${sumdata}`
+        });
       })
+
     }
   }
 }
@@ -294,7 +280,6 @@ height: 100%;
 .unit4_box{
   display: flex;
   justify-content: space-around;
-
 }
 .bottom{
 

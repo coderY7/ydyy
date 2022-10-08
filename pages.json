@@ -141,6 +141,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "result/result",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 	}],
 	"tabBar": {
