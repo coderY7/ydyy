@@ -177,7 +177,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
@@ -199,9 +198,9 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-//
 var _default = { data: function data() {return { Alllist: [], title: '报表查询' };}, onLoad: function onLoad() {this.isreportForm();uni.setStorageSync('cxbb', true);}, methods: { //获取报表
-    isreportForm: function isreportForm() {var _this = this;var reportFormdata = { access_token: uni.getStorageSync('access_token'), userid: '00000' };(0, _api.reportForm)(reportFormdata).then(function (res) {console.log('报表查询', res);
+    isreportForm: function isreportForm() {var _this = this;var reportFormdata = { access_token: uni.getStorageSync('access_token'), userid: '00000' };(0, _api.reportForm)(reportFormdata).then(function (res) {
+        console.log('报表查询', res);
         _this.Alllist = res.data;
       });
     },

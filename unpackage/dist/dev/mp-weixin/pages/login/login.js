@@ -95,6 +95,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniDataSelect: function() {
+      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 345))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -168,6 +191,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
@@ -203,25 +237,36 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: '' //分店列表
-    };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
+      isfdlist: false };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
     this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('openid')) {
     // 	uni.reLaunch({
     // 		url: '/pages/home/home'
     // 	});
     // }
-  }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
-
-          uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
-          _this.fdlist = [];
-          for (var u in res.fdlist) {
+  }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];for (var u in res.fdlist) {
             _this.fdlist.push({
-              fdbh: res.fdlist[u].fdbh,
-              fdmc: res.fdlist[u].fdmc });
+              value: res.fdlist[u].fdbh,
+              text: res.fdlist[u].fdmc });
 
           }
         } else {
+          _this.iswx = '',
+          _this.fdbh = '',
+          _this.fdlist = [], //分店列表
+          _this.isfdlist = false;
           uni.showToast({
             icon: 'none',
             title: res.message });

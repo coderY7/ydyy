@@ -71,7 +71,6 @@
               ></uni-data-select>
             </uni-section>
           </view>
-
         </view>
 
 

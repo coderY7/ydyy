@@ -9,10 +9,12 @@
         <view class="unit1box">
           <view class="box" >
             <view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.Table[0])">
-              <view class="box_left">图</view>
+              <view class="box_left">
+                <image></image>
+              </view>
               <view class="box_right">
-                <view>{{item[0]}}</view>
                 <view>{{item[1]}}</view>
+                <view>{{item[0]}}</view>
               </view>
             </view>
           </view>
@@ -183,18 +185,25 @@
 	}
 	.box{
     .boxitem{
-      width: 40%;
-      display: flex;
+      width: 50%;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
+      margin: 20rpx 0;
     }
     .box_left{
-      width: 100rpx;
-      height: 100rpx;
+      width: 80rpx;
+      height: 80rpx;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: #4f99ff;
+      margin-right: 50rpx;
+      image{
+        margin: 0;
+        padding: 0;
+        height: 0;
+      }
     }
     .box_right{
       display: flex;

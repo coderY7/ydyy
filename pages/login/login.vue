@@ -14,8 +14,19 @@
 				<input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
 					password="true"/>
 			</view>
-
 		</view>
+
+
+      <view class="boxinput" v-if="isfdlist">
+        <uni-section  type="line">
+          <uni-data-select
+              v-model="fdbh"
+              :localdata="fdlist"
+              @change="change"
+          ></uni-data-select>
+        </uni-section>
+      </view>
+
 
 		<view class="button-login" hover-class="button-hover" @tap="bindLogin()">
 			<text>登录</text>
@@ -48,7 +59,8 @@
 				password: '',
         iswx:'',
         fdbh:'',
-        fdlist:''//分店列表
+        fdlist:[],//分店列表
+        isfdlist:false
 			};
 		},
 		onLoad() {
@@ -69,6 +81,10 @@
       }
     },
 		methods: {
+      change(e){
+        console.log(e);
+        uni.setStorageSync("fdbh", e)
+      },
       //用户验证
 			useryz(){
 				let user={
@@ -76,18 +92,24 @@
 				}
 				usercheckapp(user).then((res)=>{
           if(res.error_code==0){
+            if(res.fdlist){
+              this.isfdlist=true
+            };
             uni.setStorageSync("companyid", res.companyid)
             this.fdbh=res.fdlist[0].fdbh
-
             uni.setStorageSync("fdbh", res.fdlist[0].fdbh)
             this.fdlist=[]
             for(var u in res.fdlist){
               this.fdlist.push({
-                fdbh:res.fdlist[u].fdbh,
-                fdmc:res.fdlist[u].fdmc
+                value:res.fdlist[u].fdbh,
+                text:res.fdlist[u].fdmc
               })
             }
           }else{
+                this.iswx='',
+                this.fdbh='',
+                this.fdlist=[],//分店列表
+                this.isfdlist=false
             uni.showToast({
               icon: 'none',
               title: res.message
@@ -303,4 +325,7 @@ uni.setStorageSync('basic',res.data)
 		margin-left: 15rpx;
 		margin-right: 15rpx;
 	}
+  .boxinput{
+    margin: 50rpx 70rpx 0 70rpx;
+  }
 </style>

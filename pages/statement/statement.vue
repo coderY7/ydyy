@@ -8,7 +8,6 @@
 					<view class="unit1_box" @click="enter(item)">
 						<view class="boxs">
 							<view>
-
 							</view>
 							<view>{{item.cxmc}}</view>
 						</view>
