@@ -1,11 +1,12 @@
 <template>
   <view>
-    <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()">
+    <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()" >
     </u-navbar>
     <view id="pages">
     <view v-for="(item,index) in cxtj">
-      <view v-if="item.type=='字符'">
-        <view class="boxname">{{ item.colname }}</view>
+
+      <view v-if="item.type=='字符'" class="box">
+        <view class="boxname">{{ item.colname }}:</view>
         <view class="boxinput">
           <u-input
               placeholder="请输入查询内容"
@@ -14,8 +15,8 @@
               clearable
           ></u-input>
         </view>
-
       </view>
+
       <view v-if="item.type=='开始日期'">
         <view class="boxname">{{ item.colname }}</view>
         <view class="boxinput">
@@ -26,8 +27,8 @@
               @change="startdate()"
           />
         </view>
-
       </view>
+
       <view v-if="item.type=='结束日期'">
         <view class="boxname">{{ item.colname }}</view>
         <view class="boxinput">
@@ -38,14 +39,15 @@
               @change="enddate()"
           />
         </view>
-
-
       </view>
+
       <view v-if="item.type=='多选下拉框'">
         <view class="boxname">{{ item.colname }}</view>
         <view class="boxinput"></view>
         </view>
+
       <view v-if="item.type=='下拉框'">
+
         <view v-if="item.colname=='分店编号'">
           <view>{{ item.colname }}</view>
           <view class="boxinput">
@@ -57,7 +59,6 @@
               ></uni-data-select>
             </uni-section>
           </view>
-
         </view>
 
         <view v-if="item.colname=='商品品牌'">
@@ -73,12 +74,10 @@
           </view>
         </view>
 
-
-
       </view>
 
-
       <view v-if="item.type=='查询下拉框'">
+
         <view v-if="item.colname=='商家合同'">
           <view class="boxname">{{ item.colname }}</view>
           <view class="boxinput">
@@ -91,25 +90,26 @@
             </uni-section>
           </view>
         </view>
+
       </view>
 
       <view v-if="item.type=='选择'">
+
         <view v-if="item.colname=='数据安全'">
           <view class="boxname">{{ item.colname }}</view>
           <view class="boxinput">
             <view>{{item.defval}}</view>
           </view>
         </view>
+
       </view>
     </view>
 
-<view class="unit3">
+<view class="unit3" v-if="cxtj.length!=0">
   <view class="unit3_box">
     <u-button @click="isquery()" type="primary">查询</u-button>
   </view>
 </view>
-
-
 
   </view>
   </view>
@@ -136,7 +136,7 @@ export default {
       cxfdbh:'',//查询分店编号
       cxsppp:'',//查询商品品牌
       cxsjht:'',//查询商家合同
-      sumdata:''//查询到的汇总
+      sumdata:'',//查询到的汇总
     };
   },
   onLoad(option) {
@@ -263,6 +263,7 @@ export default {
   margin-bottom: 10rpx;
 }
 .boxinput{
+  width: 500rpx;
 margin: 0 20rpx;
 }
 .unit3{
@@ -274,7 +275,7 @@ margin: 0 20rpx;
 }
 .unit3_box{
 height: 100%;
-  width: 200px;
+  width: 100px;
   margin: auto;
 }
 .unit4_box{
@@ -283,5 +284,11 @@ height: 100%;
 }
 .bottom{
 
+}
+.box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20rpx;
 }
 </style>

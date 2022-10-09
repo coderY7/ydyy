@@ -82,7 +82,12 @@
 .user-card .card .bottom .left .user-phone.data-v-777facb4 {
   color: #96a1ae;
   padding-left: 80rpx;
-  height: 50%;
+  width: 100%;
+  font-size: 0.9em;
+}
+.user-card .card .bottom .left .user-xinxi.data-v-777facb4 {
+  color: #96a1ae;
+  padding-left: 80rpx;
   width: 100%;
   font-size: 0.9em;
 }
@@ -92,7 +97,7 @@
 }
 .list-card.data-v-777facb4 {
   padding: 0 15px;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 .list-card .card.data-v-777facb4 {
   border-radius: 5px;

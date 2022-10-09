@@ -15,8 +15,11 @@
 						<view class="user-text">
 							<open-data type="userNickName"></open-data>
 						</view>
-						<view class="user-phone"> {{dlmc}} </view>
-					</view>
+						<view class="user-phone">当前门店: {{dlmc}} </view>
+            <view class="user-xinxi">门店编号: {{fdbh}} </view>
+            <view class="user-xinxi">商户编号: {{companyid}} </view>
+
+          </view>
 					<view class="right flex-center">
 						<u-icon class="icon" name="arrow-right"></u-icon>
 					</view>
@@ -65,7 +68,9 @@ import {logintype,usercheck} from "../../network/api";
 export default {
 		data() {
 			return {
-dlmc:uni.getStorageSync('dlmc')
+dlmc:uni.getStorageSync('dlmc'),
+        fdbh:uni.getStorageSync('fdbh'),//分店编号
+        companyid: uni.getStorageSync('companyid')//商家ID
 			}
 		},
 		methods: {
@@ -186,10 +191,17 @@ dlmc:uni.getStorageSync('dlmc')
 					.user-phone {
 						color: #96a1ae;
 						padding-left: 80rpx;
-						height: 50%;
+
 						width: 100%;
 						font-size: 0.9em;
 					}
+          .user-xinxi {
+            color: #96a1ae;
+            padding-left: 80rpx;
+
+            width: 100%;
+            font-size: 0.9em;
+          }
 				}
 
 				.right {
@@ -202,7 +214,7 @@ dlmc:uni.getStorageSync('dlmc')
 
 	.list-card {
 		padding: 0 15px;
-		margin-top: 50px;
+		margin-top: 80px;
 
 		.card {
 			border-radius: 5px;

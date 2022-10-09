@@ -1,5 +1,8 @@
 <template>
 	<view>
+
+    <u-switch v-model="cut"></u-switch>
+
     <view>
       <view v-for="(item,index) in sumdata" class="unit4_box">
         <view>
@@ -11,7 +14,7 @@
       </view>
     </view>
     <!--    表格数据展示-->
-    <view>
+    <view v-if="!cut">
       <uni-table border stripe emptyText="暂无更多数据">
         <!-- 表头行 -->
         <uni-tr>
@@ -23,6 +26,13 @@
         </uni-tr>
       </uni-table>
     </view>
+
+<!--    卡片显示-->
+    <view v-if="cut">
+
+
+    </view>
+
 	</view>
 </template>
 
@@ -32,14 +42,19 @@
 			return {
 				bdt:[],//表头
         result:null,//查询结果
-        sumdata:''//数据汇总
-			};
+        sumdata:'',//数据汇总
+        cut:false,//切换展示
+      };
 		},
     onLoad(option){
       console.log(option)
       this.bdt=JSON.parse(option.bdt)
       this.result=JSON.parse(option.result)
       this.sumdata=JSON.parse(option.sumdata)
+
+    },
+    methods:{
+
 
     }
 	}
