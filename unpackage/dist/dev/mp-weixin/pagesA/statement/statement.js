@@ -210,9 +210,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 231));
 
 var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -255,14 +267,8 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 var _default = { data: function data() {return { color: '', //动态背景
       three: '', //近三天
       one: '', //近一天
-      getpctodayssaledata: '', //快报查询日期
-      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: {
-          pie: {
-            activeOpacity: 0.5,
-            activeRadius: 10,
-            offsetAngle: 0,
-            labelWidth: 15,
-            border: true,
+      sdate: '', //快报查询日期
+      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15, border: true,
             borderWidth: 3,
             borderColor: "#FFFFFF",
             linearType: "custom" } } } };
@@ -272,48 +278,45 @@ var _default = { data: function data() {return { color: '', //动态背景
 
   },
 
-  onLoad: function onLoad() {var _this = this;
-    var getpcadmindaysaledata = {
-      access_token: uni.getStorageSync('access_token'),
-      sdate: (0, _dayjs.default)().format('YYYY-MM-DD') // 获取当前时间
-      //销售日期
-    };
-    (0, _api.getpcadmindaysale)(getpcadmindaysaledata).then(function (res) {
-      console.log('仪表盘数据', res);
-      _this.ybpdata = res.data;
-    });
-    this.colors();
+  onLoad: function onLoad() {
   },
   onReady: function onReady() {
     this.getServerDataA();
-
     this.getServerDataC();
 
 
   },
   onShow: function onShow() {
-    console.log((0, _dayjs.default)().format('YYYY-MM-DD')); // 获取当前时间
-
-
+    this.sdate = (0, _dayjs.default)().format('YYYY-MM-DD'); // 获取当前时间
     var one = (0, _dayjs.default)().unix() - 24 * 60 * 60; // 获取前一天时间戳
     this.one = _dayjs.default.unix(one).format('YYYY-MM-DD');
-
     var three = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 3; //前三天时间戳
     this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');
+    this.getdata();
+
   },
   methods: {
-    //随机颜色
-    colors: function colors() {
-      var str = '#';
-      var arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
-      // 利用for 循环 循环数组 6次 累加到str里面 得到 #ff0044
-      for (var i = 1; i <= 6; i++) {
-        // random数组里面的索引号 随机的  每次循环都是从数组里面随机抽取一个
-        var random = Math.floor(Math.random() * arr.length);
-        str += arr[random];
-      }
-      console.log(str);
-      return str;
+    isthree: function isthree() {
+      this.sdate = this.three;
+      this.getdata();
+    },
+    isone: function isone() {
+      this.sdate = this.one;
+      this.getdata();
+    },
+    isdt: function isdt() {
+      this.sdate = (0, _dayjs.default)().format('YYYY-MM-DD'); // 获取当前时间
+      this.getdata();
+    },
+    getdata: function getdata() {var _this = this;
+      var getpcadmindaysaledata = {
+        access_token: uni.getStorageSync('access_token'),
+        sdate: this.sdate };
+
+      (0, _api.getpcadmindaysale)(getpcadmindaysaledata).then(function (res) {
+        console.log('仪表盘数据', res);
+        _this.ybpdata = res.data;
+      });
     },
     //可视化面板
     getServerDataA: function getServerDataA() {var _this2 = this;

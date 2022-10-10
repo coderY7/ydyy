@@ -8,7 +8,13 @@
 <!--        近期查询日期-->
         <view class="recent">
           <view class="ubut">
-            <u-button @click="three()">近三天</u-button>
+            <u-button @click="isthree()">近三天</u-button>
+          </view>
+          <view class="ubut">
+            <u-button @click="isone()">近一天</u-button>
+          </view>
+          <view class="ubut">
+            <u-button @click="isdt()">当天</u-button>
           </view>
         </view>
         <view>实时销售分析</view>
@@ -53,7 +59,7 @@
         color:'',//动态背景
         three:'',//近三天
         one:'',//近一天
-				getpctodayssaledata:'',//快报查询日期
+				sdate:'',//快报查询日期
 				chartDataA: {},
 				optsA: {
 					color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
@@ -101,47 +107,44 @@
 		},
 		
 		onLoad() {
-			let getpcadmindaysaledata={
-				access_token:uni.getStorageSync('access_token'),
-        sdate:dayjs().format('YYYY-MM-DD')// 获取当前时间
-//销售日期
-			}
-      getpcadmindaysale(getpcadmindaysaledata).then((res)=>{
-				console.log('仪表盘数据',res)
-        this.ybpdata=res.data
-			})
-      this.colors()
 		},
 		onReady() {
 			this.getServerDataA();
-
       this.getServerDataC();
 
 
 		},
 		onShow() {
-			console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
-
-
+			this.sdate=dayjs().format('YYYY-MM-DD') // 获取当前时间
       let one=dayjs().unix()-24*60*60// 获取前一天时间戳
       this.one=dayjs.unix(one).format('YYYY-MM-DD')
-
       let three=dayjs().unix()-24*60*60*3//前三天时间戳
         this.three=dayjs.unix(three).format('YYYY-MM-DD')
-		},
+      this.getdata()
+
+    },
 		methods: {
-//随机颜色
-      colors(){
-        let str = '#'
-        let arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
-        // 利用for 循环 循环数组 6次 累加到str里面 得到 #ff0044
-        for (let i = 1; i <= 6; i++) {
-          // random数组里面的索引号 随机的  每次循环都是从数组里面随机抽取一个
-          let random = Math.floor(Math.random() * arr.length)
-          str += arr[random]
+      isthree(){
+        this.sdate=this.three
+        this.getdata()
+      },
+      isone(){
+        this.sdate=this.one
+        this.getdata()
+      },
+      isdt(){
+        this.sdate=dayjs().format('YYYY-MM-DD') // 获取当前时间
+        this.getdata()
+      },
+      getdata(){
+        let getpcadmindaysaledata={
+          access_token:uni.getStorageSync('access_token'),
+          sdate:this.sdate
         }
-        console.log(str)
-        return str
+        getpcadmindaysale(getpcadmindaysaledata).then((res)=>{
+          console.log('仪表盘数据',res)
+          this.ybpdata=res.data
+        })
       },
 			//可视化面板
 			getServerDataA() {
@@ -246,6 +249,7 @@
     }
   }
   .ubut{
-    width: 100rpx;
+    font-size: 12px;
+    width: 120rpx;
   }
 </style>
