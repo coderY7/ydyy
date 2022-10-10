@@ -5,6 +5,12 @@
 		<!-- 选择门店 -->
     <view class="container">
       <view class="unit1">
+<!--        近期查询日期-->
+        <view class="recent">
+          <view class="ubut">
+            <u-button @click="three()">近三天</u-button>
+          </view>
+        </view>
         <view>实时销售分析</view>
         <view class="unit1box">
           <view class="box" >
@@ -45,6 +51,8 @@
 		data() {
 			return {
         color:'',//动态背景
+        three:'',//近三天
+        one:'',//近一天
 				getpctodayssaledata:'',//快报查询日期
 				chartDataA: {},
 				optsA: {
@@ -109,8 +117,17 @@
 
       this.getServerDataC();
 
-      console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
 
+		},
+		onShow() {
+			console.log(dayjs().format('YYYY-MM-DD')) // 获取当前时间
+
+
+      let one=dayjs().unix()-24*60*60// 获取前一天时间戳
+      this.one=dayjs.unix(one).format('YYYY-MM-DD')
+
+      let three=dayjs().unix()-24*60*60*3//前三天时间戳
+        this.three=dayjs.unix(three).format('YYYY-MM-DD')
 		},
 		methods: {
 //随机颜色
@@ -227,5 +244,8 @@
       flex-direction: column;
       align-items: center;
     }
+  }
+  .ubut{
+    width: 100rpx;
   }
 </style>
