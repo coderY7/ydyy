@@ -11,8 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.11.3",
-    "echarts": "^5.3.3",
-    "mpvue-echarts": "^0.3.2",
     "uview-ui": "^2.0.31"
   }
 }

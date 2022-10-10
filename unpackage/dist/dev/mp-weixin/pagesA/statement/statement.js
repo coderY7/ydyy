@@ -202,6 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 231));
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -238,7 +239,9 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 // ES 2015
 var _default = { data: function data() {return { color: '', //动态背景
       getpctodayssaledata: '', //快报查询日期
-      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '',
+      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } },
+      chartDataC: {},
+      ybpdata: '',
       optsC: {
         color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
         padding: [5, 5, 5, 5],
@@ -257,6 +260,7 @@ var _default = { data: function data() {return { color: '', //动态背景
 
 
   },
+
   onLoad: function onLoad() {var _this = this;
     var getpcadmindaysaledata = {
       access_token: uni.getStorageSync('access_token'),

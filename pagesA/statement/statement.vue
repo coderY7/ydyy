@@ -33,11 +33,14 @@
 
 <script>
 	import dayjs from 'dayjs'; // ES 2015
+
 	import {
 		getFenDian,
 		getpctodayssale,
     getpcadmindaysale//仪表盘数据
-	} from '../../network/api.js'
+	} from '../../network/api.js';
+	
+	
 	export default {
 		data() {
 			return {
@@ -88,6 +91,7 @@
         },
 			};
 		},
+		
 		onLoad() {
 			let getpcadmindaysaledata={
 				access_token:uni.getStorageSync('access_token'),
