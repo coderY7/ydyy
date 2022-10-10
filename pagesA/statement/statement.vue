@@ -8,7 +8,7 @@
 <!--        近期查询日期-->
         <view class="recent">
           <view class="ubut" v-for="(item,index) in datelist">
-            <button @click="getdata(item)" :class="{'active':item.active}" >{{item.name}}</button>
+            <button @click="getdata(item,index)" :class="{'active':xzindex==index}" >{{item.name}}</button>
           </view>
 
         </view>
@@ -52,6 +52,7 @@
 		data() {
 			return {
         active:false,
+        xzindex:'3',
         color:'',//动态背景
         three:'',//近三天
         one:'',//近一天
@@ -131,8 +132,8 @@
           delta: 1
         });
       },
-      getdata(item){
-
+      getdata(item,index){
+this.xzindex=index
         let getpcadmindaysaledata={
           access_token:uni.getStorageSync('access_token'),
           sdate:item?item.value:this.sdate
@@ -247,6 +248,7 @@
   .recent{
     display: inline-flex;
     justify-content: flex-start;
+    margin-bottom: 20rpx;
   }
   .ubut{
     font-size: 12px;

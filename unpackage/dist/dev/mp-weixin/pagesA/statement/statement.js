@@ -251,11 +251,12 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 //
 //
 // ES 2015
-var _default = { data: function data() {return { active: false, color: '', //动态背景
+var _default = { data: function data() {return { active: false, xzindex: '3', color: '', //动态背景
       three: '', //近三天
       one: '', //近一天
       yue: '', sdate: '', //快报查询日期
-      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: {
+        color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
         padding: [5, 5, 5, 5],
         extra: {
           pie: {
@@ -300,8 +301,8 @@ var _default = { data: function data() {return { active: false, color: '', //动
         delta: 1 });
 
     },
-    getdata: function getdata(item) {var _this = this;
-
+    getdata: function getdata(item, index) {var _this = this;
+      this.xzindex = index;
       var getpcadmindaysaledata = {
         access_token: uni.getStorageSync('access_token'),
         sdate: item ? item.value : this.sdate };
