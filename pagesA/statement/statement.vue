@@ -8,7 +8,7 @@
 <!--        近期查询日期-->
         <view class="recent">
           <view class="ubut" v-for="(item,index) in datelist">
-            <button @click="getdata(item)" >{{item.name}}</button>
+            <button @click="getdata(item)" :class="{'active':item.active}" >{{item.name}}</button>
           </view>
 
         </view>
@@ -16,7 +16,7 @@
         <view class="unit1box">
           <view class="box" >
             <view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.Table[0])">
-              <view class="box_left" :style="{background:color}">
+              <view class="box_left">
                 <image></image>
               </view>
               <view class="box_right">
@@ -120,7 +120,7 @@
       let yue=dayjs().unix()-24*60*60*30//前三天时间戳
       this.yue=dayjs.unix(yue).format('YYYY-MM-DD')
       this.three=dayjs.unix(three).format('YYYY-MM-DD')
-      let datelist=[{name:'前一月',value:this.yue,avtive:false},{name:'前三天',value:this.three,avtive:false},{name:'前一天',value:this.one,avtive:false},{name:'当天',value:this.sdate,avtive:false}]
+      let datelist=[{name:'前一月',value:this.yue,active:false},{name:'前三天',value:this.three,active:false},{name:'前一天',value:this.one,active:false},{name:'当天',value:this.sdate,active:false}]
       this.datelist=datelist
       this.getdata()
 
@@ -132,6 +132,7 @@
         });
       },
       getdata(item){
+
         let getpcadmindaysaledata={
           access_token:uni.getStorageSync('access_token'),
           sdate:item?item.value:this.sdate

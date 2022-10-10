@@ -289,7 +289,7 @@ var _default = { data: function data() {return { active: false, color: '', //动
     var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
     this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');
     this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');
-    var datelist = [{ name: '前一月', value: this.yue, avtive: false }, { name: '前三天', value: this.three, avtive: false }, { name: '前一天', value: this.one, avtive: false }, { name: '当天', value: this.sdate, avtive: false }];
+    var datelist = [{ name: '前一月', value: this.yue, active: false }, { name: '前三天', value: this.three, active: false }, { name: '前一天', value: this.one, active: false }, { name: '当天', value: this.sdate, active: false }];
     this.datelist = datelist;
     this.getdata();
 
@@ -301,6 +301,7 @@ var _default = { data: function data() {return { active: false, color: '', //动
 
     },
     getdata: function getdata(item) {var _this = this;
+
       var getpcadmindaysaledata = {
         access_token: uni.getStorageSync('access_token'),
         sdate: item ? item.value : this.sdate };
