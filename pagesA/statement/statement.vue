@@ -8,7 +8,7 @@
 <!--        近期查询日期-->
         <view class="recent">
           <view class="ubut" v-for="(item,index) in datelist">
-            <button @click="getdata(item)">{{item.name}}</button>
+            <button @click="getdata(item)" >{{item.name}}</button>
           </view>
 
         </view>
@@ -120,7 +120,7 @@
       let yue=dayjs().unix()-24*60*60*30//前三天时间戳
       this.yue=dayjs.unix(yue).format('YYYY-MM-DD')
       this.three=dayjs.unix(three).format('YYYY-MM-DD')
-      let datelist=[{name:'前一月',value:this.yue},{name:'前三天',value:this.three},{name:'前一天',value:this.one},{name:'当天',value:this.sdate}]
+      let datelist=[{name:'前一月',value:this.yue,avtive:false},{name:'前三天',value:this.three,avtive:false},{name:'前一天',value:this.one,avtive:false},{name:'当天',value:this.sdate,avtive:false}]
       this.datelist=datelist
       this.getdata()
 
