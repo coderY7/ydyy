@@ -51,7 +51,6 @@
 	export default {
 		data() {
 			return {
-        active:false,
         xzindex:'3',
         color:'',//动态背景
         three:'',//近三天
@@ -121,10 +120,9 @@
       let yue=dayjs().unix()-24*60*60*30//前三天时间戳
       this.yue=dayjs.unix(yue).format('YYYY-MM-DD')
       this.three=dayjs.unix(three).format('YYYY-MM-DD')
-      let datelist=[{name:'前一月',value:this.yue,active:false},{name:'前三天',value:this.three,active:false},{name:'前一天',value:this.one,active:false},{name:'当天',value:this.sdate,active:false}]
+      let datelist=[{name:'前一月',value:this.yue},{name:'前三天',value:this.three},{name:'前一天',value:this.one},{name:'当天',value:this.sdate}]
       this.datelist=datelist
       this.getdata()
-
     },
 		methods: {
       leftClick(){
