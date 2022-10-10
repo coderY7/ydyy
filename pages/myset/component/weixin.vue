@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		<!-- 分列 -->
 		<view class="">
 			<view v-for='(item,index) in setlist' :key='index' class="unit1">
@@ -89,10 +89,16 @@
 	}
 </script>
 
-<style>
-	.unit1{
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 10rpx;
-	}
+<style lang="scss">
+.container{
+margin: 20rpx 20rpx 0 20rpx;
+ .unit1{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+   padding-bottom: 10rpx;
+   border-bottom: 1px solid #d4d6da;
+ }
+}
+
 </style>
