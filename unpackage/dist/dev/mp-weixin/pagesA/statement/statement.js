@@ -208,19 +208,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 231));
 
 var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
-//
-//
-//
-//
-//
 //
 //
 //
@@ -264,8 +254,15 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 var _default = { data: function data() {return { active: false, color: '', //动态背景
       three: '', //近三天
       one: '', //近一天
-      sdate: '', //快报查询日期
-      chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15,
+      yue: '', sdate: '', //快报查询日期
+      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+        padding: [5, 5, 5, 5],
+        extra: {
+          pie: {
+            activeOpacity: 0.5,
+            activeRadius: 10,
+            offsetAngle: 0,
+            labelWidth: 15,
             border: true,
             borderWidth: 3,
             borderColor: "#FFFFFF",
@@ -289,27 +286,24 @@ var _default = { data: function data() {return { active: false, color: '', //动
     var one = (0, _dayjs.default)().unix() - 24 * 60 * 60; // 获取前一天时间戳
     this.one = _dayjs.default.unix(one).format('YYYY-MM-DD');
     var three = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 3; //前三天时间戳
+    var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
+    this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');
     this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');
+    var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three }, { name: '前一天', value: this.one }, { name: '当天', value: this.sdate }];
+    this.datelist = datelist;
     this.getdata();
 
   },
   methods: {
-    isthree: function isthree() {
-      this.sdate = this.three;
-      this.getdata();
+    leftClick: function leftClick() {
+      uni.navigateBack({
+        delta: 1 });
+
     },
-    isone: function isone() {
-      this.sdate = this.one;
-      this.getdata();
-    },
-    isdt: function isdt() {
-      this.sdate = (0, _dayjs.default)().format('YYYY-MM-DD'); // 获取当前时间
-      this.getdata();
-    },
-    getdata: function getdata() {var _this = this;
+    getdata: function getdata(item) {var _this = this;
       var getpcadmindaysaledata = {
         access_token: uni.getStorageSync('access_token'),
-        sdate: this.sdate };
+        sdate: item ? item.value : this.sdate };
 
       (0, _api.getpcadmindaysale)(getpcadmindaysaledata).then(function (res) {
         console.log('仪表盘数据', res);

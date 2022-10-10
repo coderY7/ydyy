@@ -7,15 +7,10 @@
       <view class="unit1">
 <!--        近期查询日期-->
         <view class="recent">
-          <view class="ubut">
-            <button @click="isthree()" :class="active">近三天</button>
+          <view class="ubut" v-for="(item,index) in datelist">
+            <button @click="getdata(item)">{{item.name}}</button>
           </view>
-          <view class="ubut">
-            <button @click="isone()">近一天</button>
-          </view>
-          <view class="ubut">
-            <button @click="isdt()">当天</button>
-          </view>
+
         </view>
         <view>实时销售分析</view>
         <view class="unit1box">
@@ -60,7 +55,9 @@
         color:'',//动态背景
         three:'',//近三天
         one:'',//近一天
+        yue:'',
 				sdate:'',//快报查询日期
+        datelist:'',
 				chartDataA: {},
 				optsA: {
 					color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
@@ -120,27 +117,24 @@
       let one=dayjs().unix()-24*60*60// 获取前一天时间戳
       this.one=dayjs.unix(one).format('YYYY-MM-DD')
       let three=dayjs().unix()-24*60*60*3//前三天时间戳
-        this.three=dayjs.unix(three).format('YYYY-MM-DD')
+      let yue=dayjs().unix()-24*60*60*30//前三天时间戳
+      this.yue=dayjs.unix(yue).format('YYYY-MM-DD')
+      this.three=dayjs.unix(three).format('YYYY-MM-DD')
+      let datelist=[{name:'前一月',value:this.yue},{name:'前三天',value:this.three},{name:'前一天',value:this.one},{name:'当天',value:this.sdate}]
+      this.datelist=datelist
       this.getdata()
 
     },
 		methods: {
-      isthree(){
-        this.sdate=this.three
-        this.getdata()
+      leftClick(){
+        uni.navigateBack({
+          delta: 1
+        });
       },
-      isone(){
-        this.sdate=this.one
-        this.getdata()
-      },
-      isdt(){
-        this.sdate=dayjs().format('YYYY-MM-DD') // 获取当前时间
-        this.getdata()
-      },
-      getdata(){
+      getdata(item){
         let getpcadmindaysaledata={
           access_token:uni.getStorageSync('access_token'),
-          sdate:this.sdate
+          sdate:item?item.value:this.sdate
         }
         getpcadmindaysale(getpcadmindaysaledata).then((res)=>{
           console.log('仪表盘数据',res)
