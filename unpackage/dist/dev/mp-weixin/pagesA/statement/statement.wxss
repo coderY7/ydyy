@@ -57,8 +57,22 @@
   flex-direction: column;
   align-items: center;
 }
+.recent {
+  display: inline-flex;
+  justify-content: flex-start;
+}
 .ubut {
   font-size: 12px;
   width: 120rpx;
+  margin-right: 10rpx;
+}
+.ubut button {
+  border-radius: 0.5;
+  width: 100%;
+  font-size: 20rpx;
+  text-align: center;
+}
+.active {
+  background-color: #4f99ff;
 }
 

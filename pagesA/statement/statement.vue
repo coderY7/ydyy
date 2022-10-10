@@ -8,13 +8,13 @@
 <!--        近期查询日期-->
         <view class="recent">
           <view class="ubut">
-            <u-button @click="isthree()">近三天</u-button>
+            <button @click="isthree()" :class="active">近三天</button>
           </view>
           <view class="ubut">
-            <u-button @click="isone()">近一天</u-button>
+            <button @click="isone()">近一天</button>
           </view>
           <view class="ubut">
-            <u-button @click="isdt()">当天</u-button>
+            <button @click="isdt()">当天</button>
           </view>
         </view>
         <view>实时销售分析</view>
@@ -56,6 +56,7 @@
 	export default {
 		data() {
 			return {
+        active:false,
         color:'',//动态背景
         three:'',//近三天
         one:'',//近一天
@@ -248,8 +249,22 @@
       align-items: center;
     }
   }
+  .recent{
+    display: inline-flex;
+    justify-content: flex-start;
+  }
   .ubut{
     font-size: 12px;
     width: 120rpx;
+    margin-right: 10rpx;
+    button{
+      border-radius: 0.5;
+      width: 100%;
+      font-size: 20rpx;
+      text-align: center;
+    }
+  }
+  .active{
+    background-color: #4f99ff;
   }
 </style>
