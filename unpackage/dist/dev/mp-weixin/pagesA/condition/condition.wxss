@@ -27,12 +27,18 @@
 #pages {
   margin: 5rpx 20rpx 0 20rpx;
 }
-.boxname {
-  margin-bottom: 10rpx;
+.box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20rpx;
 }
-.boxinput {
-  width: 500rpx;
+.box .boxname {
+  flex: 1;
+}
+.box .boxinput {
   margin: 0 20rpx;
+  flex: 4;
 }
 .unit3 {
   width: 100%;
@@ -49,11 +55,5 @@
 .unit4_box {
   display: flex;
   justify-content: space-around;
-}
-.box {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20rpx;
 }
 

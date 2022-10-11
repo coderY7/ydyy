@@ -98,10 +98,10 @@ var components
 try {
   components = {
     uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 290))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 296))
     },
     qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 332))
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 338))
     }
   }
 } catch (e) {
@@ -251,12 +251,11 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143);function _intero
 //
 //
 // ES 2015
-var _default = { data: function data() {return { active: false, xzindex: '3', color: '', //动态背景
+var _default = { data: function data() {return { xzindex: '3', color: '', //动态背景
       three: '', //近三天
       one: '', //近一天
       yue: '', sdate: '', //快报查询日期
-      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: {
-        color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
         padding: [5, 5, 5, 5],
         extra: {
           pie: {
@@ -290,10 +289,9 @@ var _default = { data: function data() {return { active: false, xzindex: '3', co
     var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
     this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');
     this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');
-    var datelist = [{ name: '前一月', value: this.yue, active: false }, { name: '前三天', value: this.three, active: false }, { name: '前一天', value: this.one, active: false }, { name: '当天', value: this.sdate, active: false }];
+    var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three }, { name: '前一天', value: this.one }, { name: '当天', value: this.sdate }];
     this.datelist = datelist;
     this.getdata();
-
   },
   methods: {
     leftClick: function leftClick() {

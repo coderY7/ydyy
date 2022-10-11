@@ -259,13 +259,20 @@ export default {
 #pages{
   margin: 5rpx 20rpx 0 20rpx;
 }
-.boxname{
-  margin-bottom: 10rpx;
+.box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20rpx;
+  .boxname{
+    flex:1;
+  }
+  .boxinput{
+  margin: 0 20rpx;
+  flex:4;
+  }
 }
-.boxinput{
-  width: 500rpx;
-margin: 0 20rpx;
-}
+
 .unit3{
   width: 100%;
   margin:30rpx 0;
@@ -285,10 +292,5 @@ height: 100%;
 .bottom{
 
 }
-.box{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20rpx;
-}
+
 </style>

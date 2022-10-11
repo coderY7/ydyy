@@ -22,7 +22,8 @@
         "notice/component/Noticedetails",
         "work/work",
         "work/component/minutework",
-        "result/result"
+        "result/result",
+        "detail/detail"
       ]
     }
   ],

@@ -29,7 +29,22 @@
 
 <!--    卡片显示-->
     <view v-if="cut">
+<view>
+  <view v-for="(item,index) in result" class="box" @click="detail(item,index)">
+    <view class="boxunit1">
+      <text>名称:{{item['商品名称']}}</text>
+      <text>¥{{item['批发价格']}}</text>
+    </view>
+    <view class="boxunit2">
+      <text>编号:{{item['商品编码']}}</text>
+      <text>库存:{{item['库存数量']}}</text>
+    </view>
+    <view class="boxunit3">
+      <view>商家:{{item['商家编号']}}</view>
+    </view>
 
+  </view>
+</view>
 
     </view>
 
@@ -54,7 +69,14 @@
 
     },
     methods:{
-
+      //显示所有数据
+      detail(item,index){
+        console.log('跳转',item)
+        let data=JSON.stringify(item)
+        uni.navigateTo({
+          url: `../../pagesA/detail/detail&list=${data}`
+        });
+      }
 
     }
 	}
@@ -64,5 +86,20 @@
 .unit4_box{
   display: flex;
   justify-content: space-around;
+}
+.box{
+  margin: 30rpx auto;
+  width: 600rpx;
+  .boxunit1{
+    display: flex;
+    justify-content: space-between;
+  }
+  .boxunit2{
+    display: flex;
+    justify-content: space-between;
+  }
+  .boxunit3{
+    display: flex;
+  }
 }
 </style>

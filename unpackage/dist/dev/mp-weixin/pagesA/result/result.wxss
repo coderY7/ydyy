@@ -28,4 +28,19 @@
   display: flex;
   justify-content: space-around;
 }
+.box {
+  margin: 30rpx auto;
+  width: 600rpx;
+}
+.box .boxunit1 {
+  display: flex;
+  justify-content: space-between;
+}
+.box .boxunit2 {
+  display: flex;
+  justify-content: space-between;
+}
+.box .boxunit3 {
+  display: flex;
+}
 
