@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 296))
+    },
     uSwitch: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-switch/u-switch */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-switch/u-switch")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-switch/u-switch.vue */ 330))
     },
@@ -134,26 +137,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l2 = _vm.__map(_vm.sumdata, function(item, index) {
-    var $orig = _vm.__get_orig(item)
-
-    var l0 = Object.keys(item)
-    var l1 = Object.values(item)
-    return {
-      $orig: $orig,
-      l0: l0,
-      l1: l1
-    }
-  })
-
-  var l4 = !_vm.cut
+  var l0 = Object.entries(_vm.sumdata[0])
+  var l2 = !_vm.cut
     ? _vm.__map(_vm.result, function(item, index) {
         var $orig = _vm.__get_orig(item)
 
-        var l3 = Object.values(item)
+        var l1 = Object.values(item)
         return {
           $orig: $orig,
-          l3: l3
+          l1: l1
         }
       })
     : null
@@ -161,8 +153,8 @@ var render = function() {
     {},
     {
       $root: {
-        l2: l2,
-        l4: l4
+        l0: l0,
+        l2: l2
       }
     }
   )
@@ -252,10 +244,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
+      bgColor: '#239BFE',
       bdt: [], //表头
       result: null, //查询结果
       sumdata: '', //数据汇总

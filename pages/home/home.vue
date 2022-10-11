@@ -53,7 +53,7 @@ export default {
     return {
       Alllist: [],
       title: '报表查询',
-      bgColor: '#5199ff',
+      bgColor: '#239BFE',
       tmplIds: 'Qj4DRaFxP2mLOwfFuyW0QHc3J0RGXgg5BalSDWwVclw', //推送模版
     };
   },
@@ -215,7 +215,7 @@ li {
   list-style: none;
   text-align: center;
   border-radius: 5px;
-  background: skyblue;
+  background: #239BFE;
 }
 
 ul {

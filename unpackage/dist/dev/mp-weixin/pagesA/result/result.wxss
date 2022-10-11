@@ -54,9 +54,27 @@ page {
   padding: 10rpx 20rpx;
   display: flex;
 }
+.tablebox {
+  margin: 0 20rpx;
+}
+.box1 {
+  margin: 20rpx auto;
+  background-color: #ffffff;
+  border-radius: 30rpx;
+  width: 600rpx;
+}
 .unit4_box {
+  padding: 20rpx 0;
   display: flex;
-  justify-content: space-around;
-  margin: 50rpx;
+  justify-content: space-between;
+  margin: 0 20rpx;
+}
+.fixation {
+  top: 150rpx;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 9999999;
+  background-color: #E5E5E5;
+  padding: 20rpx 0;
 }
 

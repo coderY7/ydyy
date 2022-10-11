@@ -1,30 +1,37 @@
 <template>
 	<view>
-<view class="switch">
-  <u-switch v-model="cut">qie</u-switch>
-</view>
-    <view>
-      <view v-for="(item,index) in sumdata" class="unit4_box">
-        <view>
-          <view  v-for="(items,key) in Object.keys(item)">{{items}}</view>
-        </view>
-        <view>
-          <view  v-for="(items,key) in Object.values(item)">{{items}}</view>
+    <u-navbar :placeholder="true"  @leftClick="leftClick()" :bgColor="bgColor">
+    </u-navbar>
+    <view class="fixation">
+      <view class="switch">
+        <u-switch v-model="cut">qie</u-switch>
+      </view>
+      <view class="box1">
+        <view v-for="(item,index) in Object.entries(sumdata[0])" class="unit4_box">
+          <view>
+            <view >{{item[0]}}</view>
+          </view>
+          <view>
+            <view>{{item[1]}}</view>
+          </view>
         </view>
       </view>
     </view>
     <!--    表格数据展示-->
     <view v-if="!cut">
-      <uni-table border stripe emptyText="暂无更多数据">
-        <!-- 表头行 -->
-        <uni-tr>
-          <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>
-        </uni-tr>
-        <!-- 表格数据行 -->
-        <uni-tr v-for="(item,index) in result">
-          <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>
-        </uni-tr>
-      </uni-table>
+      <view class="tablebox">
+        <uni-table border stripe emptyText="暂无更多数据">
+          <!-- 表头行 -->
+          <uni-tr>
+            <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>
+          </uni-tr>
+          <!-- 表格数据行 -->
+          <uni-tr v-for="(item,index) in result">
+            <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>
+          </uni-tr>
+        </uni-table>
+
+      </view>
     </view>
 
 <!--    卡片显示-->
@@ -55,7 +62,8 @@
 	export default {
 		data() {
 			return {
-				bdt:[],//表头
+        bgColor:'#239BFE',
+        bdt:[],//表头
         result:null,//查询结果
         sumdata:'',//数据汇总
         cut:false,//切换展示
@@ -115,10 +123,27 @@ page{
     }
   }
 }
-.unit4_box{
-  display: flex;
-  justify-content: space-around;
-  margin: 50rpx;
+.tablebox{
+  margin: 0 20rpx;
 }
-
+.box1{
+  margin: 20rpx auto;
+  background-color: #ffffff;
+  border-radius: 30rpx;
+  width: 600rpx;
+}
+.unit4_box{
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20rpx;
+}
+.fixation{
+  top: 150rpx;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 9999999;
+  background-color: #E5E5E5;
+  padding: 20rpx 0;
+}
 </style>

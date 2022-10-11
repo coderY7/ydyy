@@ -285,6 +285,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
@@ -402,7 +404,9 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { dqbb: '', //当前报表
+//
+//
+var _default = { data: function data() {return { bgColor: '#239BFE', dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
       cxtj: '', //查询条件

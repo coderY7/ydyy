@@ -145,7 +145,8 @@
                     "path" : "result/result",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+					"navigationStyle": "custom",
+					"navigationBarTitleText": "",
                     "enablePullDownRefresh": false
 
 				}

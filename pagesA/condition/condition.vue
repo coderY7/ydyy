@@ -1,109 +1,111 @@
 <template>
   <view>
-    <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()" >
+    <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()" :bgColor="bgColor">
     </u-navbar>
     <view id="pages">
-    <view v-for="(item,index) in cxtj">
-
-      <view v-if="item.type=='字符'" class="box">
-        <view class="boxname">{{ item.colname }}:</view>
-        <view class="boxinput">
-          <u-input
-              placeholder="请输入查询内容"
-              border="surround"
-              v-model="item.defval"
-              clearable
-          ></u-input>
-        </view>
-      </view>
-
-      <view v-if="item.type=='开始日期'">
-        <view class="boxname">{{ item.colname }}</view>
-        <view class="boxinput">
-          <uni-datetime-picker
-              type="date"
-              :value="single"
-              v-model="item.defval"
-              @change="startdate()"
-          />
-        </view>
-      </view>
-
-      <view v-if="item.type=='结束日期'">
-        <view class="boxname">{{ item.colname }}</view>
-        <view class="boxinput">
-          <uni-datetime-picker
-              type="date"
-              :value="single"
-              v-model="item.defval"
-              @change="enddate()"
-          />
-        </view>
-      </view>
-
-      <view v-if="item.type=='多选下拉框'">
-        <view class="boxname">{{ item.colname }}</view>
-        <view class="boxinput"></view>
-        </view>
-
-      <view v-if="item.type=='下拉框'">
-
-        <view v-if="item.colname=='分店编号'">
-          <view>{{ item.colname }}</view>
-          <view class="boxinput">
-            <uni-section  type="line">
-              <uni-data-select
+      <view class="container">
+        <view v-for="(item,index) in cxtj">
+          <view v-if="item.type=='字符'" class="box">
+            <view class="boxname">{{ item.colname }}:</view>
+            <view class="boxinput">
+              <u-input
+                  placeholder="请输入查询内容"
+                  border="surround"
                   v-model="item.defval"
-                  :localdata="cxfdbh"
-                  @change="change"
-              ></uni-data-select>
-            </uni-section>
+                  clearable
+              ></u-input>
+            </view>
           </view>
-        </view>
 
-        <view v-if="item.colname=='商品品牌'">
-          <view class="boxname">{{ item.colname }}</view>
-          <view class="boxinput">
-            <uni-section  type="line">
-              <uni-data-select
+          <view v-if="item.type=='开始日期'">
+            <view class="boxname">{{ item.colname }}</view>
+            <view class="boxinput">
+              <uni-datetime-picker
+                  type="date"
+                  :value="single"
                   v-model="item.defval"
-                  :localdata="cxsppp"
-                  @change="change"
-              ></uni-data-select>
-            </uni-section>
+                  @change="startdate()"
+              />
+            </view>
           </view>
-        </view>
 
-      </view>
-
-      <view v-if="item.type=='查询下拉框'">
-
-        <view v-if="item.colname=='商家合同'">
-          <view class="boxname">{{ item.colname }}</view>
-          <view class="boxinput">
-            <uni-section  type="line">
-              <uni-data-select
+          <view v-if="item.type=='结束日期'">
+            <view class="boxname">{{ item.colname }}</view>
+            <view class="boxinput">
+              <uni-datetime-picker
+                  type="date"
+                  :value="single"
                   v-model="item.defval"
-                  :localdata="cxsjht"
-                  @change="change"
-              ></uni-data-select>
-            </uni-section>
+                  @change="enddate()"
+              />
+            </view>
+          </view>
+
+          <view v-if="item.type=='多选下拉框'">
+            <view class="boxname">{{ item.colname }}</view>
+            <view class="boxinput"></view>
+          </view>
+
+          <view v-if="item.type=='下拉框'">
+
+            <view v-if="item.colname=='分店编号'">
+              <view>{{ item.colname }}</view>
+              <view class="boxinput">
+                <uni-section  type="line">
+                  <uni-data-select
+                      v-model="item.defval"
+                      :localdata="cxfdbh"
+                      @change="change"
+                  ></uni-data-select>
+                </uni-section>
+              </view>
+            </view>
+
+            <view v-if="item.colname=='商品品牌'">
+              <view class="boxname">{{ item.colname }}</view>
+              <view class="boxinput">
+                <uni-section  type="line">
+                  <uni-data-select
+                      v-model="item.defval"
+                      :localdata="cxsppp"
+                      @change="change"
+                  ></uni-data-select>
+                </uni-section>
+              </view>
+            </view>
+
+          </view>
+
+          <view v-if="item.type=='查询下拉框'">
+
+            <view v-if="item.colname=='商家合同'">
+              <view class="boxname">{{ item.colname }}</view>
+              <view class="boxinput">
+                <uni-section  type="line">
+                  <uni-data-select
+                      v-model="item.defval"
+                      :localdata="cxsjht"
+                      @change="change"
+                  ></uni-data-select>
+                </uni-section>
+              </view>
+            </view>
+
+          </view>
+
+          <view v-if="item.type=='选择'">
+
+            <view v-if="item.colname=='数据安全'">
+              <view class="boxname">{{ item.colname }}</view>
+              <view class="boxinput">
+                <view>{{item.defval}}</view>
+              </view>
+            </view>
+
           </view>
         </view>
 
       </view>
-
-      <view v-if="item.type=='选择'">
-
-        <view v-if="item.colname=='数据安全'">
-          <view class="boxname">{{ item.colname }}</view>
-          <view class="boxinput">
-            <view>{{item.defval}}</view>
-          </view>
-        </view>
-
-      </view>
-    </view>
 
 <view class="unit3" v-if="cxtj.length!=0">
   <view class="unit3_box">
@@ -125,6 +127,7 @@ import {
 export default {
   data() {
     return {
+      bgColor:'#239BFE',
       dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
@@ -258,6 +261,9 @@ export default {
 <style lang="scss">
 #pages{
   margin: 5rpx 20rpx 0 20rpx;
+}
+.container{
+  padding: 20rpx;
 }
 .box{
   display: flex;
