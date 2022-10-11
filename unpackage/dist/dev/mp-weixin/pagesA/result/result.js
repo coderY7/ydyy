@@ -274,8 +274,9 @@ var _default =
     detail: function detail(item, index) {
       console.log('跳转', item);
       var data = JSON.stringify(item);
+      console.log(data);
       uni.navigateTo({
-        url: "../../pagesA/detail/detail&list=".concat(data) });
+        url: "../../pagesA/detail/detail?list=".concat(data) });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

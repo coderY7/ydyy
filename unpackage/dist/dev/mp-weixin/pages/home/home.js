@@ -196,8 +196,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _api = __webpack_require__(/*! @/network/api.js */ 143);
 
-var _api = __webpack_require__(/*! @/network/api.js */ 143); //
+
+
+
+var _api2 = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
@@ -237,11 +241,15 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
 //
-//
-var _default = { data: function data() {return { bgColor: '#5199ff', tmplIds: 'Qj4DRaFxP2mLOwfFuyW0QHc3J0RGXgg5BalSDWwVclw' //推送模版
-    };}, methods: { //快报
+var _default = { data: function data() {return { Alllist: [], title: '报表查询', bgColor: '#5199ff', tmplIds: 'Qj4DRaFxP2mLOwfFuyW0QHc3J0RGXgg5BalSDWwVclw' //推送模版
+    };}, onLoad: function onLoad() {this.isreportForm();uni.setStorageSync('cxbb', true);}, methods: { //快报
     leftClick: function leftClick() {uni.navigateTo({ url: '../../pagesA/statement/statement' });}, //工作
-    work: function work() {var data = { sn: uni.getStorageSync('sn'), fdbh: uni.getStorageSync('fdbh'), userid: uni.getStorageSync('userid'), groupld: uni.getStorageSync('loginaccess').userinfo.erp_groupid, dtmark: 'app2', recordID: '-99', access_token: uni.getStorageSync('access_token') };(0, _api.oaWorkFlow)(data).then(function (res) {if (res.err_code == '0') {console.log('最新工作', res);var item = JSON.stringify(res.data);uni.navigateTo({ url: "../../pagesA/work/work?item=".concat(item) });} else {uni.showToast({ title: '未查询到工作信息', duration: 2000, icon: 'none' });}
+    work: function work() {var data = { sn: uni.getStorageSync('sn'), fdbh: uni.getStorageSync('fdbh'), userid: uni.getStorageSync('userid'), groupld: uni.getStorageSync('loginaccess').userinfo.erp_groupid, dtmark: 'app2', recordID: '-99', access_token: uni.getStorageSync('access_token') };(0, _api.oaWorkFlow)(data).then(function (res) {if (res.err_code == '0') {console.log('最新工作', res);var item = JSON.stringify(res.data);uni.navigateTo({ url: "../../pagesA/work/work?item=".concat(item) });} else {uni.showToast({
+            title: '未查询到工作信息',
+            duration: 2000,
+            icon: 'none' });
+
+        }
       });
 
     },
@@ -275,6 +283,33 @@ var _default = { data: function data() {return { bgColor: '#5199ff', tmplIds: 'Q
             icon: 'none' });
 
         }
+      });
+    },
+
+    //获取报表
+    isreportForm: function isreportForm() {var _this = this;
+      var reportFormdata = {
+        access_token: uni.getStorageSync('access_token'),
+        userid: '00000' };
+
+      (0, _api2.reportForm)(reportFormdata).then(function (res) {
+        console.log('报表查询', res);
+        _this.Alllist = res.data;
+      });
+    },
+    enter: function enter(item) {
+      console.log(item);
+      uni.setStorageSync('dqbb', item); //当前报表
+      var dataes = {
+        access_token: uni.getStorageSync('access_token'),
+        cxbh: item.cxbh };
+
+      (0, _api2.condition)(dataes).then(function (res) {
+        console.log('查询条件', res);
+        var items = JSON.stringify(res);
+        uni.navigateTo({
+          url: "../../pagesA/condition/condition?cxdj=".concat(items) });
+
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -46,12 +46,6 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/statement/statement",
-        "iconPath": "static/images/tabbar/shopping.png",
-        "selectedIconPath": "static/images/tabbar/shopping-active.png",
-        "text": "报表"
-      },
-      {
         "pagePath": "pages/myset/myset",
         "iconPath": "static/images/tabbar/category.png",
         "selectedIconPath": "static/images/tabbar/category-active.png",

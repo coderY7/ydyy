@@ -24,16 +24,16 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container {
+.homecontainer {
   margin: 20rpx;
 }
-.unit1 {
+.homeunit1 {
   margin: 20rpx 0;
   display: flex;
   align-items: center;
   height: 100rpx;
 }
-.unit1 .unit1_left {
+.homeunit1 .unit1_left {
   width: 36px;
   height: 36px;
   margin-right: 20rpx;
@@ -60,5 +60,47 @@
   height: 80rpx;
   background: goldenrod;
   margin-bottom: 20rpx;
+}
+.container {
+  margin: 0 20rpx;
+}
+._ul {
+  padding: 0;
+}
+._li {
+  list-style: none;
+  text-align: center;
+  border-radius: 5px;
+  background: skyblue;
+}
+._ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+._li {
+  width: 26%;
+  height: 180rpx;
+  margin-right: 11%;
+  font-size: 22rpx;
+  margin-bottom: 5%;
+}
+._li:nth-of-type(3n) {
+  margin-right: 0;
+}
+._li:nth-of-type(n+99) {
+  margin-bottom: 0;
+}
+.unit1_box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.unit1_box .boxs {
+  display: flex;
+  flex-direction: column;
 }
 

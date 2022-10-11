@@ -1,8 +1,8 @@
 <template>
 	<view>
-
-    <u-switch v-model="cut"></u-switch>
-
+<view class="switch">
+  <u-switch v-model="cut">qie</u-switch>
+</view>
     <view>
       <view v-for="(item,index) in sumdata" class="unit4_box">
         <view>
@@ -29,7 +29,7 @@
 
 <!--    卡片显示-->
     <view v-if="cut">
-<view>
+<view class="container">
   <view v-for="(item,index) in result" class="box" @click="detail(item,index)">
     <view class="boxunit1">
       <text>名称:{{item['商品名称']}}</text>
@@ -73,8 +73,9 @@
       detail(item,index){
         console.log('跳转',item)
         let data=JSON.stringify(item)
+        console.log(data)
         uni.navigateTo({
-          url: `../../pagesA/detail/detail&list=${data}`
+          url: `../../pagesA/detail/detail?list=${data}`
         });
       }
 
@@ -83,23 +84,41 @@
 </script>
 
 <style lang="scss">
+page{
+  background-color: #E5E5E5;
+}
+.switch{
+  margin: 20rpx;
+}
+.container{
+  margin: 20rpx 50rpx 20rpx 50rpx;
+
+  .box{
+    margin: 30rpx auto;
+    width: 600rpx;
+    border-radius: 30rpx;
+    background-color: #ffffff;
+    font-weight: 400;
+    .boxunit1{
+      padding: 10rpx 20rpx;
+      display: flex;
+      justify-content: space-between;
+    }
+    .boxunit2{
+      padding: 10rpx 20rpx;
+      display: flex;
+      justify-content: space-between;
+    }
+    .boxunit3{
+      padding: 10rpx 20rpx;
+      display: flex;
+    }
+  }
+}
 .unit4_box{
   display: flex;
   justify-content: space-around;
+  margin: 50rpx;
 }
-.box{
-  margin: 30rpx auto;
-  width: 600rpx;
-  .boxunit1{
-    display: flex;
-    justify-content: space-between;
-  }
-  .boxunit2{
-    display: flex;
-    justify-content: space-between;
-  }
-  .boxunit3{
-    display: flex;
-  }
-}
+
 </style>

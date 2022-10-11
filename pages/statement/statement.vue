@@ -11,7 +11,6 @@
 							</view>
 							<view>{{item.cxmc}}</view>
 						</view>
-
 					</view>
 				</li>
 			</ul>
@@ -90,10 +89,11 @@
 	}
 
 	li {
-		width: 30%;
-		height: 200rpx;
-		margin-right: 5%;
-		margin-bottom: 5%;
+    width: 26%;
+    height: 180rpx;
+    margin-right: 11%;
+    font-size: 22rpx;
+    margin-bottom: 5%;
 	}
 
 	li:nth-of-type(3n) {

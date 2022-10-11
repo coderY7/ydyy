@@ -1,7 +1,8 @@
 <template>
 	<view class="container">
 		<!-- 分列 -->
-		<view class="">
+		<view class="box">
+      <view class="name">微信设置</view>
 			<view v-for='(item,index) in setlist' :key='index' class="unit1">
 				<view>{{item.name}}</view>
 				<view>
@@ -92,6 +93,14 @@
 <style lang="scss">
 .container{
 margin: 20rpx 20rpx 0 20rpx;
+  .name{
+    font-size: 35rpx;
+    color: #4f99ff;
+margin-bottom: 20rpx;
+  }
+  .box{
+    padding: 20rpx;
+  }
  .unit1{
   display: flex;
   justify-content: space-between;

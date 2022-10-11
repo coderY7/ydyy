@@ -170,6 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
@@ -184,8 +185,8 @@ var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };
-  },
+//
+var _default = { data: function data() {return { setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };},
   onLoad: function onLoad() {},
   methods: {
     asyncChange: function asyncChange(item) {
