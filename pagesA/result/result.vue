@@ -4,7 +4,7 @@
     </u-navbar>
     <view class="fixation">
       <view class="switch">
-        <u-switch v-model="cut">qie</u-switch>
+		<selectSwitch @change="changeSwitch" />
       </view>
       <view class="box1">
         <view v-for="(item,index) in Object.entries(sumdata[0])" class="unit4_box">
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+	import selectSwitch from "@/components/xuan-switch/xuan-switch.vue";
 	export default {
 		data() {
 			return {
@@ -69,6 +70,11 @@
         cut:false,//切换展示
       };
 		},
+		components: {
+		
+		selectSwitch
+		
+		},
     onLoad(option){
       console.log(option)
       this.bdt=JSON.parse(option.bdt)
@@ -77,6 +83,10 @@
 
     },
     methods:{
+		changeSwitch(isSwitch){ 
+			// console.log(isSwitch)
+			this.cut=!this.cut
+			},
       //显示所有数据
       detail(item,index){
         console.log('跳转',item)
