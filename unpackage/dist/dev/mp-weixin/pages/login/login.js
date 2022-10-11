@@ -249,14 +249,15 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
 var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
-      isfdlist: false };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
+      isfdlist: false, resdata: null };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
     this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('openid')) {
     // 	uni.reLaunch({
     // 		url: '/pages/home/home'
     // 	});
     // }
   }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];for (var u in res.fdlist) {
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];
+          for (var u in res.fdlist) {
             _this.fdlist.push({
               value: res.fdlist[u].fdbh,
               text: res.fdlist[u].fdmc });
@@ -351,8 +352,12 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
         openid: uni.getStorageSync('openid') };
 
       (0, _api.userfast)(data).then(function (res) {
-        if (res.err_code == '0') {
-          uni.setStorageSync('dlmc', res.data[0].dlmc);
+        console.log(JSON.stringify(res));
+        var resdata = JSON.parse(JSON.stringify(res));
+        console.log(resdata);
+        console.log(resdata['error_code'], resdata['userinfos']);
+        if (resdata.err_code == '0') {
+          uni.setStorageSync('dlmc', resdata.data[0].dlmc);
           uni.showToast({
             icon: 'none',
             title: res.message });

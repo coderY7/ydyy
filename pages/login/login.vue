@@ -60,7 +60,8 @@
         iswx:'',
         fdbh:'',
         fdlist:[],//分店列表
-        isfdlist:false
+        isfdlist:false,
+        resdata:null
 			};
 		},
 		onLoad() {
@@ -194,8 +195,12 @@
           openid:uni.getStorageSync('openid')
         }
         userfast(data).then((res)=>{
-					if(res.err_code=='0'){
-						uni.setStorageSync('dlmc',res.data[0].dlmc)
+          console.log(JSON.stringify(res))
+          let resdata=JSON.parse(JSON.stringify(res))
+          console.log(resdata)
+        console.log(resdata['error_code'],resdata['userinfos'])
+					if(resdata.err_code=='0'){
+						uni.setStorageSync('dlmc',resdata.data[0].dlmc)
 						uni.showToast({
 							icon: 'none',
 							title: res.message

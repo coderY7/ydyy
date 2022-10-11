@@ -84,7 +84,7 @@ dlmc:uni.getStorageSync('dlmc'),
               uni.navigateTo({
                 url:'/pages/login/login'
               })
-							 uni.clearStorageSync();
+							 // uni.clearStorageSync();
               let data={
                 vtype:'logout',
                 access_token:uni.getStorageSync('access_token'),
