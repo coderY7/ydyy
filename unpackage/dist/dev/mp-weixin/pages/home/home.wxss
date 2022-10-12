@@ -35,14 +35,14 @@ u-navbar {
   width: 100%;
 }
 .box .boxitem {
-  width: 50%;
+  width: 40%;
   display: inline-flex;
   align-items: center;
-  margin: 20rpx 0;
+  margin: 20rpx 5%;
 }
 .box .box_left {
-  width: 80rpx;
-  height: 80rpx;
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -59,11 +59,12 @@ u-navbar {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 24rpx;
 }
 .recent {
   display: inline-flex;
   justify-content: flex-start;
-  margin-bottom: 20rpx;
+  margin: 20rpx 0;
 }
 .ubut {
   font-size: 12px;
@@ -78,5 +79,25 @@ u-navbar {
 }
 .active {
   background-color: #4f99ff;
+}
+.xzbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.xz {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+}
+.xz .boxname {
+  font-size: 24rpx;
+  flex: 1;
+}
+.xz .boxinput {
+  margin: 0 20rpx;
+  flex: 3;
 }
 

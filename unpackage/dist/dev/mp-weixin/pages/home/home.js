@@ -100,6 +100,9 @@ try {
     uNavbar: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 288))
     },
+    uniDatetimePicker: function() {
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 357))
+    },
     uniDataSelect: function() {
       return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 296))
     },
@@ -171,6 +174,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
 
 
 
@@ -312,6 +321,12 @@ var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 191));funct
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // ES 2015
 var _default = { data: function data() {return { fdlist: '', //分店列表
       xzfd: '', //选择的分店
@@ -325,13 +340,7 @@ var _default = { data: function data() {return { fdlist: '', //分店列表
     var one = (0, _dayjs.default)().unix() - 24 * 60 * 60; // 获取前一天时间戳
     this.one = _dayjs.default.unix(one).format('YYYY-MM-DD');var three = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 3; //前三天时间戳
     var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
-    this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');var datelist = [{ name: '前一月',
-      value: this.yue },
-    {
-      name: '前三天',
-      value: this.three },
-    {
-      name: '前一天',
+    this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three }, { name: '前一天',
       value: this.one },
     {
       name: '当天',
@@ -346,6 +355,9 @@ var _default = { data: function data() {return { fdlist: '', //分店列表
   },
   watch: {
     xzfd: function xzfd() {
+      this.getdata();
+    },
+    sdate: function sdate() {
       this.getdata();
     } },
 
@@ -365,6 +377,11 @@ var _default = { data: function data() {return { fdlist: '', //分店列表
         var data = JSON.parse(JSON.stringify(res));
         _this.ybpdata = data;
       });
+    },
+    //开始日期
+    startdate: function startdate(e) {
+      console.log(e);
+      this.sdate = e;
     },
     //可视化面板
     getServerDataA: function getServerDataA() {var _this2 = this;

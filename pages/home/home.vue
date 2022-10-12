@@ -3,23 +3,7 @@
 		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
 			title="首页" @leftClick="leftClick">
 		</u-navbar>
-		<!-- <view class="homecontainer">
-      <view class="homeunit1" @click="notice()">
-        <view class="unit1_left">
-          <image class="unit1_left" src="../../static/home/tishi.png"></image>
-        </view>
-        <view class="unit1_right">公告获取</view>
-      </view>
-      <view class="homeunit1" @click="work()">
-        <view class="unit1_left">
-          <image class="unit1_left" src="../../static/home/tishi.png"></image>
-        </view>
-        <view class="unit1_right">待处理工作</view>
-      </view>
-    </view> -->
-
-
-
+		
 		<view class="container">
 			<view class="unit1">
 				<!--        近期查询日期-->
@@ -28,17 +12,39 @@
 						<button @click="getdata(item,index)" :class="{'active':xzindex==index}">{{item.name}}</button>
 					</view>
 				</view>
+<!-- 时间-->
+<view class="xzbox">
+	<view class="xz">
+	    <view class="boxname">选择时间</view>
+	    <view class="boxinput">
+	      <uni-datetime-picker
+	          type="date"
+	          :value="single"
+	          v-model="item.defval"
+	          @change="startdate()"
+	      />
+	    </view>
+		</view>
+	  <view style="font-size: 16rpx">(默认当天)</view>
+</view>
+        
+
 				<!-- 选择门店 -->
-				<view>选择分店<text style="font-size: 16rpx">(默认全部分店)</text></view>
-				<view>
-					<view>
-						<view class="boxinput">
-							<uni-section type="line">
-								<uni-data-select v-model="xzfd" :localdata="fdlist"></uni-data-select>
-							</uni-section>
-						</view>
-					</view>
+        <view class="xzbox">
+			<view class="xz">
+				<view class="boxname">选择分店</view>
+				<view class="boxinput">
+				  <view>
+				      <uni-section type="line">
+				        <uni-data-select v-model="xzfd" :localdata="fdlist"></uni-data-select>
+				      </uni-section>
+				  </view>
 				</view>
+			</view>
+          <view style="font-size: 16rpx">(默认全部分店)</view>
+        </view>
+
+
 				<view>实时销售分析</view>
 				<view class="unit1box">
 					<view class="box">
@@ -175,7 +181,10 @@
 		watch: {
 			xzfd: function() {
 				this.getdata()
-			}
+			},
+      sdate:function (){
+        this.getdata()
+      }
 		},
 		methods: {
 
@@ -194,6 +203,11 @@
 					this.ybpdata = data
 				})
 			},
+      //开始日期
+      startdate(e){
+        console.log(e);
+        this.sdate=e
+      },
 			//可视化面板
 			getServerDataA() {
 				//模拟从服务器获取数据时的延时
@@ -287,15 +301,16 @@
 
 	.box {
 		.boxitem {
-			width: 50%;
+			width: 40%;
 			display: inline-flex;
 			align-items: center;
-			margin: 20rpx 0;
+			margin: 20rpx 5%;
+			
 		}
 
 		.box_left {
-			width: 80rpx;
-			height: 80rpx;
+			width: 70rpx;
+			height: 70rpx;
 			border-radius: 50%;
 			display: flex;
 			align-items: center;
@@ -314,13 +329,14 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			font-size: 24rpx;
 		}
 	}
 
 	.recent {
 		display: inline-flex;
 		justify-content: flex-start;
-		margin-bottom: 20rpx;
+		margin: 20rpx 0;
 	}
 
 	.ubut {
@@ -339,4 +355,24 @@
 	.active {
 		background-color: #4f99ff;
 	}
+	.xzbox{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20rpx;
+	}
+  .xz{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+width: 70%;
+    .boxname{
+      font-size: 24rpx;
+      flex:1;
+    }
+    .boxinput{
+      margin: 0 20rpx;
+      flex:3;
+    }
+  }
 </style>
