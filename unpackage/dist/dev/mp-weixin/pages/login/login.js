@@ -159,59 +159,101 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _api = __webpack_require__(/*! @/network/api.js */ 143);var _default =
 
 
 
 
 
 
-{
-  data: function data() {
-    return {
-      userid: '',
-      password: '',
-      iswx: '',
-      fdbh: '',
-      fdlist: [], //分店列表
-      isfdlist: false,
-      resdata: null };
 
-  },
-  onLoad: function onLoad() {
-    this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
-    this.userid = uni.getStorageSync('scandata').userid;
-    // if (uni.getStorageSync('openid')) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _api = __webpack_require__(/*! @/network/api.js */ 143); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
+      isfdlist: false, resdata: null };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
+    this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('openid')) {
     // 	uni.reLaunch({
     // 		url: '/pages/home/home'
     // 	});
     // }
-  },
-  watch: {
-    userid: function userid(newValue, oldValue) {
-      if (newValue.length == '5') {
-        this.useryz();
-      } else {
-      }
-    } },
-
-  methods: {
-    change: function change(e) {
-      console.log(e);
-      uni.setStorageSync("fdbh", e);
-    },
-    //用户验证
-    useryz: function useryz() {var _this = this;
-      var user = {
-        userid: this.userid };
-
-      (0, _api.usercheckapp)(user).then(function (res) {
-        if (res.error_code == 0) {
-          if (res.fdlist) {
-            _this.isfdlist = true;
-          };
-          uni.setStorageSync("companyid", res.companyid);
-          _this.fdbh = res.fdlist[0].fdbh;
+  }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
           uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
           _this.fdlist = [];
           for (var u in res.fdlist) {
@@ -304,31 +346,59 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143);var _default =
       });
     },
     //微信登录
-    wxLogin: function wxLogin() {
-      var data = {
-        openid: uni.getStorageSync('openid') };
+    wxLogin: function wxLogin() {var _this3 = this;
+      // 获取用户信息
+      uni.login({
+        provider: 'weixin',
+        success: function success(res) {
+          //获取code,换取openid
+          console.log(res);
+          var getopeniddata = {
+            appid: uni.getStorageSync('appid'),
+            secret: uni.getStorageSync('secret'),
+            js_code: res.code };
 
-      (0, _api.userfast)(data).then(function (res) {
-        console.log(JSON.stringify(res));
-        var resdata = JSON.parse(JSON.stringify(res));
-        console.log(resdata);
-        console.log(resdata['error_code'], resdata['userinfos']);
-        if (resdata.err_code == '0') {
-          uni.setStorageSync('dlmc', resdata.data[0].dlmc);
-          uni.showToast({
-            icon: 'none',
-            title: res.message });
+          console.log(getopeniddata);
+          (0, _api.getopenid)(getopeniddata).then(function (res) {
+            console.log('获取到openid', res);
+            //存储openid
+            uni.setStorageSync('openid', res.openid);
+            uni.setStorageSync('session_key', res.session_key);
+            _this3.openid = res.openid;
+            _this3.basics();
 
-          setTimeout(function () {
-            uni.switchTab({
-              url: '/pages/home/home' });
+            var data = {
+              openid: uni.getStorageSync('openid') };
 
-          }, 1000);
+            (0, _api.userfast)(data).then(function (res) {
+              console.log(JSON.stringify(res));
+              var resdata = JSON.parse(JSON.stringify(res));
+              console.log(resdata);
+              _this3.resdata = resdata;
+              console.log(resdata['error_code'], resdata['userinfos']);
+              uni.setStorageSync('access_token', resdata.access_token.
+              access_token);
+              uni.setStorageSync('dlmc', _this3.resdata['userinfos'].dlmc);
+              uni.setStorageSync('companyid', _this3.resdata['userinfos'].
+              CompanyID);
+              uni.setStorageSync('userid', _this3.resdata['userinfos'].USERID);
+              uni.setStorageSync('fdbh', _this3.resdata['userinfos'].FDBHList);
 
-        }
+              uni.switchTab({
+                url: '/pages/home/home' });
 
-      });
+
+
+
+            });
+
+          });
+        } });
+
+
+
     },
+
     basics: function basics() {
       var data = {
         access_token: uni.getStorageSync('access_token'),

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
-		<u-navbar :title="title" :placeholder="true">
-		</u-navbar>
+		<!-- <u-navbar :title="title" :placeholder="true">
+		</u-navbar> -->
 		<view class="unit1">
 			<ul>
 				<li v-for="(item,index) in Alllist" :key="index">

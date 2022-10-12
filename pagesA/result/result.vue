@@ -83,6 +83,12 @@
 
     },
     methods:{
+		//自定义返回
+		    leftClick() {
+		      uni.navigateBack({
+		        delta: 1
+		      });
+		    },
 		changeSwitch(isSwitch){ 
 			// console.log(isSwitch)
 			this.cut=!this.cut

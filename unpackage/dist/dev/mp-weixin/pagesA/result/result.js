@@ -273,6 +273,12 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
+    //自定义返回
+    leftClick: function leftClick() {
+      uni.navigateBack({
+        delta: 1 });
+
+    },
     changeSwitch: function changeSwitch(isSwitch) {
       // console.log(isSwitch)
       this.cut = !this.cut;
