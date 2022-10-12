@@ -174,12 +174,11 @@
 				"selectedIconPath": "static/images/tabbar/home-active.png",
 				"text": "首页"
 			},
-
-			{
-				"pagePath": "pages/myset/myset",
-				"iconPath": "static/images/tabbar/category.png",
-				"selectedIconPath": "static/images/tabbar/category-active.png",
-				"text": "设置"
+				{
+				"pagePath": "pages/statement/statement",
+				"iconPath": "static/images/tabbar/shopping.png",
+				"selectedIconPath": "static/images/tabbar/shopping-active.png",
+				"text": "报表"
 			}
 		]
 	},
@@ -187,6 +186,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+
 	}
 }

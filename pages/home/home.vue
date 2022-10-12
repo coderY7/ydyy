@@ -1,9 +1,9 @@
 <template>
   <view>
-    <u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='快报' title="首页"
+    <u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置' title="首页"
               @leftClick="leftClick">
     </u-navbar>
-    <view class="homecontainer">
+    <!-- <view class="homecontainer">
       <view class="homeunit1" @click="notice()">
         <view class="unit1_left">
           <image class="unit1_left" src="../../static/home/tishi.png"></image>
@@ -16,145 +16,248 @@
         </view>
         <view class="unit1_right">待处理工作</view>
       </view>
-    </view>
+    </view> -->
+
 
 
     <view class="container">
       <view class="unit1">
-        <ul>
-          <li v-for="(item,index) in Alllist" :key="index">
-            <view class="unit1_box" @click="enter(item)">
-              <view class="boxs">
-                <view>
-                </view>
-                <view>{{item.cxmc}}</view>
+<!--        近期查询日期-->
+        <view class="recent">
+          <view class="ubut" v-for="(item,index) in datelist">
+            <button @click="getdata(item,index)" :class="{'active':xzindex==index}" >{{item.name}}</button>
+          </view>
+        </view>
+        <!-- 选择门店 -->
+        <view>选择分店<text style="font-size: 16rpx">(默认全部分店)</text></view>
+        <view>
+          <view>
+            <view class="boxinput">
+              <uni-section  type="line">
+                <uni-data-select
+                    v-model="xzfd"
+                    :localdata="fdlist"
+                    
+                ></uni-data-select>
+              </uni-section>
+            </view>
+          </view>
+        </view>
+        <view>实时销售分析</view>
+        <view class="unit1box">
+          <view class="box" >
+            <view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.table0[0])">
+              <view class="box_left">
+                <image></image>
+              </view>
+              <view class="box_right">
+                <view>{{item[1]}}</view>
+                <view>{{item[0]?item[0]:''}}</view>
               </view>
             </view>
-          </li>
-        </ul>
+          </view>
+        </view>
+      </view>
+      <view class="charts-box">
+        <qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
+      </view>
+      <view class="charts-box">
+        <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
       </view>
     </view>
+    
 
   </view>
 </template>
 
 <script>
-import {
-  oaNoticec, //公告拉取
-  oaWorkFlow, //获取最新工作信息
-  sendmessage, //推送消息
-} from "@/network/api.js";
-import {
-  reportForm,
-  condition
-} from "../../network/api.js"
-export default {
+
+	import {
+		getFenDian,
+		getpctodayssale,
+    getappsalereport//仪表盘数据
+	} from '../../network/api.js';
+  import dayjs from 'dayjs'; // ES 2015
+
+  export default {
   data() {
     return {
-      Alllist: [],
-      title: '报表查询',
-      bgColor: '#239BFE',
-      tmplIds: 'Qj4DRaFxP2mLOwfFuyW0QHc3J0RGXgg5BalSDWwVclw', //推送模版
+      fdlist:'',//分店列表
+      xzfd:'',//选择的分店
+	  xzindex:'3',
+	  bgColor:'#4f99ff',//动态背景
+	  three:'',//近三天
+	  one:'',//近一天
+	  yue:'',
+	  		sdate:'',//快报查询日期
+	  datelist:'',
+	  		chartDataA: {},
+	  		optsA: {
+	  			color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
+	  				"#ea7ccc"
+	  			],
+	  			padding: [15, 15, 0, 5],
+	  			legend: {},
+	  			xAxis: {
+	  				disableGrid: true
+	  			},
+	  			yAxis: {
+	  				data: [{
+	  					min: 0
+	  				}]
+	  			},
+	  			extra: {
+	  				column: {
+	  					type: "group",
+	  					width: 30,
+	  					activeBgColor: "#000000",
+	  					activeBgOpacity: 0.08
+	  				}
+	  			}
+	  		},
+	  chartDataC: {},
+	  ybpdata:'',
+	  optsC: {
+	    color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+	    padding: [5, 5, 5, 5],
+	    extra: {
+	      pie: {
+	        activeOpacity: 0.5,
+	        activeRadius: 10,
+	        offsetAngle: 0,
+	        labelWidth: 15,
+	        border: true,
+	        borderWidth: 3,
+	        borderColor: "#FFFFFF",
+	        linearType: "custom"
+	      }
+	    }
+	  },
     };
   },
+  onReady() {
+//this.getServerDataA();
+  this.getServerDataC();
+  		},
+		onShow() {
+      this.fdlist=uni.getStorageSync('basic').FDINFO
+      //处理分店下拉框数据
+      let cxfdbh=[];
+      this.fdlist.forEach((item)=>{
+        let datas={}
+        datas.value=item.fdbh;
+        datas.text=item.fdmc
+        cxfdbh.push(datas)
+      })
+      this.fdlist=cxfdbh
+				this.sdate=dayjs().format('YYYY-MM-DD') // 获取当前时间
+		  let one=dayjs().unix()-24*60*60// 获取前一天时间戳
+		  this.one=dayjs.unix(one).format('YYYY-MM-DD')
+		  let three=dayjs().unix()-24*60*60*3//前三天时间戳
+		  let yue=dayjs().unix()-24*60*60*30//前三天时间戳
+		  this.yue=dayjs.unix(yue).format('YYYY-MM-DD')
+		  this.three=dayjs.unix(three).format('YYYY-MM-DD')
+		  let datelist=[{name:'前一月',value:this.yue},{name:'前三天',value:this.three},{name:'前一天',value:this.one},{name:'当天',value:this.sdate}]
+		  this.datelist=datelist
+		  this.getdata()
+		},
   onLoad() {
-    this.isreportForm()
+    
     uni.setStorageSync('cxbb',true)
   },
+  watch:{
+	  xzfd:function(){
+		  this.getdata()
+	  }
+  },
   methods: {
-    //快报
+	  
+	  getdata(item,index){
+	          this.xzindex=index
+	          let getpcadmindaysaledata={
+	            access_token:uni.getStorageSync('access_token'),
+	            saledate:item?item.value:this.sdate,
+              datamark:'ssale',
+              selfdbh:this.xzfd?this.xzfd:'ALL',
+              sn:uni.getStorageSync('sn')
+	          }
+      getappsalereport(getpcadmindaysaledata).then((res)=>{
+	            console.log('仪表盘数据',JSON.parse(JSON.stringify(res)))
+        let data=JSON.parse(JSON.stringify(res))
+	            this.ybpdata=data
+      })
+	        },
+	  			//可视化面板
+	  			getServerDataA() {
+	  				//模拟从服务器获取数据时的延时
+	  				setTimeout(() => {
+	  					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+	  					let res = {
+	  						categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
+	  						series: [{
+	  								name: "目标值",
+	  								data: [35, 36, 31, 33, 13, 34]
+	  							},
+	  							{
+	  								name: "完成量",
+	  								data: [18, 27, 21, 24, 6, 28]
+	  							}
+	  						]
+	  					};
+	  
+	            //处理条形图数据
+	            let coldata=[]
+	            let cbe=[]
+	            let ose=[]
+	            this.ybpdata.table2.forEach((item)=>{
+	              cbe.push(item.库存成本额)
+	              ose.push(item.库存零售额)
+	              coldata.push(item.大类名称)
+	            })
+	            res.categories=coldata
+	            res.series=[{
+	              name:'库存成本额',
+	              data:cbe
+	            },{
+	              name:'库存零售额',
+	              data:ose
+	            }]
+	  
+	  
+	            this.chartDataA = JSON.parse(JSON.stringify(res));
+	  				}, 500);
+	  			},
+	  
+	        getServerDataC() {
+	          //模拟从服务器获取数据时的延时
+	          setTimeout(() => {
+	            //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+	  
+	            let data=[];
+	            this.ybpdata.table3.forEach((item)=>{
+	              let a={}
+	              a.name=item['标识']
+	              a.value=item['总数']
+	              data.push(a)
+	            })
+	            let res = {
+	              series: [{
+	                data:data
+	              }]
+	            };
+	            this.chartDataC = JSON.parse(JSON.stringify(res));
+	          }, 500);
+	        },
+	  
+	  
+    //设置
     leftClick() {
+      console.log('tiaozhuan');
       uni.navigateTo({
-        url: '../../pagesA/statement/statement'
-      })
-    },
-    //工作
-    work() {
-      let data = {
-        sn: uni.getStorageSync('sn'),
-        fdbh: uni.getStorageSync('fdbh'),
-        userid: uni.getStorageSync('userid'),
-        groupld: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
-        dtmark: 'app2',
-        recordID: '-99',
-        access_token:uni.getStorageSync('access_token')
-      }
-      oaWorkFlow(data).then((res) => {
-        if (res.err_code == '0') {
-          console.log('最新工作', res)
-          let item = JSON.stringify(res.data)
-          uni.navigateTo({
-            url: `../../pagesA/work/work?item=${item}`
-          })
-        }else {
-          uni.showToast({
-            title: '未查询到工作信息',
-            duration: 2000,
-            icon:'none'
-          });
-        }
-      })
-
-    },
-   
-    notice() {
-      let datas = {
-        sn: uni.getStorageSync('sn'),
-        id: '0',
-        userid: uni.getStorageSync('userid'),
-        nid: '0',
-        startTime: '2000-01-01',
-        endTime: '2099-12-30',
-        typeID: '0',
-        vtype: 'sel',
-        content: '',
-        keywords: '',
-        remark: "app2",
-        access_token:uni.getStorageSync('access_token')
-      }
-      oaNoticec(datas).then((res) => {
-
-        if (res.err_code == '0') {
-          let item = JSON.stringify(res.data)
-          uni.navigateTo({
-            url: `../../pagesA/notice/notice?item=${item}`
-          })
-        }else {
-          uni.showToast({
-            title: '未查询到公告信息',
-            duration: 2000,
-            icon:'none'
-          });
-        }
+        url: '../../pages/myset/myset'
       })
     },
 
-    //获取报表
-    isreportForm() {
-      let reportFormdata = {
-        access_token:uni.getStorageSync('access_token'),
-        userid: '00000'
-      }
-      reportForm(reportFormdata).then((res) => {
-        console.log('报表查询', res)
-        this.Alllist = res.data
-      })
-    },
-    enter(item) {
-      console.log(item)
-      uni.setStorageSync('dqbb',item)//当前报表
-      let dataes={
-        access_token: uni.getStorageSync('access_token'),
-        cxbh:item.cxbh
-      }
-      condition(dataes).then((res)=>{
-        console.log('查询条件',res)
-        let items = JSON.stringify(res)
-        uni.navigateTo({
-          url: `../../pagesA/condition/condition?cxdj=${items}`
-        })
-      })
-    }
 
   },
 
@@ -162,96 +265,69 @@ export default {
 </script>
 
 <style lang="scss">
-.homecontainer {
-  margin: 20rpx;
+u-navbar{
+	background-color: #4f99ff;
 }
+	.container{
+	  margin: 0 20rpx;
+	}
+		.status_bar{
+			        height: var(--status-bar-height);
+			        width: 100%;   
+		}
+		.box{
+	  .boxitem{
+	    width: 50%;
+	    display: inline-flex;
+	    align-items: center;
+	    margin: 20rpx 0;
+	  }
+	  .box_left{
+	    width: 80rpx;
+	    height: 80rpx;
+	    border-radius: 50%;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    background-color: #4f99ff;
+	    margin-right: 50rpx;
+	    image{
+	      margin: 0;
+	      padding: 0;
+	      height: 0;
+	    }
+	  }
+	  .box_right{
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	  }
+	}
+	.recent{
+	  display: inline-flex;
+	  justify-content: flex-start;
+	  margin-bottom: 20rpx;
+	}
+	.ubut{
+	  font-size: 12px;
+	  width: 120rpx;
+	  margin-right: 10rpx;
+	  button{
+	    border-radius: 0.5;
+	    width: 100%;
+	    font-size: 20rpx;
+	    text-align: center;
+	  }
+	}
+	.active{
+	  background-color: #4f99ff;
+	}
+	
+	
+	
+	
+	
+	
 
-.homeunit1 {
 
-  margin: 20rpx 0;
-  display: flex;
-  align-items: center;
-  height: 100rpx;
-  .unit1_left {
-    width: 36px;
-    height: 36px;
-    margin-right: 20rpx;
-  }
-}
-
-.unit2 {
-  display: flex;
-  height: 150rpx;
-  width: 100%;
-
-  .unit2box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 25%;
-    height: 100%;
-    padding: 20rpx;
-    .unit2box_top {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80rpx;
-      height: 80rpx;
-      background: goldenrod;
-      margin-bottom: 20rpx;
-    }
-  }
-}
-.container {
-  margin: 0 20rpx;
-}
-
-ul {
-  padding: 0;
-}
-
-li {
-  list-style: none;
-  text-align: center;
-  border-radius: 5px;
-  background: #239BFE;
-}
-
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-}
-
-li {
-  width: 26%;
-  height: 180rpx;
-  margin-right: 11%;
-  font-size: 22rpx;
-  margin-bottom: 5%;
-}
-
-li:nth-of-type(3n) {
-  margin-right: 0;
-}
-
-li:nth-of-type(n+99) {
-  margin-bottom: 0;
-}
-
-.unit1_box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .boxs {
-    display: flex;
-    flex-direction: column;
-
-  }
-}
 </style>

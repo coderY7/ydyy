@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 298))
+    },
     uniDataSelect: function() {
       return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 288))
     }
@@ -202,7 +205,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _api = __webpack_require__(/*! @/network/api.js */ 143); //
+//
+//
+//
 //
 //
 //
@@ -256,10 +265,7 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
     // 	});
     // }
   }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];
-          for (var u in res.fdlist) {
-            _this.fdlist.push({
-              value: res.fdlist[u].fdbh,
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];for (var u in res.fdlist) {_this.fdlist.push({ value: res.fdlist[u].fdbh,
               text: res.fdlist[u].fdmc });
 
           }

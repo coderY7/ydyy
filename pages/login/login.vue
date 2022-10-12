@@ -1,5 +1,8 @@
 <template>
 	<view class="content">
+    <u-navbar  :placeholder="true" leftIcon='home-fill' leftIconColor='#4f99ff' title="登录"
+              >
+    </u-navbar>
 		<view class="header">
 			<image src="../../static/shilu-login/logo.png"></image>
 		</view>

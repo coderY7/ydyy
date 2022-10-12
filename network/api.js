@@ -37,7 +37,7 @@ export const oaNoticec=(params, config = {}) => http.post("mzato/main/app/oaNoti
 //获取最新工作信息
 export const oaWorkFlow=(params, config = {}) => http.post("mzato/main/app/oaWorkFlow", params, config)
 // app获取首页仪表盘分析数据
-export const getpctodayssale=(params, config = {}) => http.post("mzato/main/app/getpctodayssale", params, config)
+export const getappsalereport=(params, config = {}) => http.post("mzato/main/app/getappsalereport", params, config)
 //工作流快速处理
 export const oaWorkFlowWCk=(params, config = {}) => http.post("mzato/main/app/oaWorkFlowWCk", params, config)
 //公告内容预览
