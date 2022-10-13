@@ -2,6 +2,7 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
     "mk-upload": "/components/mk-upload/mk-upload",
     "u-button": "/node-modules/uview-ui/components/u-button/u-button",
     "mkupload": "/components/mk-upload/mk-upload"

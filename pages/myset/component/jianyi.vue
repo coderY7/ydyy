@@ -1,5 +1,7 @@
 <template>
 	<view>
+		<u-navbar :placeholder="true" title="建议" @leftClick="leftClick()" :bgColor="bgColor">
+		</u-navbar>
 			<view class="feedback-body">
 				<text class="text-black">问题反馈和意见建议
 					<text style="color: red;">*</text></text>
@@ -34,6 +36,7 @@
 		},
 		data() {
 			return {
+				bgColor:'#4f99ff',
 				sendData: {
 					feedbackContent: '', //反馈内容
 					mobile: '', //联系方式
@@ -47,6 +50,12 @@
 
 		},
 		methods: {
+			//自定义返回
+			leftClick() {
+			  uni.navigateBack({
+			    delta: 1
+			  });
+			},
 			jianyi(){
 				let data={
 					sn:uni.getStorageSync('sn'),

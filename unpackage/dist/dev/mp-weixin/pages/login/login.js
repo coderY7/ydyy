@@ -375,21 +375,25 @@ var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背
               var resdata = JSON.parse(JSON.stringify(res));
               _this3.resdata = resdata;
               console.log(resdata['error_code'], resdata['userinfos']);
-              uni.setStorageSync('access_token', resdata.access_token.
-              access_token);
-              uni.setStorageSync('dlmc', _this3.resdata['userinfos'].dlmc);
-              uni.setStorageSync('companyid', _this3.resdata['userinfos'].
-              CompanyID);
-              uni.setStorageSync('userid', _this3.resdata['userinfos'].USERID);
-              uni.setStorageSync('fdbh', _this3.resdata['userinfos'].FDBHList);
-              uni.setStorageSync('groupid', _this3.resdata['userinfos'].GROUPID);
-              _this3.basics();
-              uni.switchTab({
-                url: '/pages/home/home' });
+              if (resdata.error_code == '500') {
+                uni.showToast({
+                  icon: 'none',
+                  title: resdata.message });
 
+              } else {
+                uni.setStorageSync('access_token', resdata.access_token.
+                access_token);
+                uni.setStorageSync('dlmc', _this3.resdata['userinfos'].dlmc);
+                uni.setStorageSync('companyid', _this3.resdata['userinfos'].
+                CompanyID);
+                uni.setStorageSync('userid', _this3.resdata['userinfos'].USERID);
+                uni.setStorageSync('fdbh', _this3.resdata['userinfos'].FDBHList);
+                uni.setStorageSync('groupid', _this3.resdata['userinfos'].GROUPID);
+                _this3.basics();
+                uni.switchTab({
+                  url: '/pages/home/home' });
 
-
-
+              }
             });
 
           });

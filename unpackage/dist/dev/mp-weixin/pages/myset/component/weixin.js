@@ -97,6 +97,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 288))
+    },
     uSwitch: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-switch/u-switch */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-switch/u-switch")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-switch/u-switch.vue */ 352))
     }
@@ -171,6 +174,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
@@ -186,9 +194,18 @@ var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };},
-  onLoad: function onLoad() {},
-  methods: {
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { bgColor: '#4f99ff', setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };}, onLoad: function onLoad() {}, methods: { //自定义返回
+    leftClick: function leftClick() {
+      uni.navigateBack({
+        delta: 1 });
+
+    },
+
     asyncChange: function asyncChange(item) {
       console.log(item);
       //微信设置

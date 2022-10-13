@@ -1,16 +1,21 @@
 <template>
-	<view class="container">
-		<!-- 分列 -->
-		<view class="box">
-      <view class="name">微信设置</view>
-			<view v-for='(item,index) in setlist' :key='index' class="unit1">
-				<view>{{item.name}}</view>
-				<view>
-					<u-switch v-model="item.is" @change="asyncChange(item)"></u-switch>
+	<view>
+		<u-navbar :placeholder="true" title="设置" @leftClick="leftClick()" :bgColor="bgColor">
+		</u-navbar>
+		<view class="container">
+			<!-- 分列 -->
+			<view class="box">
+		  <view class="name">微信设置</view>
+				<view v-for='(item,index) in setlist' :key='index' class="unit1">
+					<view>{{item.name}}</view>
+					<view>
+						<u-switch v-model="item.is" @change="asyncChange(item)"></u-switch>
+					</view>
 				</view>
 			</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
@@ -20,6 +25,7 @@
 	export default {
 		data() {
 			return {
+				bgColor:'#4f99ff',
 				setlist: [{
 					name: '微信绑定',
 					is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false
@@ -32,6 +38,14 @@
 		},
 		onLoad() {},
 		methods: {
+			
+				//自定义返回
+				leftClick() {
+				  uni.navigateBack({
+				    delta: 1
+				  });
+				},
+		
 			asyncChange(item) {
 				console.log(item)
 				//微信设置
