@@ -202,7 +202,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _api = __webpack_require__(/*! @/network/api.js */ 143); //
+//
+//
+//
+//
 //
 //
 //
@@ -254,11 +262,7 @@ var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背
     // 	});
     // }
   }, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;
-          uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
-          _this.fdlist = [];
-          for (var u in res.fdlist) {
-            _this.fdlist.push({
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);_this.fdlist = [];for (var u in res.fdlist) {_this.fdlist.push({
               value: res.fdlist[u].fdbh,
               text: res.fdlist[u].fdmc });
 

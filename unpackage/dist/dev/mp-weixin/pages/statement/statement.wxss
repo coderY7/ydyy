@@ -47,6 +47,9 @@
   margin-right: 11%;
   font-size: 22rpx;
   margin-bottom: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ._li:nth-of-type(3n) {
   margin-right: 0;
@@ -55,14 +58,11 @@
   margin-bottom: 0;
 }
 .unit1 {
-  margin: 20rpx;
+  margin: 50rpx 20rpx;
 }
 .unit1_box {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .unit1_box .boxs {
   display: flex;
@@ -78,6 +78,6 @@
   margin-bottom: 20rpx;
 }
 .unit1_box .boxs .boxsname {
-  font-size: 18rpx;
+  font-size: 24rpx;
 }
 

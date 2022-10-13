@@ -260,7 +260,7 @@ export default {
 
 <style lang="scss">
 #pages{
-  margin: 5rpx 20rpx 0 20rpx;
+  margin:20rpx;
 }
 .container{
   padding: 20rpx;

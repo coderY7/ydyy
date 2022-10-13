@@ -115,10 +115,13 @@ page{
   margin: 20rpx;
 }
 .container{
-  margin: 20rpx 50rpx 20rpx 50rpx;
-
+ 
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
   .box{
-    margin: 30rpx auto;
+   margin: 30rpx 0;
     width: 600rpx;
     border-radius: 30rpx;
     background-color: #ffffff;

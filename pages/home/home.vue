@@ -21,7 +21,7 @@
 								@change="startdate()" />
 						</view>
 					</view>
-					<view style="font-size: 16rpx">(默认当天)</view>
+					<view style="font-size: 18rpx">(默认当天)</view>
 				</view>
 
 				<!-- 选择门店 -->
@@ -36,7 +36,7 @@
 							</view>
 						</view>
 					</view>
-					<view style="font-size: 16rpx">(默认全部分店)</view>
+					<view style="font-size: 18rpx">(默认全部分店)</view>
 				</view>
 
 				<view>实时销售分析</view>
@@ -291,7 +291,7 @@
 	}
 
 	.container {
-		margin: 0 20rpx;
+		margin:20rpx;
 	}
 
 	.status_bar {
@@ -328,18 +328,18 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			font-size: 24rpx;
+			font-size: 26rpx;
 		}
 	}
 
 	.recent {
 		display: inline-flex;
 		justify-content: flex-start;
-		margin: 20rpx 0;
+		
 	}
 
 	.ubut {
-		font-size: 12px;
+		
 		width: 120rpx;
 		margin-right: 10rpx;
 
@@ -366,10 +366,10 @@
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		width: 70%;
+		width: 80%;
 
 		.boxname {
-			font-size: 24rpx;
+			font-size: 30rpx;
 			flex: 1;
 		}
 

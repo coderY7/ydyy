@@ -24,20 +24,24 @@
 				<uni-data-select v-model="fdbh" :localdata="fdlist" @change="change"></uni-data-select>
 			</uni-section>
 		</view>
-
-		<view class="button-login" hover-class="button-hover" @tap="bindLogin()">
-			<text>登录</text>
-		</view>
-
-		<view class="button-login" hover-class="button-hover" @tap="wxLogin()">
-			<text>微信一键登录</text>
-		</view>
-
-		<view class="agreenment">
-			<!-- <navigator url="forget" open-type="navigate">忘记密码</navigator>
-			<text>|</text> -->
-			<navigator url="reg" open-type="navigate">注册账户</navigator>
-		</view>
+		
+<view class="unit2">
+	<view class="button-login" hover-class="button-hover" @tap="bindLogin()">
+		<text>登录</text>
+	</view>
+	
+	<view class="button-login" hover-class="button-hover" @tap="wxLogin()">
+		<text>微信一键登录</text>
+	</view>
+	
+	<view class="agreenment">
+		<!-- <navigator url="forget" open-type="navigate">忘记密码</navigator>
+		<text>|</text> -->
+		<navigator url="reg" open-type="navigate">注册账户</navigator>
+	</view>
+</view>
+		
+		
 	</view>
 </template>
 
@@ -319,6 +323,9 @@
 		text-align: left;
 		font-size: 28rpx;
 		margin-left: 16rpx;
+	}
+	.unit2{
+		margin-top: 160rpx;
 	}
 
 	.button-login {

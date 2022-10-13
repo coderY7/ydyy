@@ -28,7 +28,7 @@ u-navbar {
   background-color: #4f99ff;
 }
 .container {
-  margin: 0 20rpx;
+  margin: 20rpx;
 }
 .status_bar {
   height: 25px;
@@ -59,15 +59,13 @@ u-navbar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 .recent {
   display: inline-flex;
   justify-content: flex-start;
-  margin: 20rpx 0;
 }
 .ubut {
-  font-size: 12px;
   width: 120rpx;
   margin-right: 10rpx;
 }
@@ -90,10 +88,10 @@ u-navbar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 70%;
+  width: 80%;
 }
 .xz .boxname {
-  font-size: 24rpx;
+  font-size: 30rpx;
   flex: 1;
 }
 .xz .boxinput {
