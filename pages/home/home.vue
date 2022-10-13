@@ -3,7 +3,7 @@
 		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
 			title="首页" @leftClick="leftClick">
 		</u-navbar>
-		
+
 		<view class="container">
 			<view class="unit1">
 				<!--        近期查询日期-->
@@ -12,40 +12,35 @@
 						<button @click="getdata(item,index)" :class="{'active':xzindex==index}">{{item.name}}</button>
 					</view>
 				</view>
-<!-- 时间-->
-<view class="xzbox">
-	<view class="xz">
-	    <view class="boxname">选择时间</view>
-	    <view class="boxinput">
-	      <uni-datetime-picker
-	          type="date"
-	          :value="single"
-	          v-model="item.defval"
-	          @change="startdate()"
-	      />
-	    </view>
-		</view>
-	  <view style="font-size: 16rpx">(默认当天)</view>
-</view>
-        
+				<!-- 选择时间-->
+				<view class="xzbox">
+					<view class="xz">
+						<view class="boxname">选择时间</view>
+						<view class="boxinput">
+							<uni-datetime-picker type="date" :value="single" v-model="item.defval"
+								@change="startdate()" />
+						</view>
+					</view>
+					<view style="font-size: 16rpx">(默认当天)</view>
+				</view>
 
 				<!-- 选择门店 -->
-        <view class="xzbox">
-			<view class="xz">
-				<view class="boxname">选择分店</view>
-				<view class="boxinput">
-				  <view>
-				      <uni-section type="line">
-				        <uni-data-select v-model="xzfd" :localdata="fdlist"></uni-data-select>
-				      </uni-section>
-				  </view>
+				<view class="xzbox">
+					<view class="xz">
+						<view class="boxname">选择分店</view>
+						<view class="boxinput">
+							<view>
+								<uni-section type="line">
+									<uni-data-select v-model="xzfd" :localdata="fdlist"></uni-data-select>
+								</uni-section>
+							</view>
+						</view>
+					</view>
+					<view style="font-size: 16rpx">(默认全部分店)</view>
 				</view>
-			</view>
-          <view style="font-size: 16rpx">(默认全部分店)</view>
-        </view>
-
 
 				<view>实时销售分析</view>
+				
 				<view class="unit1box">
 					<view class="box">
 						<view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.table0[0])">
@@ -141,16 +136,6 @@
 			this.getServerDataC();
 		},
 		onShow() {
-			this.fdlist = uni.getStorageSync('basic').FDINFO
-			//处理分店下拉框数据
-			let cxfdbh = [];
-			this.fdlist.forEach((item) => {
-				let datas = {}
-				datas.value = item.fdbh;
-				datas.text = item.fdmc
-				cxfdbh.push(datas)
-			})
-			this.fdlist = cxfdbh
 			this.sdate = dayjs().format('YYYY-MM-DD') // 获取当前时间
 			let one = dayjs().unix() - 24 * 60 * 60 // 获取前一天时间戳
 			this.one = dayjs.unix(one).format('YYYY-MM-DD')
@@ -172,22 +157,37 @@
 				value: this.sdate
 			}]
 			this.datelist = datelist
+
+			//处理分店下拉框数据
+			this.fdlist = uni.getStorageSync('basic').FDINFO
+			let cxfdbh = [];
+			this.fdlist.forEach((item) => {
+				let datas = {}
+				datas.value = item.fdbh;
+				datas.text = item.fdmc
+				cxfdbh.push(datas)
+			})
+			this.fdlist = cxfdbh
+
 			this.getdata()
 		},
 		onLoad() {
-
 			uni.setStorageSync('cxbb', true)
 		},
 		watch: {
-			xzfd: function() {
-				this.getdata()
+			xzfd: function(now, old) {
+				if (now) {
+					this.getdata()
+				}
 			},
-      sdate:function (){
-        this.getdata()
-      }
+			sdate: function(now, old) {
+				if (now) {
+					this.getdata()
+				}
+
+			}
 		},
 		methods: {
-
 			getdata(item, index) {
 				this.xzindex = index
 				let getpcadmindaysaledata = {
@@ -203,11 +203,11 @@
 					this.ybpdata = data
 				})
 			},
-      //开始日期
-      startdate(e){
-        console.log(e);
-        this.sdate=e
-      },
+			//开始日期
+			startdate(e) {
+				console.log(e);
+				this.sdate = e
+			},
 			//可视化面板
 			getServerDataA() {
 				//模拟从服务器获取数据时的延时
@@ -304,8 +304,7 @@
 			width: 40%;
 			display: inline-flex;
 			align-items: center;
-			margin: 20rpx 5%;
-			
+			margin: 20rpx 5%;	
 		}
 
 		.box_left {
@@ -355,24 +354,28 @@
 	.active {
 		background-color: #4f99ff;
 	}
-	.xzbox{
+
+	.xzbox {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 20rpx;
 	}
-  .xz{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-width: 70%;
-    .boxname{
-      font-size: 24rpx;
-      flex:1;
-    }
-    .boxinput{
-      margin: 0 20rpx;
-      flex:3;
-    }
-  }
+
+	.xz {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		width: 70%;
+
+		.boxname {
+			font-size: 24rpx;
+			flex: 1;
+		}
+
+		.boxinput {
+			margin: 0 20rpx;
+			flex: 3;
+		}
+	}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<u-navbar :placeholder="true" leftIcon='home-fill' leftIconColor='#4f99ff' title="登录">
+		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='home-fill' leftIconColor="#4f99ff" title="登录">
 		</u-navbar>
 		<view class="header">
 			<image src="../../static/shilu-login/logo.png"></image>
@@ -52,6 +52,7 @@
 	export default {
 		data() {
 			return {
+				bgColor: '#4f99ff', //动态背景
 				userid: '',
 				password: '',
 				iswx: '',
@@ -145,7 +146,7 @@
 					if (res.message == 'success') {
 						uni.setStorageSync('access_token', res.access_token) //token
 						uni.setStorageSync('refresh_token', res.refresh_token) //刷新
-						uni.setStorageSync('dlmc', res.companyinfo.erp_fdmc) //分店名称
+						uni.setStorageSync('dlmc', res.userinfo.erp_username) //名称
 						uni.setStorageSync('loginaccess', res) //登录成功返回的数据
 						uni.setStorageSync('login', true)
 						// 获取用户信息
@@ -205,15 +206,13 @@
 							uni.setStorageSync('openid', res.openid)
 							uni.setStorageSync('session_key', res.session_key)
 							this.openid = res.openid
-							this.basics()
-
+							
 							let data = {
 								openid: uni.getStorageSync('openid')
 							}
 							userfast(data).then((res) => {
 								console.log(JSON.stringify(res))
 								let resdata = JSON.parse(JSON.stringify(res))
-								console.log(resdata)
 								this.resdata = resdata
 								console.log(resdata['error_code'], resdata['userinfos'])
 								uni.setStorageSync('access_token', resdata.access_token
@@ -223,7 +222,8 @@
 									.CompanyID)
 								uni.setStorageSync('userid', this.resdata['userinfos'].USERID)
 								uni.setStorageSync('fdbh', this.resdata['userinfos'].FDBHList)
-								
+								uni.setStorageSync('groupid', this.resdata['userinfos'].GROUPID)
+								this.basics()
 									uni.switchTab({
 										url: '/pages/home/home'
 									});

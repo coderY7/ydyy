@@ -95,6 +95,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uNavbar: function() {
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 288))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -153,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
@@ -173,9 +197,10 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { Alllist: [], title: '报表查询' };}, onLoad: function onLoad() {this.isreportForm();uni.setStorageSync('cxbb', true);}, methods: { //获取报表
-    isreportForm: function isreportForm() {var _this = this;var reportFormdata = { access_token: uni.getStorageSync('access_token'), userid: '00000' };
-      (0, _api.reportForm)(reportFormdata).then(function (res) {
+//
+var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背景
+      Alllist: [], title: '报表查询' };}, onLoad: function onLoad() {this.isreportForm();}, methods: { //获取报表
+    isreportForm: function isreportForm() {var _this = this;var reportFormdata = { access_token: uni.getStorageSync('access_token'), userid: '00000' };(0, _api.reportForm)(reportFormdata).then(function (res) {
         console.log('报表查询', res);
         _this.Alllist = res.data;
       });
@@ -194,6 +219,14 @@ var _default = { data: function data() {return { Alllist: [], title: '报表查�
           url: "../../pagesA/condition/condition?cxdj=".concat(items) });
 
       });
+    },
+
+    //设置
+    leftClick: function leftClick() {
+      console.log('tiaozhuan');
+      uni.navigateTo({
+        url: '../../pages/myset/myset' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

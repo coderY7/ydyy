@@ -1,15 +1,16 @@
 <template>
 	<view class="container">
-		<!-- <u-navbar :title="title" :placeholder="true">
-		</u-navbar> -->
+		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
+			title="报表" @leftClick="leftClick">
+		</u-navbar>		
 		<view class="unit1">
 			<ul>
 				<li v-for="(item,index) in Alllist" :key="index">
 					<view class="unit1_box" @click="enter(item)">
 						<view class="boxs">
-							<view>
+							<view class="boxsimg">
 							</view>
-							<view>{{item.cxmc}}</view>
+							<view class="boxsname">{{item.cxmc}}</view>
 						</view>
 					</view>
 				</li>
@@ -26,19 +27,20 @@
 	export default {
 		data() {
 			return {
+				bgColor: '#4f99ff', //动态背景
 				Alllist: [],
 				title: '报表查询',
 			};
 		},
 		onLoad() {
 			this.isreportForm()
-      uni.setStorageSync('cxbb',true)
+
 		},
 		methods: {
 			//获取报表
 			isreportForm() {
 				let reportFormdata = {
-					access_token:uni.getStorageSync('access_token'),
+					access_token: uni.getStorageSync('access_token'),
 					userid: '00000'
 				}
 				reportForm(reportFormdata).then((res) => {
@@ -47,20 +49,28 @@
 				})
 			},
 			enter(item) {
-        console.log(item)
-        uni.setStorageSync('dqbb',item)//当前报表
-        let dataes={
-          access_token: uni.getStorageSync('access_token'),
-          cxbh:item.cxbh
-        }
-        condition(dataes).then((res)=>{
-          console.log('查询条件',res)
-          let items = JSON.stringify(res)
-          uni.navigateTo({
-          	url: `../../pagesA/condition/condition?cxdj=${items}`
-          })
-        })
-			}
+				console.log(item)
+				uni.setStorageSync('dqbb', item) //当前报表
+				let dataes = {
+					access_token: uni.getStorageSync('access_token'),
+					cxbh: item.cxbh
+				}
+				condition(dataes).then((res) => {
+					console.log('查询条件', res)
+					let items = JSON.stringify(res)
+					uni.navigateTo({
+						url: `../../pagesA/condition/condition?cxdj=${items}`
+					})
+				})
+			},
+
+			//设置
+			leftClick() {
+				console.log('tiaozhuan');
+				uni.navigateTo({
+					url: '../../pages/myset/myset'
+				})
+			},
 		}
 	}
 </script>
@@ -78,7 +88,6 @@
 		list-style: none;
 		text-align: center;
 		border-radius: 5px;
-		background: skyblue;
 	}
 
 	ul {
@@ -89,11 +98,11 @@
 	}
 
 	li {
-    width: 26%;
-    height: 180rpx;
-    margin-right: 11%;
-    font-size: 22rpx;
-    margin-bottom: 5%;
+		width: 26%;
+		height: 180rpx;
+		margin-right: 11%;
+		font-size: 22rpx;
+		margin-bottom: 5%;
 	}
 
 	li:nth-of-type(3n) {
@@ -102,6 +111,10 @@
 
 	li:nth-of-type(n+99) {
 		margin-bottom: 0;
+	}
+
+	.unit1 {
+		margin: 20rpx;
 	}
 
 	.unit1_box {
@@ -114,7 +127,19 @@
 		.boxs {
 			display: flex;
 			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 
+			.boxsimg {
+				width: 60rpx;
+				height: 60rpx;
+				border-radius: 5rpx;
+				background-color: #4f99ff;
+				margin-bottom: 20rpx;
+			}
+			.boxsname{
+				font-size: 18rpx;
+			}
 		}
 	}
 </style>

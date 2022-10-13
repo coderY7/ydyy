@@ -214,7 +214,7 @@ var _default = { data: function data() {return { Alllist: [], title: '报表查�
     this.one = _dayjs.default.unix(one).format('YYYY-MM-DD');var three = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 3; //前三天时间戳
     var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
     this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three }, { name: '前一天', value: this.one }, { name: '当天', value: this.sdate }];this.datelist = datelist;this.getdata();}, onLoad: function onLoad() {this.isreportForm();
-    uni.setStorageSync('cxbb', true);
+
   },
   methods: {
     //自定义返回

@@ -1,5 +1,7 @@
 <template>
 	<view id="page">
+		<u-navbar :placeholder="true" title="结果详情" @leftClick="leftClick()" :bgColor="bgColor">
+		</u-navbar>
     <view class="container">
       <view class="name">商品详细:</view>
       <view v-for="(item,key) of Object.entries(datas)" class="box">
@@ -15,15 +17,23 @@
 	export default {
 		data() {
 			return {
-				datas:null
+				datas:null,
+				bgColor:'#4f99ff',
 			};
 		},
     onLoad(option){
       console.log(option)
       this.datas=JSON.parse(option.list)
       console.log(Object.entries(this.datas));
-
     },
+	methods:{
+		//自定义返回
+		leftClick() {
+		  uni.navigateBack({
+		    delta: 1
+		  });
+		},
+	}
 	}
 </script>
 

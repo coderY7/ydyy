@@ -245,7 +245,8 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
+var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背景
+      userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
       isfdlist: false, resdata: null };}, onLoad: function onLoad() {this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
     this.userid = uni.getStorageSync('scandata').userid; // if (uni.getStorageSync('openid')) {
     // 	uni.reLaunch({
@@ -305,7 +306,7 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
         if (res.message == 'success') {
           uni.setStorageSync('access_token', res.access_token); //token
           uni.setStorageSync('refresh_token', res.refresh_token); //刷新
-          uni.setStorageSync('dlmc', res.companyinfo.erp_fdmc); //分店名称
+          uni.setStorageSync('dlmc', res.userinfo.erp_username); //名称
           uni.setStorageSync('loginaccess', res); //登录成功返回的数据
           uni.setStorageSync('login', true);
           // 获取用户信息
@@ -365,7 +366,6 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
             uni.setStorageSync('openid', res.openid);
             uni.setStorageSync('session_key', res.session_key);
             _this3.openid = res.openid;
-            _this3.basics();
 
             var data = {
               openid: uni.getStorageSync('openid') };
@@ -373,7 +373,6 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
             (0, _api.userfast)(data).then(function (res) {
               console.log(JSON.stringify(res));
               var resdata = JSON.parse(JSON.stringify(res));
-              console.log(resdata);
               _this3.resdata = resdata;
               console.log(resdata['error_code'], resdata['userinfos']);
               uni.setStorageSync('access_token', resdata.access_token.
@@ -383,7 +382,8 @@ var _default = { data: function data() {return { userid: '', password: '', iswx:
               CompanyID);
               uni.setStorageSync('userid', _this3.resdata['userinfos'].USERID);
               uni.setStorageSync('fdbh', _this3.resdata['userinfos'].FDBHList);
-
+              uni.setStorageSync('groupid', _this3.resdata['userinfos'].GROUPID);
+              _this3.basics();
               uni.switchTab({
                 url: '/pages/home/home' });
 

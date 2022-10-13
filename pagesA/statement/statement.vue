@@ -57,7 +57,7 @@ export default {
   },
   onLoad() {
     this.isreportForm()
-    uni.setStorageSync('cxbb',true)
+    
   },
   methods: {
 //自定义返回

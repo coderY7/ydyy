@@ -253,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 {
   data: function data() {
     return {
-      bgColor: '#239BFE',
+      bgColor: '#4f99ff',
       bdt: [], //表头
       result: null, //查询结果
       sumdata: '', //数据汇总

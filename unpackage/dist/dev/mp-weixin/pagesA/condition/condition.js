@@ -101,16 +101,16 @@ try {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 288))
     },
     uInput: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-input/u-input.vue */ 349))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-input/u-input.vue */ 360))
     },
     uniDatetimePicker: function() {
-      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 357))
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 306))
     },
     uniDataSelect: function() {
       return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 296))
     },
     uButton: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 331))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 342))
     }
   }
 } catch (e) {
@@ -406,7 +406,7 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { bgColor: '#239BFE', dqbb: '', //当前报表
+var _default = { data: function data() {return { bgColor: '#4f99ff', dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
       cxtj: '', //查询条件
@@ -427,7 +427,7 @@ var _default = { data: function data() {return { bgColor: '#239BFE', dqbb: '', /
     enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
     getcol: function getcol() {var _this = this;var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };(0, _api.getcolumns)(data).then(function (res) {console.log('表单头', res);_this.bdt = res.data;});}, //查询
     isquery: function isquery() {var _this2 = this;this.tj = []; //清空之前填写
-      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid, username: uni.getStorageSync('loginaccess').userinfo.erp_username, fdbh: uni.getStorageSync('fdbh'), condition: this.tj };(0, _api.getlist)(data).then(function (res) {_this2.result = res.data;_this2.sumdata = res.sumdata; //this.bdt=Object.keys(this.result[0])
+      this.cxtj.forEach(function (item) {_this2.tj.push({ 'Convalue': item.defval, 'recordid': item.recordid });});var data = { djtype: this.dqbb.cxbh, access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), groupid: uni.getStorageSync('groupid'), username: uni.getStorageSync('dlmc'), fdbh: uni.getStorageSync('fdbh'), condition: this.tj };(0, _api.getlist)(data).then(function (res) {_this2.result = res.data;_this2.sumdata = res.sumdata; //this.bdt=Object.keys(this.result[0])
         //表单头处理
         var cl = res.columns;var a = [];cl.forEach(function (item) {a.push(item.title);});_this2.bdt = a; //跳转新页面
         var bdt = JSON.stringify(_this2.bdt);var result = JSON.stringify(_this2.result);var sumdata = JSON.stringify(_this2.sumdata);uni.navigateTo({ url: "../../pagesA/result/result?bdt=".concat(bdt, "&result=").concat(result, "&sumdata=").concat(sumdata) });});} } };exports.default = _default;

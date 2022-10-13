@@ -1,6 +1,6 @@
 <template>
 	<view>
-    <u-navbar :placeholder="true"  @leftClick="leftClick()" :bgColor="bgColor">
+    <u-navbar :placeholder="true"  @leftClick="leftClick()" title="查询结果" :bgColor="bgColor">
     </u-navbar>
     <view class="fixation">
       <view class="switch">
@@ -63,7 +63,7 @@
 	export default {
 		data() {
 			return {
-        bgColor:'#239BFE',
+        bgColor:'#4f99ff',
         bdt:[],//表头
         result:null,//查询结果
         sumdata:'',//数据汇总

@@ -127,7 +127,7 @@ import {
 export default {
   data() {
     return {
-      bgColor:'#239BFE',
+      bgColor:'#4f99ff',
       dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
@@ -228,8 +228,8 @@ export default {
         djtype: this.dqbb.cxbh,
         access_token: uni.getStorageSync('access_token'),
         userid: uni.getStorageSync('userid'),
-        groupid: uni.getStorageSync('loginaccess').userinfo.erp_groupid,
-        username: uni.getStorageSync('loginaccess').userinfo.erp_username,
+        groupid: uni.getStorageSync('groupid'),
+        username: uni.getStorageSync('dlmc'),
         fdbh: uni.getStorageSync('fdbh'),
         condition: this.tj
       }
