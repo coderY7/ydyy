@@ -1,7 +1,6 @@
 <template>
 	<view>
-		<u-navbar :placeholder="true" title="设置" @leftClick="leftClick()" :bgColor="bgColor">
-		</u-navbar>
+		<navbar title='微信' @lefts=left()></navbar>
 		<view class="container">
 			<!-- 分列 -->
 			<view class="box">
@@ -21,7 +20,8 @@
 <script>
 	import {
 		logintype
-	} from '../../../network/api.js'
+	} from '../../../network/api.js';
+	import navbar from '../../../components/nav.vue'
 	export default {
 		data() {
 			return {
@@ -36,11 +36,14 @@
 				}]
 			}
 		},
+		components: {
+		    navbar
+		  },
 		onLoad() {},
 		methods: {
 			
 				//自定义返回
-				leftClick() {
+				left() {
 				  uni.navigateBack({
 				    delta: 1
 				  });

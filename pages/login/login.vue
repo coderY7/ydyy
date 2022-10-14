@@ -65,9 +65,7 @@
 				fdlist: [], //分店列表
 				isfdlist: false,
 				resdata: null,
-				titleHeight: 0, //状态栏和导航栏的总高度
-				statusBarHeight: 0 ,//状态栏高度
-				naviBarHeight:0,//导航栏高度
+				
 			};
 		},
 		components: {
@@ -78,21 +76,7 @@
 			this.iswx = uni.getStorageSync('iswx') //判断微信绑定
 			this.userid = uni.getStorageSync('scandata').userid
 			
-			const res = uni.getSystemInfoSync()
-			console.log(res)
-			const system = res.osName;
-			this.statusBarHeight = res.statusBarHeight;
-			if (system === 'android') {
-			this.titleHeight = 48 + this.statusBarHeight;
-			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
-			uni.setStorageSync('titleHeight',this.titleHeight);
-			} else if (system === 'ios') {
-			this.titleHeight = 44 + this.statusBarHeight;
-			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
-			uni.setStorageSync('titleHeight',this.titleHeight);
-			}
-			uni.setStorageSync('naviBarHeight',44);
-			this.naviBarHeight = this.titleHeight - this.statusBarHeight
+			
 			
 		},
 		watch: {

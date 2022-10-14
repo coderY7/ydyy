@@ -252,26 +252,10 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../components/nav.vue */ 557));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背景
       userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
-      isfdlist: false, resdata: null, titleHeight: 0, //状态栏和导航栏的总高度
-      statusBarHeight: 0, //状态栏高度
-      naviBarHeight: 0 //导航栏高度
-    };}, components: { navbar: navbar }, onLoad: function onLoad() {console.log(wx.getMenuButtonBoundingClientRect());this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
-    this.userid = uni.getStorageSync('scandata').userid;var res = uni.getSystemInfoSync();console.log(res);var system = res.osName;this.statusBarHeight = res.statusBarHeight;if (system === 'android') {this.titleHeight = 48 + this.statusBarHeight;uni.setStorageSync('statusBarHeight', this.statusBarHeight);uni.setStorageSync('titleHeight', this.titleHeight);} else if (system === 'ios') {this.titleHeight = 44 + this.statusBarHeight;uni.setStorageSync('statusBarHeight', this.statusBarHeight);uni.setStorageSync('titleHeight', this.titleHeight);}uni.setStorageSync('naviBarHeight', 44);this.naviBarHeight = this.titleHeight - this.statusBarHeight;}, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}
-    } },
-
-  methods: {
-    //自定义导航左面按钮
-    left: function left(data) {
-      console.log('点击左面按钮', data);
-    },
-    change: function change(e) {
-      console.log(e);
-      uni.setStorageSync("fdbh", e);
-    },
-    //用户验证
-    useryz: function useryz() {var _this = this;
-      var user = {
-        userid: this.userid };
+      isfdlist: false, resdata: null };}, components: { navbar: navbar }, onLoad: function onLoad() {console.log(wx.getMenuButtonBoundingClientRect());this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
+    this.userid = uni.getStorageSync('scandata').userid;}, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //自定义导航左面按钮
+    left: function left(data) {console.log('点击左面按钮', data);}, change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };
 
       (0, _api.usercheckapp)(user).then(function (res) {
         if (res.error_code == 0) {

@@ -1,7 +1,8 @@
 <template>
 	<view id="page">
-		<u-navbar :placeholder="true" title="结果详情" @leftClick="leftClick()" :bgColor="bgColor">
-		</u-navbar>
+		<!-- <u-navbar :placeholder="true" title="结果详情" @leftClick="leftClick()" :bgColor="bgColor">
+		</u-navbar> -->
+		<navbar title='结果详情' @lefts=left()></navbar>
     <view class="container">
       <view class="name">商品详细:</view>
       <view v-for="(item,key) of Object.entries(datas)" class="box">
@@ -14,12 +15,17 @@
 </template>
 
 <script>
+	import navbar from '../../components/nav.vue';
 	export default {
 		data() {
 			return {
 				datas:null,
 				bgColor:'#4f99ff',
 			};
+		},
+		components: {
+		
+		navbar
 		},
     onLoad(option){
       console.log(option)
@@ -28,7 +34,7 @@
     },
 	methods:{
 		//自定义返回
-		leftClick() {
+		left() {
 		  uni.navigateBack({
 		    delta: 1
 		  });

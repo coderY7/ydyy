@@ -24,9 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container {
-  margin: 0 20rpx;
-}
 ._ul {
   padding: 0;
 }

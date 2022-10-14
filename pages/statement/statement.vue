@@ -1,8 +1,9 @@
 <template>
 	<view class="container">
-		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
+		<!-- <u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
 			title="报表" @leftClick="leftClick">
-		</u-navbar>		
+		</u-navbar> -->	
+			<navbar title='报表' @lefts=left()></navbar>
 		<view class="unit1">
 			<ul>
 				<li v-for="(item,index) in Alllist" :key="index">
@@ -23,7 +24,8 @@
 	import {
 		reportForm,
 		condition
-	} from "../../network/api.js"
+	} from "../../network/api.js";
+	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
 			return {
@@ -32,6 +34,9 @@
 				title: '报表查询',
 			};
 		},
+		components: {
+		    navbar
+		  },
 		onLoad() {
 			this.isreportForm()
 
@@ -65,11 +70,8 @@
 			},
 
 			//设置
-			leftClick() {
-				console.log('tiaozhuan');
-				uni.navigateTo({
-					url: '../../pages/myset/myset'
-				})
+			left() {
+				
 			},
 		}
 	}
@@ -77,7 +79,7 @@
 
 <style lang="scss">
 	.container {
-		margin: 0 20rpx;
+		
 	}
 
 	ul {

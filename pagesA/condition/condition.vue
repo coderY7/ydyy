@@ -1,7 +1,8 @@
 <template>
   <view>
-    <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()" :bgColor="bgColor">
-    </u-navbar>
+    <!-- <u-navbar :placeholder="true" :title="dqbb.cxmc" @leftClick="leftClick()" :bgColor="bgColor">
+    </u-navbar> -->
+	<navbar :title='dqbb.cxmc' @lefts=left()></navbar>
     <view id="pages">
       <view class="container">
         <view v-for="(item,index) in cxtj">
@@ -122,7 +123,8 @@ import {
   getlist,
   getcolumns,
     query
-} from '../../network/api.js'
+} from '../../network/api.js';
+	import navbar from '../../components/nav.vue'
 
 export default {
   data() {
@@ -142,6 +144,9 @@ export default {
       sumdata:'',//查询到的汇总
     };
   },
+  components: {
+      navbar
+    },
   onLoad(option) {
     this.cxtj = JSON.parse(option.cxdj).data //查询条件
     this.dqbb = uni.getStorageSync('dqbb') //当前报表
@@ -186,7 +191,7 @@ export default {
   },
   methods: {
     //自定义返回
-    leftClick() {
+    left() {
       uni.navigateBack({
         delta: 1
       });

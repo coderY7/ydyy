@@ -97,9 +97,6 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 327))
-    },
     uInput: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-input/u-input.vue */ 360))
     },
@@ -168,6 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
 
 
 
@@ -406,7 +404,8 @@ var _api = __webpack_require__(/*! ../../network/api.js */ 143); //
 //
 //
 //
-var _default = { data: function data() {return { bgColor: '#4f99ff', dqbb: '', //当前报表
+//
+var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../components/nav.vue */ 557));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { bgColor: '#4f99ff', dqbb: '', //当前报表
       start: '', //开始时间
       end: '', //结束时间
       cxtj: '', //查询条件
@@ -416,13 +415,13 @@ var _default = { data: function data() {return { bgColor: '#4f99ff', dqbb: '', /
       cxsppp: '', //查询商品品牌
       cxsjht: '', //查询商家合同
       sumdata: '' //查询到的汇总
-    };}, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
+    };}, components: { navbar: navbar }, onLoad: function onLoad(option) {this.cxtj = JSON.parse(option.cxdj).data; //查询条件
     this.dqbb = uni.getStorageSync('dqbb'); //当前报表
   }, onShow: function onShow() {this.cxfdbh = uni.getStorageSync('basic').FDINFO;this.cxsppp = uni.getStorageSync('basic').PPINFO;this.cxsjht = uni.getStorageSync('basic').SJHTTYPE; //处理分店下拉框数据
     var cxfdbh = [];this.cxfdbh.forEach(function (item) {var datas = {};datas.value = item.fdbh;datas.text = item.fdmc;cxfdbh.push(datas);});this.cxfdbh = cxfdbh; //处理商品品牌下拉框数据
     var cxsppp = [];this.cxsppp.forEach(function (item) {var datas = {};datas.value = item.ppbmid;datas.text = item.ppmc;cxsppp.push(datas);});this.cxsppp = cxsppp; //处理商家合同下拉框数据
     var cxsjht = [];this.cxsjht.forEach(function (item) {var datas = {};datas.value = item.htlxid;datas.text = item.htlxmc;cxsjht.push(datas);});this.cxsjht = cxsjht;}, watch: { tj: function tj(newvalue, oldvalue) {} }, methods: { //自定义返回
-    leftClick: function leftClick() {uni.navigateBack({ delta: 1 });}, //开始日期
+    left: function left() {uni.navigateBack({ delta: 1 });}, //开始日期
     startdate: function startdate(e) {console.log(e);this.start = e;}, //结束日期
     enddate: function enddate(e) {console.log(e);this.end = e;}, maskClick: function maskClick(e) {console.log('----maskClick事件:', e);}, //列表头
     getcol: function getcol() {var _this = this;var data = { access_token: uni.getStorageSync('access_token'), userid: uni.getStorageSync('userid'), djtype: uni.getStorageSync('dqbb').cxbh, fdbh: uni.getStorageSync('fdbh') };(0, _api.getcolumns)(data).then(function (res) {console.log('表单头', res);_this.bdt = res.data;});}, //查询

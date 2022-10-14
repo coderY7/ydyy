@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<u-navbar :placeholder="true" title="建议" @leftClick="leftClick()" :bgColor="bgColor">
+		<!-- <u-navbar :placeholder="true" title="建议" @leftClick="leftClick()" :bgColor="bgColor"> -->
+			<navbar title='建议' @lefts=left()></navbar>
 		</u-navbar>
 			<view class="feedback-body">
 				<text class="text-black">问题反馈和意见建议
@@ -30,6 +31,7 @@
 <script>
 	import {getQuestion} from '../../../network/api.js'
 	import mkupload from '@/components/mk-upload/mk-upload.vue';
+	import navbar from '../../../components/nav.vue'
 	export default {
 		components: {
 			mkupload
@@ -46,12 +48,15 @@
 				imgList: []
 			};
 		},
+		components: {
+		    navbar
+		  },
 		onLoad() {
 
 		},
 		methods: {
 			//自定义返回
-			leftClick() {
+			left() {
 			  uni.navigateBack({
 			    delta: 1
 			  });

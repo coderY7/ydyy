@@ -1,7 +1,8 @@
 <template>
 	<view>
-    <u-navbar :placeholder="true"  @leftClick="leftClick()" title="查询结果" :bgColor="bgColor">
-    </u-navbar>
+    <!-- <u-navbar :placeholder="true"  @leftClick="leftClick()" title="查询结果" :bgColor="bgColor">
+    </u-navbar> -->
+	<navbar title='查询结果' @lefts=left()></navbar>
     <view class="fixation">
       <view class="switch">
 		<selectSwitch @change="changeSwitch" />
@@ -60,6 +61,7 @@
 
 <script>
 	import selectSwitch from "@/components/xuan-switch/xuan-switch.vue";
+	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
 			return {
@@ -71,9 +73,8 @@
       };
 		},
 		components: {
-		
-		selectSwitch
-		
+		selectSwitch,
+		navbar
 		},
     onLoad(option){
       console.log(option)
@@ -84,7 +85,7 @@
     },
     methods:{
 		//自定义返回
-		    leftClick() {
+		    left() {
 		      uni.navigateBack({
 		        delta: 1
 		      });

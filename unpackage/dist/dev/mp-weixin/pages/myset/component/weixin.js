@@ -97,9 +97,6 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 327))
-    },
     uSwitch: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-switch/u-switch */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-switch/u-switch")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-switch/u-switch.vue */ 352))
     }
@@ -178,7 +175,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
@@ -198,9 +194,13 @@ var _api = __webpack_require__(/*! ../../../network/api.js */ 143); //
 //
 //
 //
-//
-var _default = { data: function data() {return { bgColor: '#4f99ff', setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };}, onLoad: function onLoad() {}, methods: { //自定义返回
-    leftClick: function leftClick() {
+var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../../components/nav.vue */ 557));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { bgColor: '#4f99ff', setlist: [{ name: '微信绑定', is: uni.getStorageSync('iswx') ? uni.getStorageSync('iswx') : false }, { name: '修改密码', is: false }] };}, components: { navbar: navbar },
+
+  onLoad: function onLoad() {},
+  methods: {
+
+    //自定义返回
+    left: function left() {
       uni.navigateBack({
         delta: 1 });
 
