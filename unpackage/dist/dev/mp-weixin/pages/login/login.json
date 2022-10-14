@@ -1,8 +1,9 @@
 {
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
   "usingComponents": {
-    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
-    "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select"
+    "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
+    "navbar": "/components/nav"
   }
 }

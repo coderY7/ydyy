@@ -1,6 +1,5 @@
 <template>
-	<view class="page">
-		
+	<view class="page">	
 		<view class="top">
 			<view class="background"></view>
 		</view>

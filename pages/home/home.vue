@@ -1,9 +1,7 @@
 <template>
 	<view>
-		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
-			title="首页" @leftClick="leftClick">
-		</u-navbar>
-
+		
+		<navbar title='首页' @lefts=left() leftname="设置"></navbar>
 		<view class="container">
 			<view class="unit1">
 				<!--        近期查询日期-->
@@ -74,10 +72,13 @@
 		getappsalereport //仪表盘数据
 	} from '../../network/api.js';
 	import dayjs from 'dayjs'; // ES 2015
-
+	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
 			return {
+				titleHeight: 0, //状态栏和导航栏的总高度
+				statusBarHeight: 0 ,//状态栏高度
+				naviBarHeight:0,//导航栏高度
 				fdlist: '', //分店列表
 				xzfd: '', //选择的分店
 				xzindex: '3',
@@ -131,6 +132,9 @@
 				},
 			};
 		},
+		components: {
+		    navbar
+		  },
 		onReady() {
 			//this.getServerDataA();
 			this.getServerDataC();
@@ -173,6 +177,21 @@
 		},
 		onLoad() {
 			uni.setStorageSync('cxbb', true)
+			const res = uni.getSystemInfoSync()
+			console.log(res)
+			const system = res.osName;
+			this.statusBarHeight = res.statusBarHeight;
+			if (system === 'android') {
+			this.titleHeight = 48 + this.statusBarHeight;
+			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
+			uni.setStorageSync('titleHeight',this.titleHeight);
+			} else if (system === 'ios') {
+			this.titleHeight = 44 + this.statusBarHeight;
+			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
+			uni.setStorageSync('titleHeight',this.titleHeight);
+			}
+			uni.setStorageSync('naviBarHeight',44);
+			this.naviBarHeight = this.titleHeight - this.statusBarHeight
 		},
 		watch: {
 			xzfd: function(now, old) {
@@ -272,7 +291,7 @@
 
 
 			//设置
-			leftClick() {
+			left() {
 				console.log('tiaozhuan');
 				uni.navigateTo({
 					url: '../../pages/myset/myset'
@@ -304,7 +323,8 @@
 			width: 40%;
 			display: inline-flex;
 			align-items: center;
-			margin: 20rpx 5%;	
+			margin: 20rpx 5%;
+	
 		}
 
 		.box_left {
@@ -376,6 +396,26 @@
 		.boxinput {
 			margin: 0 20rpx;
 			flex: 3;
+		}
+	}
+	.navbar{
+		background:linear-gradient(#52c8f1, #85d8f3);
+		font-size: 16px;
+		position: sticky;
+		z-index: 999;
+		top:0;
+		.nav{
+			display: flex;
+			align-items: center;
+			.navicon{
+				padding-left: 20px;
+				width: 80px;
+			}
+			.navname{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
 		}
 	}
 </style>

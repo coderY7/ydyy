@@ -3,9 +3,9 @@
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-navbar": "/node-modules/uview-ui/components/u-navbar/u-navbar",
     "uni-datetime-picker": "/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker",
     "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
-    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts"
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts",
+    "navbar": "/components/nav"
   }
 }

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
-		<u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='home-fill' leftIconColor="#4f99ff" title="登录">
-		</u-navbar>
+		
+		<navbar title='登录' @lefts=left()></navbar>
 		<view class="header">
 			<image src="../../static/shilu-login/logo.png"></image>
 		</view>
@@ -53,6 +53,7 @@
 		usercheckapp,
 		basic
 	} from "@/network/api.js";
+	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
 			return {
@@ -63,17 +64,36 @@
 				fdbh: '',
 				fdlist: [], //分店列表
 				isfdlist: false,
-				resdata: null
+				resdata: null,
+				titleHeight: 0, //状态栏和导航栏的总高度
+				statusBarHeight: 0 ,//状态栏高度
+				naviBarHeight:0,//导航栏高度
 			};
 		},
+		components: {
+		    navbar
+		  },
 		onLoad() {
+			console.log(wx.getMenuButtonBoundingClientRect())
 			this.iswx = uni.getStorageSync('iswx') //判断微信绑定
 			this.userid = uni.getStorageSync('scandata').userid
-			// if (uni.getStorageSync('openid')) {
-			// 	uni.reLaunch({
-			// 		url: '/pages/home/home'
-			// 	});
-			// }
+			
+			const res = uni.getSystemInfoSync()
+			console.log(res)
+			const system = res.osName;
+			this.statusBarHeight = res.statusBarHeight;
+			if (system === 'android') {
+			this.titleHeight = 48 + this.statusBarHeight;
+			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
+			uni.setStorageSync('titleHeight',this.titleHeight);
+			} else if (system === 'ios') {
+			this.titleHeight = 44 + this.statusBarHeight;
+			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
+			uni.setStorageSync('titleHeight',this.titleHeight);
+			}
+			uni.setStorageSync('naviBarHeight',44);
+			this.naviBarHeight = this.titleHeight - this.statusBarHeight
+			
 		},
 		watch: {
 			userid: function(newValue, oldValue) {
@@ -83,6 +103,10 @@
 			}
 		},
 		methods: {
+			//自定义导航左面按钮
+			left(data){
+			console.log('点击左面按钮',data)
+			},
 			change(e) {
 				console.log(e);
 				uni.setStorageSync("fdbh", e)
@@ -177,7 +201,6 @@
 									});
 									this.basics()
 								})
-
 							}
 						});
 
@@ -273,7 +296,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -284,7 +307,7 @@
 		width: 161rpx;
 		height: 161rpx;
 		border-radius: 50%;
-		margin-top: 30rpx;
+		margin-top: 60rpx;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -369,4 +392,23 @@
 	.boxinput {
 		margin: 50rpx 70rpx 0 70rpx;
 	}
+	
+	.navbar{
+		background:linear-gradient(#52c8f1, #85d8f3);
+		font-size: 16px;
+		.nav{
+			display: flex;
+			align-items: center;
+			.navicon{
+				padding-left: 20px;
+				width: 80px;
+			}
+			.navname{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+	
 </style>

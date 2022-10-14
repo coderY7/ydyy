@@ -8,7 +8,8 @@
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 
 		},
@@ -186,8 +187,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"navigationStyle": "custom"
+		"backgroundColor": "#F8F8F8"
+		
 
 	}
 }

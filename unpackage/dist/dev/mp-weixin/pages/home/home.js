@@ -97,17 +97,14 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uNavbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-navbar/u-navbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-navbar/u-navbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-navbar/u-navbar.vue */ 288))
-    },
     uniDatetimePicker: function() {
-      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 306))
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 298))
     },
     uniDataSelect: function() {
-      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 296))
+      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 288))
     },
     qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 317))
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 309))
     }
   }
 } catch (e) {
@@ -174,8 +171,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-
-
 
 
 
@@ -315,21 +310,27 @@ var _dayjs = _interopRequireDefault(__webpack_require__(/*! dayjs */ 191));funct
 //
 //
 //
-//
-//
-// ES 2015
-var _default = { data: function data() {return { fdlist: '', //分店列表
+var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../components/nav.vue */ 557));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { titleHeight: 0, //状态栏和导航栏的总高度
+      statusBarHeight: 0, //状态栏高度
+      naviBarHeight: 0, //导航栏高度
+      fdlist: '', //分店列表
       xzfd: '', //选择的分店
       xzindex: '3', bgColor: '#4f99ff', //动态背景
       three: '', //近三天
       one: '', //近一天
       yue: '', sdate: '', //快报查询日期
-      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15, border: true, borderWidth: 3, borderColor: "#FFFFFF", linearType: "custom" } } } };}, onReady: function onReady() {//this.getServerDataA();
+      datelist: '', chartDataA: {}, optsA: { color: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4", "#ea7ccc"], padding: [15, 15, 0, 5], legend: {}, xAxis: { disableGrid: true }, yAxis: { data: [{ min: 0 }] }, extra: { column: { type: "group", width: 30, activeBgColor: "#000000", activeBgOpacity: 0.08 } } }, chartDataC: {}, ybpdata: '', optsC: { color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"], padding: [5, 5, 5, 5], extra: { pie: { activeOpacity: 0.5, activeRadius: 10, offsetAngle: 0, labelWidth: 15, border: true, borderWidth: 3, borderColor: "#FFFFFF", linearType: "custom" } } } };}, components: { navbar: navbar }, onReady: function onReady() {//this.getServerDataA();
     this.getServerDataC();}, onShow: function onShow() {this.sdate = (0, _dayjs.default)().format('YYYY-MM-DD'); // 获取当前时间
     var one = (0, _dayjs.default)().unix() - 24 * 60 * 60; // 获取前一天时间戳
     this.one = _dayjs.default.unix(one).format('YYYY-MM-DD');var three = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 3; //前三天时间戳
     var yue = (0, _dayjs.default)().unix() - 24 * 60 * 60 * 30; //前三天时间戳
-    this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three }, { name: '前一天', value: this.one }, { name: '当天', value: this.sdate }];
+    this.yue = _dayjs.default.unix(yue).format('YYYY-MM-DD');this.three = _dayjs.default.unix(three).format('YYYY-MM-DD');var datelist = [{ name: '前一月', value: this.yue }, { name: '前三天', value: this.three },
+    {
+      name: '前一天',
+      value: this.one },
+    {
+      name: '当天',
+      value: this.sdate }];
 
     this.datelist = datelist;
 
@@ -348,6 +349,21 @@ var _default = { data: function data() {return { fdlist: '', //分店列表
   },
   onLoad: function onLoad() {
     uni.setStorageSync('cxbb', true);
+    var res = uni.getSystemInfoSync();
+    console.log(res);
+    var system = res.osName;
+    this.statusBarHeight = res.statusBarHeight;
+    if (system === 'android') {
+      this.titleHeight = 48 + this.statusBarHeight;
+      uni.setStorageSync('statusBarHeight', this.statusBarHeight);
+      uni.setStorageSync('titleHeight', this.titleHeight);
+    } else if (system === 'ios') {
+      this.titleHeight = 44 + this.statusBarHeight;
+      uni.setStorageSync('statusBarHeight', this.statusBarHeight);
+      uni.setStorageSync('titleHeight', this.titleHeight);
+    }
+    uni.setStorageSync('naviBarHeight', 44);
+    this.naviBarHeight = this.titleHeight - this.statusBarHeight;
   },
   watch: {
     xzfd: function xzfd(now, old) {
@@ -447,7 +463,7 @@ var _default = { data: function data() {return { fdlist: '', //分店列表
 
 
     //设置
-    leftClick: function leftClick() {
+    left: function left() {
       console.log('tiaozhuan');
       uni.navigateTo({
         url: '../../pages/myset/myset' });
