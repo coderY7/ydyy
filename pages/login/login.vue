@@ -70,7 +70,6 @@
 				fdlist: [], //分店列表
 				isfdlist: false,
 				resdata: null,
-				
 			};
 		},
 		components: {
@@ -80,9 +79,6 @@
 			console.log(wx.getMenuButtonBoundingClientRect())
 			this.iswx = uni.getStorageSync('iswx') //判断微信绑定
 			this.userid = uni.getStorageSync('scandata').userid
-			
-			
-			
 		},
 		watch: {
 			userid: function(newValue, oldValue) {

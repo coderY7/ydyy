@@ -11,17 +11,9 @@
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
 			}
-
 		},
-		{
-			"path": "pages/init/init",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
 
-		},
+
 		{
 			"path": "pages/index/index",
 			"style": {

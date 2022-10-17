@@ -265,11 +265,7 @@ var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | compo
       isfdlist: false, resdata: null };}, components: { navbar: navbar }, onLoad: function onLoad() {console.log(wx.getMenuButtonBoundingClientRect());this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
     this.userid = uni.getStorageSync('scandata').userid;}, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //自定义导航左面按钮
     left: function left(data) {console.log('点击左面按钮', data);}, change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;
-          };
-          uni.setStorageSync("companyid", res.companyid);
-          _this.fdbh = res.fdlist[0].fdbh;
-          uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;};uni.setStorageSync("companyid", res.companyid);_this.fdbh = res.fdlist[0].fdbh;uni.setStorageSync("fdbh", res.fdlist[0].fdbh);
           _this.fdlist = [];
           for (var u in res.fdlist) {
             _this.fdlist.push({
