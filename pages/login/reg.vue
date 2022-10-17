@@ -253,8 +253,10 @@
 		width: 470rpx;
 		height: 100rpx;
 		line-height: 100rpx;
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 1), rgba(188, 226, 158, 1));
-		box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(164, 217, 228, 0.2);
+
+    background:linear-gradient(-90deg,#52c8f1, #85d8f3);
+
+    box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(164, 217, 228, 0.2);
 		border-radius: 50rpx;
 		text-align: center;
 		margin-left: auto;
@@ -263,8 +265,9 @@
 	}
 
 	.button-hover {
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 0.8), rgba(188, 226, 158, 0.8));
-	}
+    background:linear-gradient(-90deg,#52c8f1, #85d8f3);
+
+  }
 
 	.agreement {
 		display: flex;

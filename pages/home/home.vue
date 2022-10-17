@@ -13,7 +13,7 @@
 				<!-- 选择时间-->
 				<view class="xzbox">
 					<view class="xz">
-						<view class="boxname">选择时间</view>
+						<view class="boxname">选择时间:</view>
 						<view class="boxinput">
 							<uni-datetime-picker type="date" :value="single" v-model="item.defval"
 								@change="startdate()" />
@@ -25,7 +25,7 @@
 				<!-- 选择门店 -->
 				<view class="xzbox">
 					<view class="xz">
-						<view class="boxname">选择分店</view>
+						<view class="boxname">选择分店:</view>
 						<view class="boxinput">
 							<view>
 								<uni-section type="line">
@@ -37,7 +37,7 @@
 					<view style="font-size: 18rpx">(默认全部分店)</view>
 				</view>
 
-				<view>实时销售分析</view>
+				<view style="font-size: 30rpx;margin: 10rpx 0">实时销售分析:</view>
 				
 				<view class="unit1box">
 					<view class="box">
@@ -82,7 +82,7 @@
 				fdlist: '', //分店列表
 				xzfd: '', //选择的分店
 				xzindex: '3',
-				bgColor: '#4f99ff', //动态背景
+
 				three: '', //近三天
 				one: '', //近一天
 				yue: '',
@@ -162,36 +162,25 @@
 			}]
 			this.datelist = datelist
 
-			//处理分店下拉框数据
-			this.fdlist = uni.getStorageSync('basic').FDINFO
-			let cxfdbh = [];
-			this.fdlist.forEach((item) => {
-				let datas = {}
-				datas.value = item.fdbh;
-				datas.text = item.fdmc
-				cxfdbh.push(datas)
-			})
-			this.fdlist = cxfdbh
+      setTimeout(()=>{
+        //处理分店下拉框数据
+        this.fdlist = uni.getStorageSync('basic').FDINFO
+        let cxfdbh = [];
+        this.fdlist.forEach((item) => {
+          let datas = {}
+          datas.value = item.fdbh;
+          datas.text = item.fdmc
+          cxfdbh.push(datas)
+        })
+        this.fdlist = cxfdbh
+      },1000)
+
+
 
 			this.getdata()
 		},
 		onLoad() {
 			uni.setStorageSync('cxbb', true)
-			const res = uni.getSystemInfoSync()
-			console.log(res)
-			const system = res.osName;
-			this.statusBarHeight = res.statusBarHeight;
-			if (system === 'android') {
-			this.titleHeight = 48 + this.statusBarHeight;
-			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
-			uni.setStorageSync('titleHeight',this.titleHeight);
-			} else if (system === 'ios') {
-			this.titleHeight = 44 + this.statusBarHeight;
-			uni.setStorageSync('statusBarHeight',this.statusBarHeight);
-			uni.setStorageSync('titleHeight',this.titleHeight);
-			}
-			uni.setStorageSync('naviBarHeight',44);
-			this.naviBarHeight = this.titleHeight - this.statusBarHeight
 		},
 		watch: {
 			xzfd: function(now, old) {
@@ -207,6 +196,7 @@
 			}
 		},
 		methods: {
+      //查询数据
 			getdata(item, index) {
 				this.xzindex = index
 				let getpcadmindaysaledata = {

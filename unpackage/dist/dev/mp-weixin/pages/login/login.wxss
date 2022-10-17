@@ -24,10 +24,11 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.content {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 20rpx;
 }
 .header {
   width: 161rpx;
@@ -46,8 +47,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 50rpx;
-  padding-left: 70rpx;
-  padding-right: 70rpx;
+  padding: 0 50rpx;
 }
 .list-call {
   display: flex;
@@ -73,10 +73,10 @@
 }
 .button-login {
   color: #FFFFFF;
-  font-size: 28rpx;
+  font-size: 26rpx;
   width: 260rpx;
   height: 70rpx;
-  background: linear-gradient(-90deg, #3fcdeb, #bce29e);
+  background: linear-gradient(-90deg, #52c8f1, #85d8f3);
   box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(164, 217, 228, 0.2);
   border-radius: 30rpx;
   line-height: 70rpx;
@@ -86,24 +86,19 @@
   margin-top: 40rpx;
 }
 .button-hover {
-  background: linear-gradient(-90deg, rgba(63, 205, 235, 0.8), rgba(188, 226, 158, 0.8));
+  background: linear-gradient(-90deg, #52c8f1, #85d8f3);
 }
 .agreenment {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  font-size: 30rpx;
-  margin-top: 80rpx;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+  margin-right: 50rpx;
   color: #FFA800;
   text-align: center;
   height: 40rpx;
   line-height: 40rpx;
-}
-.agreenment text {
-  font-size: 24rpx;
-  margin-left: 15rpx;
-  margin-right: 15rpx;
 }
 .boxinput {
   margin: 50rpx 70rpx 0 70rpx;

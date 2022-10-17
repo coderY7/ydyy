@@ -1,46 +1,51 @@
 <template>
-	<view class="content">
+	<view>
 		
 		<navbar title='登录' @lefts=left()></navbar>
-		<view class="header">
-			<image src="../../static/shilu-login/logo.png"></image>
-		</view>
+    <view class="container">
+      <view class="header">
+        <image src="../../static/shilu-login/logo.png"></image>
+      </view>
 
-		<view class="list">
-			<view class="list-call">
-				<image class="img" src="/static/shilu-login/1.png"></image>
-				<input class="sl-input" v-model="userid" type="number" maxlength="5" placeholder="输入工号" />
-			</view>
-			<view class="list-call">
-				<image class="img" src="/static/shilu-login/2.png"></image>
-				<input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
-					password="true" />
-			</view>
-		</view>
+      <view class="list">
+        <view class="list-call">
+          <image class="img" src="/static/shilu-login/1.png"></image>
+          <input class="sl-input" v-model="userid" type="number" maxlength="5" placeholder="输入工号" />
+        </view>
+        <view class="list-call">
+          <image class="img" src="/static/shilu-login/2.png"></image>
+          <input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
+                 password="true" />
+        </view>
+      </view>
 
 
-		<view class="boxinput" v-if="isfdlist">
-			<uni-section type="line">
-				<uni-data-select v-model="fdbh" :localdata="fdlist" @change="change"></uni-data-select>
-			</uni-section>
-		</view>
-		
-<view class="unit2">
-	<view class="button-login" hover-class="button-hover" @tap="bindLogin()">
-		<text>登录</text>
-	</view>
-	
-	<view class="button-login" hover-class="button-hover" @tap="wxLogin()">
-		<text>微信一键登录</text>
-	</view>
-	
-	<view class="agreenment">
-		<!-- <navigator url="forget" open-type="navigate">忘记密码</navigator>
-		<text>|</text> -->
-		<navigator url="reg" open-type="navigate">注册账户</navigator>
-	</view>
-</view>
-		
+      <view class="boxinput" v-if="isfdlist">
+        <uni-section type="line">
+          <uni-data-select v-model="fdbh" :localdata="fdlist" @change="change"></uni-data-select>
+        </uni-section>
+      </view>
+
+      <view>
+        <view class="agreenment">
+          <navigator url="reg" open-type="navigate">注册账户</navigator>
+        </view>
+      </view>
+
+      <view class="unit2">
+        <view class="button-login" hover-class="button-hover" @tap="bindLogin()">
+          <text>登录</text>
+        </view>
+
+        <view class="button-login" hover-class="button-hover" @tap="wxLogin()">
+          <text>微信一键登录</text>
+        </view>
+
+
+      </view>
+
+    </view>
+
 		
 	</view>
 </template>
@@ -281,10 +286,11 @@
 </script>
 
 <style lang="scss">
-	.content {
+	.container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+    margin: 20rpx;
 	}
 
 	.header {
@@ -306,8 +312,7 @@
 		display: flex;
 		flex-direction: column;
 		padding-top: 50rpx;
-		padding-left: 70rpx;
-		padding-right: 70rpx;
+		padding: 0 50rpx;
 	}
 
 	.list-call {
@@ -337,11 +342,11 @@
 
 	.button-login {
 		color: #FFFFFF;
-		font-size: 28rpx;
+		font-size: 26rpx;
 		width: 260rpx;
 		height: 70rpx;
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 1), rgba(188, 226, 158, 1));
-		box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(164, 217, 228, 0.2);
+    background:linear-gradient(-90deg,#52c8f1, #85d8f3);
+    box-shadow: 0rpx 0rpx 13rpx 0rpx rgba(164, 217, 228, 0.2);
 		border-radius: 30rpx;
 		line-height: 70rpx;
 		text-align: center;
@@ -351,27 +356,22 @@
 	}
 
 	.button-hover {
-		background: linear-gradient(-90deg, rgba(63, 205, 235, 0.8), rgba(188, 226, 158, 0.8));
-	}
+    background:linear-gradient(-90deg,#52c8f1, #85d8f3);
+  }
 
 	.agreenment {
 		display: flex;
-		flex-direction: row;
-		justify-content: center;
+    justify-content: flex-end;
 		align-items: center;
-		font-size: 30rpx;
-		margin-top: 80rpx;
+		font-size: 26rpx;
+		margin-top: 20rpx;
+    margin-right: 50rpx;
 		color: #FFA800;
 		text-align: center;
 		height: 40rpx;
 		line-height: 40rpx;
 	}
 
-	.agreenment text {
-		font-size: 24rpx;
-		margin-left: 15rpx;
-		margin-right: 15rpx;
-	}
 
 	.boxinput {
 		margin: 50rpx 70rpx 0 70rpx;

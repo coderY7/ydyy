@@ -98,7 +98,7 @@ var components
 try {
   components = {
     uniDataSelect: function() {
-      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 288))
+      return Promise.all(/*! import() | uni_modules/uni-data-select/components/uni-data-select/uni-data-select */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-data-select/components/uni-data-select/uni-data-select")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue */ 295))
     }
   }
 } catch (e) {
@@ -203,6 +203,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
@@ -250,17 +255,17 @@ var _api = __webpack_require__(/*! @/network/api.js */ 143); //
 //
 //
 //
-var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../components/nav.vue */ 557));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背景
+//
+//
+//
+//
+//
+var navbar = function navbar() {__webpack_require__.e(/*! require.ensure | components/nav */ "components/nav").then((function () {return resolve(__webpack_require__(/*! ../../components/nav.vue */ 208));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { bgColor: '#4f99ff', //动态背景
       userid: '', password: '', iswx: '', fdbh: '', fdlist: [], //分店列表
       isfdlist: false, resdata: null };}, components: { navbar: navbar }, onLoad: function onLoad() {console.log(wx.getMenuButtonBoundingClientRect());this.iswx = uni.getStorageSync('iswx'); //判断微信绑定
     this.userid = uni.getStorageSync('scandata').userid;}, watch: { userid: function userid(newValue, oldValue) {if (newValue.length == '5') {this.useryz();} else {}} }, methods: { //自定义导航左面按钮
     left: function left(data) {console.log('点击左面按钮', data);}, change: function change(e) {console.log(e);uni.setStorageSync("fdbh", e);}, //用户验证
-    useryz: function useryz() {var _this = this;var user = { userid: this.userid };
-
-      (0, _api.usercheckapp)(user).then(function (res) {
-        if (res.error_code == 0) {
-          if (res.fdlist) {
-            _this.isfdlist = true;
+    useryz: function useryz() {var _this = this;var user = { userid: this.userid };(0, _api.usercheckapp)(user).then(function (res) {if (res.error_code == 0) {if (res.fdlist) {_this.isfdlist = true;
           };
           uni.setStorageSync("companyid", res.companyid);
           _this.fdbh = res.fdlist[0].fdbh;
