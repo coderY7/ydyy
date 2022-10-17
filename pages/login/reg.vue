@@ -6,22 +6,22 @@
 
 		<view class="list">
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/1.png"></image>
+				<image class="img" src="/static/shilu-login/xl.png"></image>
 				<input class="sl-input" v-model="userInfo.sn" placeholder="序列号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/2.png"></image>
+				<image class="img" src="/static/shilu-login/fd.png"></image>
 				<input class="sl-input" v-model="userInfo.fdbh" type="text" maxlength="32" placeholder="分店号"
 					:password="!showPassword" />
 				<!-- <image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image> -->
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/3.png"></image>
+				<image class="img" src="/static/shilu-login/lx.png"></image>
 				<input class="sl-input" v-model="userInfo.fdlx" placeholder="分店类型" />
 				<!-- <view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}</view> -->
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/4.png"></image>
+				<image class="img" src="/static/shilu-login/gh.png"></image>
 				<input class="sl-input" v-model="userInfo.userid" type="text" placeholder="用户工号" />
 			</view>
 

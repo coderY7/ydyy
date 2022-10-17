@@ -3,11 +3,11 @@
 		<view class="list">
 			<view class="tishi">若您发现密码有泄漏风险，可在此重新设置新密码。</view>
 			<!-- <view class="list-call">
-        <image class="img" src="/static/shilu-login/1.png"></image>
+        <image class="img" src="/static/shilu-login/gh.png"></image>
         <input class="sl-input" type="number" v-model="phone" maxlength="11" placeholder="请输入手机号" />
       </view> -->
 			<view class="list-call">
-				<image class="img" src="/static/shilu-login/2.png"></image>
+				<image class="img" src="/static/shilu-login/mm.png"></image>
 				<input class="sl-input" type="text" v-model="password" maxlength="32" placeholder="请输入新密码"
 					:password="!showPassword" />
 				<image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'"

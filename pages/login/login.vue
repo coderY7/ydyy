@@ -9,11 +9,11 @@
 
       <view class="list">
         <view class="list-call">
-          <image class="img" src="/static/shilu-login/1.png"></image>
+          <image class="img" src="/static/shilu-login/gh.png"></image>
           <input class="sl-input" v-model="userid" type="number" maxlength="5" placeholder="输入工号" />
         </view>
         <view class="list-call">
-          <image class="img" src="/static/shilu-login/2.png"></image>
+          <image class="img" src="/static/shilu-login/mm.png"></image>
           <input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码"
                  password="true" />
         </view>
