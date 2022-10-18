@@ -60,10 +60,14 @@
 			<view class="charts-box">
 				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
 			</view>
+			<!-- 玫瑰图 -->
 			<view class="charts-box">
 				<qiun-data-charts type="rose" :opts="optsC" :chartData="chartDataC" />
 			</view>
-
+			<!-- 折线图 -->
+			<view class="charts-box">
+				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
+			</view>
 		</view>
 
 
@@ -163,7 +167,27 @@
 						}
 					}
 				},
-
+				chartDataD: {},
+				optsD: {
+					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
+						"#ea7ccc"
+					],
+					padding: [15, 10, 0, 15],
+					legend: {},
+					xAxis: {
+						disableGrid: true
+					},
+					yAxis: {
+						gridType: "dash",
+						dashLength: 2
+					},
+					extra: {
+						line: {
+							type: "straight",
+							width: 2
+						}
+					}
+				}
 			};
 		},
 		components: {
@@ -173,13 +197,14 @@
 			this.getServerDataA();
 			this.getServerDataB();
 			this.getServerDataC();
+			this.getServerDataD();
 		},
 		onShow() {
-			
-			
-			
-			
-			
+
+
+
+
+
 			this.sdate = dayjs().format('YYYY-MM-DD') // 获取当前时间
 			let one = dayjs().unix() - 24 * 60 * 60 // 获取前一天时间戳
 			this.one = dayjs.unix(one).format('YYYY-MM-DD')
@@ -251,15 +276,18 @@
 					let data = JSON.parse(JSON.stringify(res))
 					this.ybpdata = data
 					//test处理实销
-					let table0=this.ybpdata.table0[0]
-					let table=[]
+					let table0 = this.ybpdata.table0[0]
+					let table = []
 					for (var [key, value] of Object.entries(table0)) {
-					  table.push({key,value})
+						table.push({
+							key,
+							value
+						})
 					}
-					this.tablecolor.forEach((item,index)=>{
-						table[index].color=item
+					this.tablecolor.forEach((item, index) => {
+						table[index].color = item
 					})
-					this.ybpdata.table0[0]=table
+					this.ybpdata.table0[0] = table
 				})
 			},
 			//开始日期
@@ -356,6 +384,29 @@
 					this.chartDataC = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
+			getServerDataD() {
+				//模拟从服务器获取数据时的延时
+				setTimeout(() => {
+					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+					let res = {
+						categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
+						series: [{
+								name: "成交量A",
+								data: [35, 8, 25, 37, 4, 20]
+							},
+							{
+								name: "成交量B",
+								data: [70, 40, 65, 100, 44, 68]
+							},
+							{
+								name: "成交量C",
+								data: [100, 80, 95, 150, 112, 132]
+							}
+						]
+					};
+					this.chartDataD = JSON.parse(JSON.stringify(res));
+				}, 500);
+			},
 			//设置
 			left() {
 
@@ -363,8 +414,6 @@
 					url: '../../pages/myset/myset'
 				})
 			},
-
-
 		},
 
 	}
@@ -413,7 +462,7 @@
 		.box_right {
 			display: flex;
 			flex-direction: column;
-			
+
 			font-size: 26rpx;
 		}
 	}
