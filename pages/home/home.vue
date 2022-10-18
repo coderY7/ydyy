@@ -1,6 +1,6 @@
 <template>
 	<view>
-		
+
 		<navbar title='首页' @lefts=left() leftname="设置"></navbar>
 		<view class="container">
 			<view class="unit1">
@@ -38,27 +38,32 @@
 				</view>
 
 				<view style="font-size: 30rpx;margin: 10rpx 0">实时销售分析:</view>
-				
 				<view class="unit1box">
 					<view class="box">
-						<view class="boxitem" v-for="(item,index) in Object.entries(ybpdata.table0[0])">
-							<view class="box_left">
+						<view class="boxitem" v-for="(item,index) in ybpdata.table0[0]">
+							<view class="box_left" :style="{backgroundColor:item.color}">
 								<image></image>
 							</view>
 							<view class="box_right">
-								<view>{{item[1]}}</view>
-								<view>{{item[0]?item[0]:''}}</view>
+								<view>{{item.value==''?'0.00':item.value}}</view>
+								<view>{{item.key}}</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
+			<!-- 柱状图 -->
 			<view class="charts-box">
 				<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
 			</view>
+			<!-- 饼状图 -->
 			<view class="charts-box">
-				<qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
+				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
 			</view>
+			<view class="charts-box">
+				<qiun-data-charts type="rose" :opts="optsC" :chartData="chartDataC" />
+			</view>
+
 		</view>
 
 
@@ -77,12 +82,14 @@
 		data() {
 			return {
 				titleHeight: 0, //状态栏和导航栏的总高度
-				statusBarHeight: 0 ,//状态栏高度
-				naviBarHeight:0,//导航栏高度
+				statusBarHeight: 0, //状态栏高度
+				naviBarHeight: 0, //导航栏高度
 				fdlist: '', //分店列表
 				xzfd: '', //选择的分店
 				xzindex: '3',
-
+				tablecolor: ["#1890FF", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
+					"#ea7ccc", "#1890FF", "#FAC858"
+				],
 				three: '', //近三天
 				one: '', //近一天
 				yue: '',
@@ -112,9 +119,9 @@
 						}
 					}
 				},
-				chartDataC: {},
+				chartDataB: {},
 				ybpdata: '',
-				optsC: {
+				optsB: {
 					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
 					padding: [5, 5, 5, 5],
 					extra: {
@@ -130,16 +137,49 @@
 						}
 					}
 				},
+				chartDataC: {},
+				optsC: {
+					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
+						"#ea7ccc"
+					],
+					padding: [5, 5, 5, 5],
+					legend: {
+						show: true,
+						position: "left",
+						lineHeight: 25
+					},
+					extra: {
+						rose: {
+							type: "radius",
+							minRadius: 50,
+							activeOpacity: 0.5,
+							activeRadius: 10,
+							offsetAngle: 0,
+							labelWidth: 15,
+							border: true,
+							borderWidth: 2,
+							borderColor: "#FFFFFF",
+							linearType: "custom"
+						}
+					}
+				},
+
 			};
 		},
 		components: {
-		    navbar
-		  },
+			navbar
+		},
 		onReady() {
-			//this.getServerDataA();
+			this.getServerDataA();
+			this.getServerDataB();
 			this.getServerDataC();
 		},
 		onShow() {
+			
+			
+			
+			
+			
 			this.sdate = dayjs().format('YYYY-MM-DD') // 获取当前时间
 			let one = dayjs().unix() - 24 * 60 * 60 // 获取前一天时间戳
 			this.one = dayjs.unix(one).format('YYYY-MM-DD')
@@ -162,18 +202,18 @@
 			}]
 			this.datelist = datelist
 
-      setTimeout(()=>{
-        //处理分店下拉框数据
-        this.fdlist = uni.getStorageSync('basic').FDINFO
-        let cxfdbh = [];
-        this.fdlist.forEach((item) => {
-          let datas = {}
-          datas.value = item.fdbh;
-          datas.text = item.fdmc
-          cxfdbh.push(datas)
-        })
-        this.fdlist = cxfdbh
-      },1000)
+			setTimeout(() => {
+				//处理分店下拉框数据
+				this.fdlist = uni.getStorageSync('basic').FDINFO
+				let cxfdbh = [];
+				this.fdlist.forEach((item) => {
+					let datas = {}
+					datas.value = item.fdbh;
+					datas.text = item.fdmc
+					cxfdbh.push(datas)
+				})
+				this.fdlist = cxfdbh
+			}, 1000)
 
 
 
@@ -196,7 +236,7 @@
 			}
 		},
 		methods: {
-      //查询数据
+			//查询数据
 			getdata(item, index) {
 				this.xzindex = index
 				let getpcadmindaysaledata = {
@@ -210,6 +250,16 @@
 					console.log('仪表盘数据', JSON.parse(JSON.stringify(res)))
 					let data = JSON.parse(JSON.stringify(res))
 					this.ybpdata = data
+					//test处理实销
+					let table0=this.ybpdata.table0[0]
+					let table=[]
+					for (var [key, value] of Object.entries(table0)) {
+					  table.push({key,value})
+					}
+					this.tablecolor.forEach((item,index)=>{
+						table[index].color=item
+					})
+					this.ybpdata.table0[0]=table
 				})
 			},
 			//开始日期
@@ -218,6 +268,7 @@
 				this.sdate = e
 			},
 			//可视化面板
+			// 柱状图
 			getServerDataA() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
@@ -257,8 +308,8 @@
 					this.chartDataA = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-
-			getServerDataC() {
+			//饼状图
+			getServerDataB() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
 					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
@@ -275,14 +326,39 @@
 							data: data
 						}]
 					};
+					this.chartDataB = JSON.parse(JSON.stringify(res));
+				}, 500);
+			},
+			//玫瑰图		
+			getServerDataC() {
+				//模拟从服务器获取数据时的延时
+				setTimeout(() => {
+					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+					// let res = {
+					//     series: [
+					//       {
+					//         data: [{"name":"一班","value":50},{"name":"二班","value":30},{"name":"三班","value":20},{"name":"四班","value":18},{"name":"五班","value":8}]
+					//       }
+					//     ]
+					//   };
+					let data = [];
+					this.ybpdata.table3.forEach((item) => {
+						let a = {}
+						a.name = item['标识']
+						a.value = item['总数']
+						data.push(a)
+					})
+					let res = {
+						series: [{
+							data: data
+						}]
+					};
 					this.chartDataC = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-
-
 			//设置
 			left() {
-				console.log('tiaozhuan');
+
 				uni.navigateTo({
 					url: '../../pages/myset/myset'
 				})
@@ -300,7 +376,7 @@
 	}
 
 	.container {
-		margin:20rpx;
+		margin: 20rpx;
 	}
 
 	.status_bar {
@@ -314,7 +390,7 @@
 			display: inline-flex;
 			align-items: center;
 			margin: 20rpx 5%;
-	
+
 		}
 
 		.box_left {
@@ -337,7 +413,7 @@
 		.box_right {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			
 			font-size: 26rpx;
 		}
 	}
@@ -345,11 +421,11 @@
 	.recent {
 		display: inline-flex;
 		justify-content: flex-start;
-		
+		margin-bottom: 20rpx;
 	}
 
 	.ubut {
-		
+
 		width: 120rpx;
 		margin-right: 10rpx;
 
@@ -388,20 +464,24 @@
 			flex: 3;
 		}
 	}
-	.navbar{
-		background:linear-gradient(#52c8f1, #85d8f3);
+
+	.navbar {
+		background: linear-gradient(#52c8f1, #85d8f3);
 		font-size: 16px;
 		position: sticky;
 		z-index: 999;
-		top:0;
-		.nav{
+		top: 0;
+
+		.nav {
 			display: flex;
 			align-items: center;
-			.navicon{
+
+			.navicon {
 				padding-left: 20px;
 				width: 80px;
 			}
-			.navname{
+
+			.navname {
 				display: flex;
 				justify-content: center;
 				align-items: center;

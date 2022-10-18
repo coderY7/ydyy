@@ -3,8 +3,10 @@
 		<!-- <u-navbar :bgColor="bgColor" :placeholder="true" leftIcon='tags' leftIconColor='#f60506' leftText='设置'
 			title="报表" @leftClick="leftClick">
 		</u-navbar> -->	
-			<navbar title='报表' @lefts=left()></navbar>
-		<view class="unit1">
+
+    <navbar title='报表' @lefts=left() leftname="设置"></navbar>
+
+    <view class="unit1">
 			<ul>
 				<li v-for="(item,index) in Alllist" :key="index">
 					<view class="unit1_box" @click="enter(item)">
@@ -69,10 +71,13 @@
 				})
 			},
 
-			//设置
-			left() {
-				
-			},
+      //设置
+      left() {
+
+        uni.navigateTo({
+          url: '../../pages/myset/myset'
+        })
+      },
 		}
 	}
 </script>

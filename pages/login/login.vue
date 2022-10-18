@@ -362,7 +362,7 @@
 		font-size: 26rpx;
 		margin-top: 20rpx;
     margin-right: 50rpx;
-		color: #FFA800;
+		color: #52c8f1;
 		text-align: center;
 		height: 40rpx;
 		line-height: 40rpx;

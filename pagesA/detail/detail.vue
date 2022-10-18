@@ -1,16 +1,15 @@
 <template>
-	<view id="page">
-		<!-- <u-navbar :placeholder="true" title="结果详情" @leftClick="leftClick()" :bgColor="bgColor">
-		</u-navbar> -->
+	<view>
 		<navbar title='结果详情' @lefts=left()></navbar>
     <view class="container">
-      <view class="name">商品详细:</view>
+      <view>
+        <view class="name">商品详细:</view>
+      </view>
       <view v-for="(item,key) of Object.entries(datas)" class="box">
         <view class="boxunit1">{{item[0]}} :</view>
         <view class="boxunit2">{{item[1]}}</view>
       </view>
     </view>
-
 	</view>
 </template>
 
@@ -44,9 +43,7 @@
 </script>
 
 <style lang="scss">
-page{
-  background-color: #E5E5E5;
-}
+
 .container{
   margin: 20rpx 50rpx 20rpx 50rpx;
   padding: 20rpx;

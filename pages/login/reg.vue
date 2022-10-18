@@ -276,7 +276,7 @@
 		align-items: center;
 		font-size: 30rpx;
 		margin-top: 80rpx;
-		color: #FFA800;
+		color: #52c8f1;
 		text-align: center;
 		height: 40rpx;
 		line-height: 40rpx;

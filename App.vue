@@ -6,6 +6,7 @@
       uni.setStorageSync('model', 'Test');
 			uni.setStorageSync('sn', 'MOPMPI-MLKKNG-KFOLNF-QINPHH');
 			uni.setStorageSync('appid', 'wxbce91b6b8e662b44');
+      uni.setStorageSync("secret", '4d4c042b2ca5c9e9c5a2b07049991f41')
     },
 		onShow: function() {
       // 获取设备的ip地址
