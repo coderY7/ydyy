@@ -72,10 +72,14 @@
 			<view class="charts-box">
 				<qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
 			</view>
-			<!--饼状图-->
+			<!--饼状图促销-->
 			<view class="charts-box">
 				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
 			</view>
+      <!--饼状图会员-->
+      <view class="charts-box">
+        <qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
+      </view>
 		</view>
 
 
@@ -96,6 +100,7 @@
 			return {
         bfb:'',//百分比图表
         cxdata:'',//促销图
+        yhdata:'',//会员图
 				titleHeight: 0, //状态栏和导航栏的总高度
 				statusBarHeight: 0, //状态栏高度
 				naviBarHeight: 0, //导航栏高度
@@ -341,7 +346,18 @@
         cxdata.push(b)
         console.log(cxdata)
         this.cxdata=cxdata
-
+//会员
+        let yhdata=[]
+        let c={}
+        c.name=this.bfb[1].key
+        c.value=this.bfb[1].value.replace("%", "")*100
+        yhdata.push(c)
+        let d={}
+        d.name=`非${this.bfb[1].key}`
+        d.value=10000-this.bfb[1].value.replace("%", "")*100
+        yhdata.push(d)
+        console.log(cxdata)
+        this.yhdata=yhdata
       },
 			//查询数据
 			getdata(item, index) {
