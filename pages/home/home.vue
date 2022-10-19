@@ -52,21 +52,29 @@
 					</view>
 				</view>
 			</view>
-			<!-- 柱状图 -->
+			<!--			&lt;!&ndash; 柱状图 &ndash;&gt;-->
+			<!--			<view class="charts-box">-->
+			<!--				<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />-->
+			<!--			</view>-->
+			<!--			&lt;!&ndash; 饼状图 &ndash;&gt;-->
+			<!--			<view class="charts-box">-->
+			<!--				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />-->
+			<!--			</view>-->
+			<!--			&lt;!&ndash; 玫瑰图 &ndash;&gt;-->
+			<!--			<view class="charts-box">-->
+			<!--				<qiun-data-charts type="rose" :opts="optsC" :chartData="chartDataC" />-->
+			<!--			</view>-->
+			<!--			&lt;!&ndash; 折线图 &ndash;&gt;-->
+			<!--			<view class="charts-box">-->
+			<!--				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />-->
+			<!--			</view>-->
+			<!-- 圆环图 -->
 			<view class="charts-box">
-				<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />
+				<qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
 			</view>
-			<!-- 饼状图 -->
+			<!--饼状图-->
 			<view class="charts-box">
 				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
-			</view>
-			<!-- 玫瑰图 -->
-			<view class="charts-box">
-				<qiun-data-charts type="rose" :opts="optsC" :chartData="chartDataC" />
-			</view>
-			<!-- 折线图 -->
-			<view class="charts-box">
-				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
 			</view>
 		</view>
 
@@ -76,15 +84,18 @@
 
 <script>
 	import {
-		getFenDian,
+		getfendians,
 		getpctodayssale,
-		getappsalereport //仪表盘数据
+		getappsalereport, //仪表盘数据
+
 	} from '../../network/api.js';
 	import dayjs from 'dayjs'; // ES 2015
 	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
 			return {
+        bfb:'',//百分比图表
+        cxdata:'',//促销图
 				titleHeight: 0, //状态栏和导航栏的总高度
 				statusBarHeight: 0, //状态栏高度
 				naviBarHeight: 0, //导航栏高度
@@ -187,6 +198,43 @@
 							width: 2
 						}
 					}
+				},
+				chartDataE: {},
+				optsE: {
+					rotate: false,
+					rotateLock: false,
+					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
+						"#ea7ccc"
+					],
+					padding: [5, 5, 5, 5],
+					dataLabel: true,
+					legend: {
+						show: true,
+						position: "right",
+						lineHeight: 20
+					},
+					title: {
+						name: "收益率",
+						fontSize: 10,
+						color: "#666666"
+					},
+					subtitle: {
+						name: "70%",
+						fontSize: 20,
+						color: "#7cb5ec"
+					},
+					extra: {
+						ring: {
+							ringWidth: 40,
+							activeOpacity: 0.5,
+							activeRadius: 10,
+							offsetAngle: 0,
+							labelWidth: 15,
+							border: false,
+							borderWidth: 3,
+							borderColor: "#FFFFFF"
+						}
+					}
 				}
 			};
 		},
@@ -194,17 +242,13 @@
 			navbar
 		},
 		onReady() {
-			this.getServerDataA();
+			// this.getServerDataA();
 			this.getServerDataB();
-			this.getServerDataC();
-			this.getServerDataD();
+			// this.getServerDataC();
+			// this.getServerDataD();
+			this.getServerDataE();
 		},
 		onShow() {
-
-
-
-
-
 			this.sdate = dayjs().format('YYYY-MM-DD') // 获取当前时间
 			let one = dayjs().unix() - 24 * 60 * 60 // 获取前一天时间戳
 			this.one = dayjs.unix(one).format('YYYY-MM-DD')
@@ -243,6 +287,7 @@
 
 
 			this.getdata()
+
 		},
 		onLoad() {
 			uni.setStorageSync('cxbb', true)
@@ -261,6 +306,43 @@
 			}
 		},
 		methods: {
+			//处理数据
+			manage(e) {
+				//处理实销数据表盘
+				let table0 = this.ybpdata.table0[0]
+				let table = []
+				for (var [key, value] of Object.entries(table0)) {
+					table.push({
+						key,
+						value
+					})
+				}
+				this.tablecolor.forEach((item, index) => {
+					table[index].color = item
+				})
+				this.ybpdata.table0[0] = table
+				//剔除会员和促销
+        this.bfb= this.ybpdata.table0[0].filter(item => item.key=="促销占比"||item.key=="会员占比")
+
+
+			},
+//会员比和促销比
+      percent(){
+
+        //促销
+        let cxdata=[]
+        let a={}
+        a.name=this.bfb[0].key
+        a.value=this.bfb[0].value.replace("%", "")*100
+        cxdata.push(a)
+        let b={}
+        b.name=`非${this.bfb[0].key}`
+        b.value=10000-this.bfb[0].value.replace("%", "")*100
+        cxdata.push(b)
+        console.log(cxdata)
+        this.cxdata=cxdata
+
+      },
 			//查询数据
 			getdata(item, index) {
 				this.xzindex = index
@@ -268,27 +350,49 @@
 					access_token: uni.getStorageSync('access_token'),
 					saledate: item ? item.value : this.sdate,
 					datamark: 'ssale',
-					selfdbh: this.xzfd ? this.xzfd : 'ALL',
-					sn: uni.getStorageSync('sn')
+					selfdbh: this.xzfd ? this.xzfd : 'ALL'
 				}
-				getappsalereport(getpcadmindaysaledata).then((res) => {
-					console.log('仪表盘数据', JSON.parse(JSON.stringify(res)))
-					let data = JSON.parse(JSON.stringify(res))
-					this.ybpdata = data
-					//test处理实销
-					let table0 = this.ybpdata.table0[0]
-					let table = []
-					for (var [key, value] of Object.entries(table0)) {
-						table.push({
-							key,
-							value
-						})
+				//test
+				uni.request({
+					url: 'http://webapibeta.mzsale.com/mzato/main/app/getappsalereport', //仅为示例，并非真实接口地址。
+					data: {
+						saledate: "2022-10-19",
+						datamark: "ssale",
+						selfdbh: "ALL",
+						sn: "MOPMPI-MLKKNG-KFOLNF-QINPHH"
+					},
+					method: "POST",
+					header: {
+						'Content-Type': 'application/json',
+					},
+					success: (res) => {
+
+						console.log('仪表盘数据', JSON.parse(res.data))
+						let data = JSON.parse(res.data)
+						this.ybpdata = data
+						this.manage()
+            this.percent()
 					}
-					this.tablecolor.forEach((item, index) => {
-						table[index].color = item
-					})
-					this.ybpdata.table0[0] = table
-				})
+				});
+				//实际方法
+				// getappsalereport(getpcadmindaysaledata).then((res) => {
+				// 	console.log('仪表盘数据', JSON.parse(JSON.stringify(res)))
+				// 	let data = JSON.parse(JSON.stringify(res))
+				// 	this.ybpdata = data
+				// 	//处理实销数据表盘
+				// 	let table0 = this.ybpdata.table0[0]
+				// 	let table = []
+				// 	for (var [key, value] of Object.entries(table0)) {
+				// 		table.push({
+				// 			key,
+				// 			value
+				// 		})
+				// 	}
+				// 	this.tablecolor.forEach((item, index) => {
+				// 		table[index].color = item
+				// 	})
+				// 	this.ybpdata.table0[0] = table
+				// })
 			},
 			//开始日期
 			startdate(e) {
@@ -341,19 +445,14 @@
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
 					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+          let res = {
+            series: [
+              {
+                data: this.cxdata
+              }
+            ]
+          };
 
-					let data = [];
-					this.ybpdata.table3.forEach((item) => {
-						let a = {}
-						a.name = item['标识']
-						a.value = item['总数']
-						data.push(a)
-					})
-					let res = {
-						series: [{
-							data: data
-						}]
-					};
 					this.chartDataB = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
@@ -370,10 +469,10 @@
 					//     ]
 					//   };
 					let data = [];
-					this.ybpdata.table3.forEach((item) => {
+					this.ybpdata.table3[0].forEach((item) => {
 						let a = {}
-						a.name = item['标识']
-						a.value = item['总数']
+						a.name = item['微会员数']
+						a.value = item['非微会员']
 						data.push(a)
 					})
 					let res = {
@@ -407,9 +506,48 @@
 					this.chartDataD = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
+			getServerDataE() {
+				//模拟从服务器获取数据时的延时
+				setTimeout(() => {
+					let data = [];
+					let test = this.ybpdata.table3[0]
+					console.log(test)
+
+					let title = []
+					for (const [key, value] of Object.entries(test)) {
+
+						let a = {}
+						if (key == '微会员数') {
+							a.name = key
+							a.value = Number(value)
+							data.push(a)
+						}
+						let b = {}
+						if (key == '非微会员') {
+							b.name = key
+							b.value = Number(value)
+							data.push(b)
+						}
+						let c = {}
+						if (key == '总数') {
+							c.name = key
+							c.value = Number(value)
+							title.push(c)
+						}
+					}
+					this.optsE.title.name = title[0].name
+					this.optsE.subtitle.name = title[0].value
+					console.log(data, title)
+					let res = {
+						series: [{
+							data: data
+						}]
+					};
+					this.chartDataE = JSON.parse(JSON.stringify(res));
+				}, 500);
+			},
 			//设置
 			left() {
-
 				uni.navigateTo({
 					url: '../../pages/myset/myset'
 				})

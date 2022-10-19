@@ -67,7 +67,8 @@ export const searchSupplier=(params, config = {}) => http.post("mzato/main/app/s
 export const getSupplyType=(params, config = {}) => http.post("mzato/main/app/getSupplyType", params, config)
 //更新部门信息
 export const getDepart=(params, config = {}) => http.post("mzato/main/app/getDepart", params, config)
-
+//在线商店信息
+export const getfendians=(params, config = {}) => http.post("mzato/main/app/getfendians", params, config)
 //报表查询接口
 //12个综合报表
 export const reportForm = (params, config = {}) => http.post("mzato/main/app/reportForm", params, config)
