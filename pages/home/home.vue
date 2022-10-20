@@ -107,6 +107,16 @@
         </view>
       </view>
 
+      <view class="unit">
+        <view>分店销售分析</view>
+        <view class="charts-box">
+          <qiun-data-charts
+              type="column"
+              :opts="optsF"
+              :chartData="chartDataF"
+          />
+        </view>
+      </view>
 		</view>
 
 
@@ -246,7 +256,7 @@
 					},
 					subtitle: {
 						name: "70%",
-						fontSize: 20,
+						fontSize: 12,
 						color: "#7cb5ec"
 					},
 					extra: {
@@ -261,7 +271,31 @@
 							borderColor: "#FFFFFF"
 						}
 					}
-				}
+				},
+        chartDataF: {},
+        optsF: {
+          color: ["#1890FF","#91CB74","#FAC858","#EE6666","#73C0DE","#3CA272","#FC8452","#9A60B4","#ea7ccc"],
+          padding: [15,15,0,5],
+          legend: {},
+          xAxis: {
+            disableGrid: true
+          },
+          yAxis: {
+            data: [
+              {
+                min: 0
+              }
+            ]
+          },
+          extra: {
+            column: {
+              type: "stack",
+              width: 30,
+              activeBgColor: "#000000",
+              activeBgOpacity: 0.08
+            }
+          }
+        }
 			};
 		},
 		components: {
@@ -273,7 +307,9 @@
 			this.getServerDataC();
 			// this.getServerDataD();
 			this.getServerDataE();
-		},
+      this.getServerDataF();
+
+    },
 		onShow() {
 			this.sdate = dayjs().format('YYYY-MM-DD') // 获取当前时间
 			let one = dayjs().unix() - 24 * 60 * 60 // 获取前一天时间戳
@@ -597,6 +633,35 @@
 					this.chartDataE = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
+
+      getServerDataF() {
+        //模拟从服务器获取数据时的延时
+        setTimeout(() => {
+          //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+          let res = {
+            categories: ["2016","2017","2018","2019","2020","2021"],
+            series: []
+          };
+          let table=this.ybpdata.table2
+          let fd=[]
+          let kdbs=[]
+          let yjmle=[]
+          let sxje=[]
+          table.forEach((item)=>{
+            fd.push(item['分店号'])
+            kdbs.push(parseFloat(item['客单笔数']))
+            yjmle.push(parseFloat(item['预计毛利额']))
+            sxje.push(parseFloat(item['实销金额']))
+          })
+          res.categories=fd
+          console.log(kdbs)
+          res.series.push({name:'实销金额',data:sxje},
+              {name:'预计毛利额',data:yjmle},
+              {name:'客单笔数',data:kdbs})
+console.log(res)
+          this.chartDataF = JSON.parse(JSON.stringify(res));
+        }, 500);
+      },
 			//设置
 			left() {
 				uni.navigateTo({
