@@ -290,7 +290,7 @@
           extra: {
             column: {
               type: "stack",
-              width: 30,
+              width: 50,
               activeBgColor: "#000000",
               activeBgOpacity: 0.08
             }
