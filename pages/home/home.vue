@@ -36,50 +36,77 @@
 					</view>
 					<view style="font-size: 18rpx">(默认全部分店)</view>
 				</view>
-
-				<view style="font-size: 30rpx;margin: 10rpx 0">实时销售分析:</view>
-				<view class="unit1box">
-					<view class="box">
-						<view class="boxitem" v-for="(item,index) in ybpdata.table0[0]">
-							<view class="box_left" :style="{backgroundColor:item.color}">
-								<image></image>
-							</view>
-							<view class="box_right">
-								<view>{{item.value==''?'0.00':item.value}}</view>
-								<view>{{item.key}}</view>
-							</view>
-						</view>
-					</view>
-				</view>
 			</view>
+
+      <view class="unit">
+        <view class="unitname">实时销售分析:</view>
+        <view class="unit1box">
+          <view class="box">
+            <view class="boxitem" v-for="(item,index) of ybpdata.table0[0]">
+              <view class="box_left" :style="{backgroundColor:item.color}">
+                <image></image>
+              </view>
+              <view class="box_right">
+                <view>{{item.value==''?'0.00':item.value}}</view>
+                <view>{{item.key}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
 			<!--			&lt;!&ndash; 柱状图 &ndash;&gt;-->
 			<!--			<view class="charts-box">-->
 			<!--				<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />-->
 			<!--			</view>-->
-			<!--			&lt;!&ndash; 饼状图 &ndash;&gt;-->
-			<!--			<view class="charts-box">-->
-			<!--				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />-->
-			<!--			</view>-->
-			<!--			&lt;!&ndash; 玫瑰图 &ndash;&gt;-->
-			<!--			<view class="charts-box">-->
-			<!--				<qiun-data-charts type="rose" :opts="optsC" :chartData="chartDataC" />-->
-			<!--			</view>-->
+
 			<!--			&lt;!&ndash; 折线图 &ndash;&gt;-->
 			<!--			<view class="charts-box">-->
 			<!--				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />-->
 			<!--			</view>-->
-			<!-- 圆环图 -->
-			<view class="charts-box">
-				<qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
-			</view>
-			<!--饼状图促销-->
-			<view class="charts-box">
-				<qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
-			</view>
-      <!--饼状图会员-->
-      <view class="charts-box">
-        <qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
+      <view class="unit">
+        <view class="unitname">会员分析</view>
+        <!-- 圆环图 -->
+        <view class="charts-box">
+          <qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
+        </view>
+        <view class="own">
+          <view class="ownbox" style="padding-right: 40rpx">
+            <view class="uwntop">今日新增</view>
+            <view class="uwnbottom">
+              <view v-for="(item,key) in ybpdata.table3[1]">
+                <view v-if="item.key!='标识'">{{item.key}}</view>
+                <view v-if="item.key!='标识'" style="height: 20rpx">{{item.value}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="ownbox" style="padding-left: 40rpx">
+            <view class="uwntop">昨日新增</view>
+            <view class="uwnbottom">
+              <view v-for="(item,key) in ybpdata.table3[2]">
+                <view v-if="item.key!='标识'">{{item.key}}</view>
+                <view v-if="item.key!='标识'" style="height: 20rpx">{{item.value}}</view>
+              </view>
+            </view>
+          </view>
+
+        </view>
       </view>
+
+      <view class="unit">
+        <view class="unitname">销售占比</view>
+        <view class="percent">
+          <!--饼状图促销-->
+          <view class="charts-box">
+            <qiun-data-charts type="pie" :opts="optsB" :chartData="chartDataB" />
+          </view>
+          <!--饼状图会员-->
+          <view class="charts-box">
+            <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
+          </view>
+        </view>
+      </view>
+
 		</view>
 
 
@@ -100,7 +127,7 @@
 			return {
         bfb:'',//百分比图表
         cxdata:'',//促销图
-        yhdata:'',//会员图
+        hydata:'',//会员图
 				titleHeight: 0, //状态栏和导航栏的总高度
 				statusBarHeight: 0, //状态栏高度
 				naviBarHeight: 0, //导航栏高度
@@ -139,50 +166,44 @@
 						}
 					}
 				},
-				chartDataB: {},
 				ybpdata: '',
+        chartDataB: {},
 				optsB: {
-					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+					color: ["#FC8452", "#9A60B4","#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
 					padding: [5, 5, 5, 5],
 					extra: {
 						pie: {
+              rotate:true,
+              customRadius:40,
 							activeOpacity: 0.5,
-							activeRadius: 10,
+							activeRadius: 5,
 							offsetAngle: 0,
-							labelWidth: 15,
+							labelWidth: 6,
 							border: true,
 							borderWidth: 3,
 							borderColor: "#FFFFFF",
-							linearType: "custom"
+							linearType: "none"
 						}
 					}
 				},
-				chartDataC: {},
-				optsC: {
-					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
-						"#ea7ccc"
-					],
-					padding: [5, 5, 5, 5],
-					legend: {
-						show: true,
-						position: "left",
-						lineHeight: 25
-					},
-					extra: {
-						rose: {
-							type: "radius",
-							minRadius: 50,
-							activeOpacity: 0.5,
-							activeRadius: 10,
-							offsetAngle: 0,
-							labelWidth: 15,
-							border: true,
-							borderWidth: 2,
-							borderColor: "#FFFFFF",
-							linearType: "custom"
-						}
-					}
-				},
+        chartDataC: {},
+        optsC: {
+          color: ["#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4"],
+          padding: [5, 5, 5, 5],
+          extra: {
+            pie: {
+              customRadius:40,
+              activeOpacity: 0.5,
+              activeRadius: 5,
+              offsetAngle: 0,
+              labelWidth: 2,
+              border: true,
+              borderWidth: 3,
+              borderColor: "#FFFFFF",
+              linearType: "none"
+            }
+          }
+        },
 				chartDataD: {},
 				optsD: {
 					color: ["#1890FF", "#91CB74", "#FAC858", "#EE6666", "#73C0DE", "#3CA272", "#FC8452", "#9A60B4",
@@ -230,7 +251,7 @@
 					},
 					extra: {
 						ring: {
-							ringWidth: 40,
+							ringWidth: 50,
 							activeOpacity: 0.5,
 							activeRadius: 10,
 							offsetAngle: 0,
@@ -249,7 +270,7 @@
 		onReady() {
 			// this.getServerDataA();
 			this.getServerDataB();
-			// this.getServerDataC();
+			this.getServerDataC();
 			// this.getServerDataD();
 			this.getServerDataE();
 		},
@@ -315,7 +336,7 @@
 			manage(e) {
 				//处理实销数据表盘
 				let table0 = this.ybpdata.table0[0]
-				let table = []
+        let table = []
 				for (var [key, value] of Object.entries(table0)) {
 					table.push({
 						key,
@@ -326,14 +347,23 @@
 					table[index].color = item
 				})
 				this.ybpdata.table0[0] = table
-				//剔除会员和促销
-        this.bfb= this.ybpdata.table0[0].filter(item => item.key=="促销占比"||item.key=="会员占比")
 
+        //剔除会员和促销
+        let newdata=[]
+        for ( key of this.ybpdata.table0[0]) {
+          if (key.key == '会员占比' || key.key=="促销占比") {
+            newdata.push(key)
+          }
+        }
+        this.bfb=newdata
 
+        let a=this.ybpdata.table0[0].splice(8,1)
+        let b=this.ybpdata.table0[0].splice(9,1)
+        console.log(a,b)
+        console.log(this.ybpdata.table0[0])
 			},
 //会员比和促销比
       percent(){
-
         //促销
         let cxdata=[]
         let a={}
@@ -344,20 +374,18 @@
         b.name=`非${this.bfb[0].key}`
         b.value=10000-this.bfb[0].value.replace("%", "")*100
         cxdata.push(b)
-        console.log(cxdata)
         this.cxdata=cxdata
 //会员
-        let yhdata=[]
+        let hydata=[]
         let c={}
         c.name=this.bfb[1].key
         c.value=this.bfb[1].value.replace("%", "")*100
-        yhdata.push(c)
+        hydata.push(c)
         let d={}
         d.name=`非${this.bfb[1].key}`
         d.value=10000-this.bfb[1].value.replace("%", "")*100
-        yhdata.push(d)
-        console.log(cxdata)
-        this.yhdata=yhdata
+        hydata.push(d)
+        this.hydata=hydata
       },
 			//查询数据
 			getdata(item, index) {
@@ -472,33 +500,22 @@
 					this.chartDataB = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-			//玫瑰图		
-			getServerDataC() {
-				//模拟从服务器获取数据时的延时
-				setTimeout(() => {
-					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-					// let res = {
-					//     series: [
-					//       {
-					//         data: [{"name":"一班","value":50},{"name":"二班","value":30},{"name":"三班","value":20},{"name":"四班","value":18},{"name":"五班","value":8}]
-					//       }
-					//     ]
-					//   };
-					let data = [];
-					this.ybpdata.table3[0].forEach((item) => {
-						let a = {}
-						a.name = item['微会员数']
-						a.value = item['非微会员']
-						data.push(a)
-					})
-					let res = {
-						series: [{
-							data: data
-						}]
-					};
-					this.chartDataC = JSON.parse(JSON.stringify(res));
-				}, 500);
-			},
+      getServerDataC() {
+        //模拟从服务器获取数据时的延时
+        setTimeout(() => {
+          //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+          let res = {
+            series: [
+              {
+                data: this.hydata
+              }
+            ]
+          };
+
+          this.chartDataC = JSON.parse(JSON.stringify(res));
+        }, 500);
+      },
+
 			getServerDataD() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
@@ -527,11 +544,8 @@
 				setTimeout(() => {
 					let data = [];
 					let test = this.ybpdata.table3[0]
-					console.log(test)
-
 					let title = []
 					for (const [key, value] of Object.entries(test)) {
-
 						let a = {}
 						if (key == '微会员数') {
 							a.name = key
@@ -548,12 +562,33 @@
 						if (key == '总数') {
 							c.name = key
 							c.value = Number(value)
-							title.push(c)
+              data.push(c)
+              title.push(c)
 						}
 					}
+          let table1 = []
+          for (var [key, value] of Object.entries(this.ybpdata.table3[1])) {
+            table1.push({
+              key,
+              value
+            })
+          }
+          this.ybpdata.table3[1] = table1
+
+          let table2 = []
+          for (var [key, value] of Object.entries(this.ybpdata.table3[2])) {
+            table2.push({
+              key,
+              value
+            })
+          }
+          this.ybpdata.table3[2] = table2
+
+
+
 					this.optsE.title.name = title[0].name
 					this.optsE.subtitle.name = title[0].value
-					console.log(data, title)
+
 					let res = {
 						series: [{
 							data: data
@@ -586,7 +621,14 @@
 		height: var(--status-bar-height);
 		width: 100%;
 	}
-
+  .unit{
+    padding: 20rpx 0;
+    border-bottom: 1px silver dashed;
+  }
+.unitname{
+  margin: 20rpx 0;
+  font-size: 30rpx;
+}
 	.box {
 		.boxitem {
 			width: 40%;
@@ -683,7 +725,6 @@
 				padding-left: 20px;
 				width: 80px;
 			}
-
 			.navname {
 				display: flex;
 				justify-content: center;
@@ -691,4 +732,37 @@
 			}
 		}
 	}
+  .percent{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+.charts-box{
+  width: 50%;
+}
+  }
+  .own{
+    width: 100%;
+    display: inline-flex;
+    font-size: 22rpx;
+    .ownbox{
+      border-right: 1px silver dashed;
+      padding: 10rpx;
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .uwntop{
+       margin-bottom: 20rpx;
+      }
+      .uwnbottom{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+      }
+    }
+  }
 </style>
