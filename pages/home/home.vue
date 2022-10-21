@@ -100,7 +100,7 @@
       </view>
 
       <view class="unit">
-        <view>分店销售分析</view>
+        <view class="unitname">分店销售分析</view>
         <view class="charts-box">
           <qiun-data-charts
               type="column"
@@ -111,7 +111,7 @@
       </view>
 
       <view class="unit">
-        <view>时段销售分析</view>
+        <view class="unitname">时段销售分析</view>
         <view class="charts-box">
           <qiun-data-charts
               type="line"
@@ -122,7 +122,7 @@
       </view>
 
       <view class="unit">
-        <view>部门经营分析</view>
+        <view class="unitname">部门经营分析</view>
         <view class="charts-box">
           <qiun-data-charts
               type="column"
@@ -133,12 +133,39 @@
       </view>
 
       <view class="unit">
-        <view>15天数据分析</view>
+        <view class="unitname">15天数据分析</view>
         			<!-- 折线图 -->
         			<view class="charts-box">
         				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
         			</view>
       </view>
+
+<!--      树结构显示-->
+      <view class="unit">
+        <view class="unitname">部门经营概况</view>
+        <view class="shu">
+          <!--       一级-->
+          <view class="shu1">
+            <view class="shu1box"  v-for="(item,index) in sdays.table0"  @click="shu1box(item,index)">
+              <u-button :text="item['部门名称']" size="mini"></u-button>
+            </view>
+          </view>
+          <view class="shu2">
+            <view class="shu2box" v-for="(item,index) in shu2data"  @click="shu2box(item,index)">
+              <u-button :text="item['部门分组名']" size="mini"></u-button>
+            </view>
+          </view>
+          <view class="shu3">
+            <view class="shu3box" v-for="(item,index) in Object.entries(xzshu)">
+              <view>{{item[0]}}</view>
+              <view>{{item[1]}}</view>
+            </view>
+          </view>
+
+        </view>
+
+      </view>
+
 		</view>
 	</view>
 </template>
@@ -155,6 +182,8 @@
 	export default {
 		data() {
 			return {
+        xzshu:'',//选择的显示
+        shu2data:'',//二级
         sdays:'',//15天数据
         bfb:'',//百分比图表
         cxdata:'',//促销图
@@ -757,6 +786,23 @@ console.log(res)
         // 	this.ybpdata.table0[0] = table
         // })
       },
+
+      shu1box(item,index){
+        console.log('当前选择',item,index)
+        this.xzshu=item
+        let shu2=[]
+        this.sdays.table2.forEach((i)=>{
+          if(item['部门ID'] == i['部门ID']){
+            shu2.push(i)
+          }
+        })
+        this.shu2data=shu2
+        console.log(shu2)
+      },
+      shu2box(item,index){
+        console.log('当前选择',item,index)
+        this.xzshu=item
+      },
 			//设置
 			left() {
 				uni.navigateTo({
@@ -921,8 +967,31 @@ console.log(res)
         display: flex;
         justify-content: space-between;
         align-items: center;
-
       }
+    }
+  }
+  .shu{
+    width: 100%;
+    .shu1{
+      .shu1box{
+        display: inline-flex;
+       justify-content: flex-start;
+        margin:  0 20rpx;
+      }
+    }
+    .shu2{
+      margin: 20rpx 0;
+      .shu2box{
+        display: inline-flex;
+        justify-content: flex-start;
+        margin:  0 10rpx;
+      }
+    }
+    .shu3box{
+      width: 100%;
+      display: inline-flex;
+      justify-content: space-around;
+      margin: 10rpx;
     }
   }
 </style>
