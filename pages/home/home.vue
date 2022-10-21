@@ -117,6 +117,18 @@
           />
         </view>
       </view>
+
+      <view class="unit">
+        <view>时段销售分析</view>
+        <view class="charts-box">
+          <qiun-data-charts
+              type="line"
+              :opts="optsG"
+              :chartData="chartDataG"
+          />
+        </view>
+      </view>
+
 		</view>
 
 
@@ -295,7 +307,27 @@
               activeBgOpacity: 0.08
             }
           }
-        }
+        },
+        chartDataG:{},
+        optsG: {
+          color: ["#1890FF","#91CB74","#FAC858","#EE6666","#73C0DE","#3CA272","#FC8452","#9A60B4","#ea7ccc"],
+          padding: [15,10,0,15],
+          legend: {},
+          xAxis: {
+            disableGrid: true
+          },
+          yAxis: {
+            gridType: "dash",
+            dashLength: 2
+          },
+          extra: {
+            line: {
+              type: "straight",
+              width: 2
+            }
+          }
+        },
+
 			};
 		},
 		components: {
@@ -308,6 +340,7 @@
 			// this.getServerDataD();
 			this.getServerDataE();
       this.getServerDataF();
+      this.getServerDataG();
 
     },
 		onShow() {
@@ -345,11 +378,7 @@
 				})
 				this.fdlist = cxfdbh
 			}, 1000)
-
-
-
 			this.getdata()
-
 		},
 		onLoad() {
 			uni.setStorageSync('cxbb', true)
@@ -364,13 +393,12 @@
 				if (now) {
 					this.getdata()
 				}
-
 			}
 		},
 		methods: {
 			//处理数据
 			manage(e) {
-				//处理实销数据表盘
+        //处理实销数据表盘
 				let table0 = this.ybpdata.table0[0]
         let table = []
 				for (var [key, value] of Object.entries(table0)) {
@@ -392,11 +420,8 @@
           }
         }
         this.bfb=newdata
-
         let a=this.ybpdata.table0[0].splice(8,1)
         let b=this.ybpdata.table0[0].splice(9,1)
-        console.log(a,b)
-        console.log(this.ybpdata.table0[0])
 			},
 //会员比和促销比
       percent(){
@@ -660,6 +685,36 @@
               {name:'客单笔数',data:kdbs})
 console.log(res)
           this.chartDataF = JSON.parse(JSON.stringify(res));
+        }, 500);
+      },
+
+      getServerDataG() {
+        //模拟从服务器获取数据时的延时
+        setTimeout(() => {
+          //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+          let res = {
+            categories: ["2016","2017","2018","2019","2020","2021"],
+            series: [
+
+            ]
+          };
+          let table=this.ybpdata.table1
+          let kdll=[]
+          let kdj=[]
+          let sxje=[]
+          let sj=[]
+          table.forEach((item)=>{
+            kdll.push(item['客单流量'])
+            kdj.push(parseFloat(item['平均客单价']))
+            sxje.push(parseFloat(item['实销金额']))
+            sj.push(parseFloat(item['时间段']))
+          })
+          res.categories=sj
+          res.series.push({name:'实销金额',data:sxje},
+              {name:'平均客单价',data:kdj},
+              {name:'客单流量',data:kdll})
+          console.log(res)
+          this.chartDataG = JSON.parse(JSON.stringify(res));
         }, 500);
       },
 			//设置
