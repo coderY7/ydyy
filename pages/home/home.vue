@@ -149,6 +149,7 @@
             <view class="shu1box"  v-for="(item,index) in sdays.table0"  @click="shu1box(item,index)">
               <u-button :text="item['部门名称']" size="mini"></u-button>
             </view>
+
           </view>
           <view class="shu2">
             <view class="shu2box" v-for="(item,index) in shu2data"  @click="shu2box(item,index)">
@@ -165,7 +166,6 @@
         </view>
 
       </view>
-
 		</view>
 	</view>
 </template>
@@ -182,6 +182,8 @@
 	export default {
 		data() {
 			return {
+        list:[],
+        current:'0',
         xzshu:'',//选择的显示
         shu2data:'',//二级
         sdays:'',//15天数据
@@ -436,6 +438,9 @@
 			}
 		},
 		methods: {
+      sectionChange(index) {
+        this.current = index;
+      },
 			//处理数据
 			manage(e) {
         //处理实销数据表盘
@@ -798,6 +803,7 @@ console.log(res)
         })
         this.shu2data=shu2
         console.log(shu2)
+
       },
       shu2box(item,index){
         console.log('当前选择',item,index)
