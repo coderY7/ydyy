@@ -54,15 +54,7 @@
           </view>
         </view>
       </view>
-			<!--			&lt;!&ndash; 柱状图 &ndash;&gt;-->
-			<!--			<view class="charts-box">-->
-			<!--				<qiun-data-charts type="column" :opts="optsA" :chartData="chartDataA" />-->
-			<!--			</view>-->
 
-			<!--			&lt;!&ndash; 折线图 &ndash;&gt;-->
-			<!--			<view class="charts-box">-->
-			<!--				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />-->
-			<!--			</view>-->
       <view class="unit">
         <view class="unitname">会员分析</view>
         <!-- 圆环图 -->
@@ -129,9 +121,25 @@
         </view>
       </view>
 
+      <view class="unit">
+        <view>部门经营分析</view>
+        <view class="charts-box">
+          <qiun-data-charts
+              type="column"
+              :opts="optsA"
+              :chartData="chartDataA"
+          />
+        </view>
+      </view>
+
+      <view class="unit">
+        <view>15天数据分析</view>
+        			<!-- 折线图 -->
+        			<view class="charts-box">
+        				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
+        			</view>
+      </view>
 		</view>
-
-
 	</view>
 </template>
 
@@ -147,6 +155,7 @@
 	export default {
 		data() {
 			return {
+        sdays:'',//15天数据
         bfb:'',//百分比图表
         cxdata:'',//促销图
         hydata:'',//会员图
@@ -181,7 +190,7 @@
 					},
 					extra: {
 						column: {
-							type: "group",
+							type: "stack",
 							width: 30,
 							activeBgColor: "#000000",
 							activeBgOpacity: 0.08
@@ -334,10 +343,10 @@
 			navbar
 		},
 		onReady() {
-			// this.getServerDataA();
+			this.getServerDataA();
 			this.getServerDataB();
 			this.getServerDataC();
-			// this.getServerDataD();
+			this.getServerDataD();
 			this.getServerDataE();
       this.getServerDataF();
       this.getServerDataG();
@@ -379,7 +388,9 @@
 				this.fdlist = cxfdbh
 			}, 1000)
 			this.getdata()
-		},
+      this.getdata2()
+
+    },
 		onLoad() {
 			uni.setStorageSync('cxbb', true)
 		},
@@ -505,47 +516,37 @@
 				this.sdate = e
 			},
 			//可视化面板
-			// 柱状图
+			// 部门经营分析
 			getServerDataA() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
 					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
 					let res = {
-						categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
-						series: [{
-								name: "目标值",
-								data: [35, 36, 31, 33, 13, 34]
-							},
-							{
-								name: "完成量",
-								data: [18, 27, 21, 24, 6, 28]
-							}
-						]
+						categories: [],
+						series: []
 					};
 
-					//处理条形图数据
-					let coldata = []
-					let cbe = []
-					let ose = []
-					this.ybpdata.table2.forEach((item) => {
-						cbe.push(item.库存成本额)
-						ose.push(item.库存零售额)
-						coldata.push(item.大类名称)
-					})
-					res.categories = coldata
-					res.series = [{
-						name: '库存成本额',
-						data: cbe
-					}, {
-						name: '库存零售额',
-						data: ose
-					}]
-
-
+					//处理柱形图数据
+					let bmmc = []//名称
+          let bmid=[]//ID
+          let sxje=[]//实销金额
+          let yjml=[]//预计毛利
+          let kdbs=[]//客单笔数
+					this.sdays.table0.forEach((item) => {
+						bmmc.push(item['部门名称'])
+            bmid.push(item['部门ID'])
+            kdbs.push(parseFloat(item['客单笔数']))
+            yjml.push(parseFloat(item['预计毛利']))
+            sxje.push(parseFloat(item['实销金额']))
+          })
+					res.categories = bmmc
+          res.series.push({name:'实销金额',data:sxje},
+              {name:'预计毛利',data:yjml},
+              {name:'客单笔数',data:kdbs})
 					this.chartDataA = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-			//饼状图
+			//销售占比饼状图
 			getServerDataB() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
@@ -561,6 +562,7 @@
 					this.chartDataB = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
+      //销售占比分析
       getServerDataC() {
         //模拟从服务器获取数据时的延时
         setTimeout(() => {
@@ -577,29 +579,8 @@
         }, 500);
       },
 
-			getServerDataD() {
-				//模拟从服务器获取数据时的延时
-				setTimeout(() => {
-					//模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
-					let res = {
-						categories: ["2016", "2017", "2018", "2019", "2020", "2021"],
-						series: [{
-								name: "成交量A",
-								data: [35, 8, 25, 37, 4, 20]
-							},
-							{
-								name: "成交量B",
-								data: [70, 40, 65, 100, 44, 68]
-							},
-							{
-								name: "成交量C",
-								data: [100, 80, 95, 150, 112, 132]
-							}
-						]
-					};
-					this.chartDataD = JSON.parse(JSON.stringify(res));
-				}, 500);
-			},
+
+      //会员分析
 			getServerDataE() {
 				//模拟从服务器获取数据时的延时
 				setTimeout(() => {
@@ -658,7 +639,7 @@
 					this.chartDataE = JSON.parse(JSON.stringify(res));
 				}, 500);
 			},
-
+//分店销售分析
       getServerDataF() {
         //模拟从服务器获取数据时的延时
         setTimeout(() => {
@@ -679,7 +660,7 @@
             sxje.push(parseFloat(item['实销金额']))
           })
           res.categories=fd
-          console.log(kdbs)
+
           res.series.push({name:'实销金额',data:sxje},
               {name:'预计毛利额',data:yjmle},
               {name:'客单笔数',data:kdbs})
@@ -687,16 +668,14 @@ console.log(res)
           this.chartDataF = JSON.parse(JSON.stringify(res));
         }, 500);
       },
-
+//时段分析
       getServerDataG() {
         //模拟从服务器获取数据时的延时
         setTimeout(() => {
           //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
           let res = {
             categories: ["2016","2017","2018","2019","2020","2021"],
-            series: [
-
-            ]
+            series: []
           };
           let table=this.ybpdata.table1
           let kdll=[]
@@ -707,15 +686,76 @@ console.log(res)
             kdll.push(item['客单流量'])
             kdj.push(parseFloat(item['平均客单价']))
             sxje.push(parseFloat(item['实销金额']))
-            sj.push(parseFloat(item['时间段']))
+            sj.push(item['时间段'])
           })
           res.categories=sj
           res.series.push({name:'实销金额',data:sxje},
               {name:'平均客单价',data:kdj},
               {name:'客单流量',data:kdll})
-          console.log(res)
           this.chartDataG = JSON.parse(JSON.stringify(res));
         }, 500);
+      },
+//15天数据
+      getServerDataD() {
+        //模拟从服务器获取数据时的延时
+        setTimeout(() => {
+          //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+          let res = {
+            categories: ['time'],
+            series: [{
+              name: "",
+              data: [0,0]
+            },]
+          };
+          this.chartDataD = JSON.parse(JSON.stringify(res));
+        }, 500);
+      },
+      getdata2(item, index) {
+        this.xzindex = index
+        let getpcadmindaysaledata = {
+          access_token: uni.getStorageSync('access_token'),
+          saledate: item ? item.value : this.sdate,
+          datamark: 'sdays',
+          selfdbh: this.xzfd ? this.xzfd : 'ALL'
+        }
+        //test
+        uni.request({
+          url: 'http://webapibeta.mzsale.com/mzato/main/app/getappsalereport', //仅为示例，并非真实接口地址。
+          data: {
+            saledate: "2022-10-19",
+            datamark: "sdays",
+            selfdbh: 'ALL',
+            sn: "MOPMPI-MLKKNG-KFOLNF-QINPHH"
+          },
+          method: "POST",
+          header: {
+            'Content-Type': 'application/json',
+          },
+          success: (res) => {
+            console.log('数据', JSON.parse(res.data))
+            let data = JSON.parse(res.data)
+            this.sdays = data
+          }
+        });
+        //实际方法
+        // getappsalereport(getpcadmindaysaledata).then((res) => {
+        // 	console.log('仪表盘数据', JSON.parse(JSON.stringify(res)))
+        // 	let data = JSON.parse(JSON.stringify(res))
+        // 	this.ybpdata = data
+        // 	//处理实销数据表盘
+        // 	let table0 = this.ybpdata.table0[0]
+        // 	let table = []
+        // 	for (var [key, value] of Object.entries(table0)) {
+        // 		table.push({
+        // 			key,
+        // 			value
+        // 		})
+        // 	}
+        // 	this.tablecolor.forEach((item, index) => {
+        // 		table[index].color = item
+        // 	})
+        // 	this.ybpdata.table0[0] = table
+        // })
       },
 			//设置
 			left() {
