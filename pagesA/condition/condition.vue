@@ -239,7 +239,11 @@ export default {
         fdbh: uni.getStorageSync('fdbh'),
         condition: this.tj
       }
+      uni.showLoading({
+        title: '加载中'
+      });
       getlist(data).then((res) => {
+        uni.hideLoading();
         this.result=res.data
         this.sumdata=res.sumdata
         //this.bdt=Object.keys(this.result[0])
