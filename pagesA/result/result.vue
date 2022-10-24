@@ -21,21 +21,36 @@
         </view>
       </view>
       <!--    表格数据展示-->
+<!--      <view v-if="!cut">-->
+<!--        <view class="tablebox">-->
+<!--          <uni-table border stripe emptyText="暂无更多数据">-->
+<!--            &lt;!&ndash; 表头行 &ndash;&gt;-->
+<!--            <uni-tr>-->
+<!--              <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>-->
+<!--            </uni-tr>-->
+<!--            &lt;!&ndash; 表格数据行 &ndash;&gt;-->
+<!--            <uni-tr v-for="(item,index) in result">-->
+<!--              <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>-->
+<!--            </uni-tr>-->
+<!--          </uni-table>-->
+
+<!--        </view>-->
+<!--      </view>-->
+
       <view v-if="!cut">
         <view class="tablebox">
-          <uni-table border stripe emptyText="暂无更多数据">
-            <!-- 表头行 -->
-            <uni-tr>
-              <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>
-            </uni-tr>
-            <!-- 表格数据行 -->
-            <uni-tr v-for="(item,index) in result">
-              <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>
-            </uni-tr>
-          </uni-table>
-
+          <kingTable
+              :tableData="tableData"
+              :tableHeadL="tableHeadL"
+              :tableHeadR="tableHeadR"
+              :tableHeadLKey="tableHeadLKey"
+              :tableHeadRKey="tableHeadRKey"
+              @getCellVal="getCellVal()"
+          ></kingTable>
         </view>
       </view>
+
+
 
       <!--    卡片显示-->
       <view v-if="cut">
@@ -63,6 +78,7 @@
 
 <script>
 	import selectSwitch from "@/components/xuan-switch/xuan-switch.vue";
+  import kingTable from '@/components/kingTable/kingTable.vue';
 	import navbar from '../../components/nav.vue'
 	export default {
 		data() {
@@ -72,20 +88,57 @@
         result:null,//查询结果
         sumdata:'',//数据汇总
         cut:false,//切换展示
+        // 是否两个表头
+        isTwoHead: Boolean,
+        // 主表数据（后端返回来）
+        tableData: [],
+        // 左侧表头
+        tableHeadL: [],
+        // 右侧表头
+        tableHeadR: [],
+        // 自定义左侧表头对应的字段（长度一定要跟表头的长度想对应）
+        tableHeadLKey: [],
+        // 自定义右侧表头对应的字段（长度一定要跟表头的长度想对应）
+        tableHeadRKey: []
+
       };
 		},
 		components: {
 		selectSwitch,
-		navbar
+		navbar,
+      kingTable
 		},
     onLoad(option){
       console.log(option)
       this.bdt=JSON.parse(option.bdt)
+      this.tableHeadL=[this.bdt[0],this.bdt[1]]
+      this.tableHeadLKey=[this.bdt[0],this.bdt[1]]
+      //右侧表头
+      let tableHeadR=[]
+      this.bdt.forEach((item,index)=>{
+        if(index>1){
+          tableHeadR.push(item)
+        }
+      })
+      this.tableHeadR=tableHeadR
+      this.tableHeadRKey=tableHeadR
+
       this.result=JSON.parse(option.result)
       this.sumdata=JSON.parse(option.sumdata)
 
+      this.tableData = this.result;
+
     },
     methods:{
+      // 点击单元格获取的值
+      getCellVal(e) {
+        console.log(e);
+        let data=JSON.stringify(e[0])
+        console.log(data)
+        uni.navigateTo({
+          url: `../../pagesA/detail/detail?list=${data}`
+        });
+      },
 		//自定义返回
 		    left() {
 		      uni.navigateBack({

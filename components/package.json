@@ -1,0 +1,12 @@
+{
+    "id": "langjitianya_king-table",
+    "name": "适用微信小程序的表格table，冻结行，冻结列，可左右，上下滑动",
+    "version": "1.1.0",
+    "description": "适用微信小程序的表格table，冻结行，冻结列，可左右，上下滑动",
+    "keywords": [
+        "uniapp",
+        "微信小程序",
+        "表格",
+        "table"
+    ]
+}
