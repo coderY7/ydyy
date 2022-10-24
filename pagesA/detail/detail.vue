@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<navbar title='结果详情' @lefts=left()></navbar>
+		<navbar title='结果详情' @lefts=left() leftname="<"></navbar>
     <view class="container">
       <view>
         <view class="name">商品详细:</view>
@@ -23,13 +23,10 @@
 			};
 		},
 		components: {
-		
 		navbar
 		},
     onLoad(option){
-      console.log(option)
       this.datas=JSON.parse(option.list)
-      console.log(Object.entries(this.datas));
     },
 	methods:{
 		//自定义返回
