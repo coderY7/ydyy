@@ -46,11 +46,11 @@
   padding: 20rpx;
   background-color: #ffffff;
   border-radius: 20rpx;
-
+  border: thick double #85d8f3;
 }
 .name{
   font-size: 40rpx;
-  color: #4f99ff;
+  color: #85d8f3;
   margin-left: 30rpx;
 }
 .box{
