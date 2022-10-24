@@ -82,9 +82,11 @@
 		},
 		watch: {
 			userid: function(newValue, oldValue) {
-				if (newValue.length == '5') {
-					this.useryz()
-				} else {}
+        if(newValue){
+          if (newValue.length == '5') {
+            this.useryz()
+          } else {}
+        }
 			}
 		},
 		methods: {
