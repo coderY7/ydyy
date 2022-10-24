@@ -380,8 +380,8 @@
 			this.getServerDataC();
 			this.getServerDataD();
 			this.getServerDataE();
-      this.getServerDataF();
-      this.getServerDataG();
+			this.getServerDataF();
+			this.getServerDataG();
 
     },
 		onShow() {
@@ -444,8 +444,7 @@
       },
 			//处理数据
 			manage(e) {
-        //处理实销数据表盘
-				let table0 = this.ybpdata.table0[0]
+        let table0 = this.ybpdata.table0[0]
         let table = []
 				for (var [key, value] of Object.entries(table0)) {
 					table.push({
@@ -466,8 +465,19 @@
           }
         }
         this.bfb=newdata
-        let a=this.ybpdata.table0[0].splice(8,1)
-        let b=this.ybpdata.table0[0].splice(9,1)
+
+        this.ybpdata.table0[0].forEach((item,index)=>{
+          if (item.key == '会员占比') {
+            let a=this.ybpdata.table0[0].splice(index,1)
+          }
+          if (item.key=="促销占比") {
+            let a=this.ybpdata.table0[0].splice(index,1)
+          }
+          if (item.key=="Result") {
+            let a=this.ybpdata.table0[0].splice(index,1)
+          }
+        })
+        console.log(this.ybpdata.table0[0])
 			},
 //会员比和促销比
       percent(){
@@ -517,9 +527,9 @@
 						'Content-Type': 'application/json',
 					},
 					success: (res) => {
-
 						console.log('仪表盘数据', JSON.parse(res.data))
 						let data = JSON.parse(res.data)
+
 						this.ybpdata = data
 						this.manage()
             this.percent()
