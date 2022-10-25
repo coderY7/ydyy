@@ -166,6 +166,7 @@ export default {
    this.cxfdbh=uni.getStorageSync('basic').FDINFO
     this.cxsppp=uni.getStorageSync('basic').PPINFO
     this.cxsjht=uni.getStorageSync('basic').SJHTTYPE
+
     //处理分店下拉框数据
     let cxfdbh=[];
    this.cxfdbh.forEach((item)=>{

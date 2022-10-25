@@ -37,55 +37,58 @@
 				</view>
 			</view>
 
-      <view class="unit">
-        <view class="unitname">实时销售分析:</view>
-        <view class="unit1box">
-          <view class="box">
-            <view class="boxitem" v-for="(item,index) of ybpdata.table0[0]">
-              <view class="box_left" :style="{backgroundColor:item.color}">
-                <image></image>
-              </view>
-              <view class="box_right">
-                <view>{{item.value==''?'0.00':item.value}}</view>
-                <view>{{item.key}}</view>
+      <uni-group title="实时销售分析" top="20">
+        <view class="unit">
+          <view class="unit1box">
+            <view class="box">
+              <view class="boxitem" v-for="(item,index) of ybpdata.table0[0]">
+                <view class="box_left" :style="{backgroundColor:item.color}">
+                  <image></image>
+                </view>
+                <view class="box_right">
+                  <view>{{item.value==''?'0.00':item.value}}</view>
+                  <view>{{item.key}}</view>
+                </view>
               </view>
             </view>
           </view>
         </view>
-      </view>
+      </uni-group>
 
-      <view class="unit">
-        <view class="unitname">会员分析</view>
-        <!-- 圆环图 -->
-        <view class="charts-box">
-          <qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
-        </view>
-        <view class="own">
-          <view class="ownbox" style="padding-right: 40rpx">
-            <view class="uwntop">今日新增</view>
-            <view class="uwnbottom">
-              <view v-for="(item,key) in ybpdata.table3[1]">
-                <view v-if="item.key!='标识'">{{item.key}}</view>
-                <view v-if="item.key!='标识'" style="height: 20rpx">{{item.value}}</view>
-              </view>
-            </view>
+      <uni-group title="会员分析" top="20">
+        <view class="unit">
+          <view class="charts-box">
+            <qiun-data-charts type="ring" :opts="optsE" :chartData="chartDataE" />
           </view>
 
-          <view class="ownbox" style="padding-left: 40rpx">
-            <view class="uwntop">昨日新增</view>
-            <view class="uwnbottom">
-              <view v-for="(item,key) in ybpdata.table3[2]">
-                <view v-if="item.key!='标识'">{{item.key}}</view>
-                <view v-if="item.key!='标识'" style="height: 20rpx">{{item.value}}</view>
+          <!-- 圆环图 -->
+          <view class="own">
+            <view class="ownbox" style="padding-right: 40rpx">
+              <view class="uwntop">今日新增</view>
+              <view class="uwnbottom">
+                <view v-for="(item,key) in ybpdata.table3[1]" class="uwnbottombox">
+                  <view v-if="item.key!='标识'">{{item.key}}</view>
+                  <view v-if="item.key!='标识'" style="height: 30rpx;font-size: 26rpx;">{{item.value}}</view>
+                </view>
               </view>
             </view>
+
+            <view class="ownbox" style="padding-left: 40rpx">
+              <view class="uwntop">昨日新增</view>
+              <view class="uwnbottom">
+                <view v-for="(item,key) in ybpdata.table3[2]" class="uwnbottombox">
+                  <view v-if="item.key!='标识'">{{item.key}}</view>
+                  <view v-if="item.key!='标识'" style="height: 30rpx;font-size: 26rpx;">{{item.value}}</view>
+                </view>
+              </view>
+            </view>
+
           </view>
-
         </view>
-      </view>
 
-      <view class="unit">
-        <view class="unitname">销售占比</view>
+      </uni-group>
+
+      <uni-group title="销售占比" top="20">
         <view class="percent">
           <!--饼状图促销-->
           <view class="charts-box">
@@ -96,78 +99,72 @@
             <qiun-data-charts type="pie" :opts="optsC" :chartData="chartDataC" />
           </view>
         </view>
-      </view>
+      </uni-group>
 
-      <view class="unit">
-        <view class="unitname">分店销售分析</view>
-        <view class="charts-box">
-          <qiun-data-charts
-              type="column"
-              :opts="optsF"
-              :chartData="chartDataF"
-          />
-        </view>
-      </view>
-
-      <view class="unit">
-        <view class="unitname">时段销售分析</view>
-        <view class="charts-box">
-          <qiun-data-charts
-              type="line"
-              :opts="optsG"
-              :chartData="chartDataG"
-          />
-        </view>
-      </view>
-
-      <view class="unit">
-        <view class="unitname">部门经营分析</view>
-        <view class="charts-box">
-          <qiun-data-charts
-              type="column"
-              :opts="optsA"
-              :chartData="chartDataA"
-          />
-        </view>
-      </view>
-
-      <view class="unit">
-        <view class="unitname">15天数据分析</view>
-        			<!-- 折线图 -->
-        			<view class="charts-box">
-        				<qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
-        			</view>
-      </view>
-
-<!--      树结构显示-->
-      <view class="unit">
-        <view class="unitname">部门经营概况</view>
-        <view class="shu">
-          <!--       一级-->
-          <view class="shu1">
-            <view class="shu1box"  v-for="(item,index) in sdays.table0"  @click="shu1box(item,index)">
-              <u-button :text="item['部门名称']" size="mini"></u-button>
-            </view>
-
+      <uni-group title="分店销售分析" top="20">
+        <view class="unit">
+          <view class="charts-box">
+            <qiun-data-charts
+                type="column"
+                :opts="optsF"
+                :chartData="chartDataF"
+            />
           </view>
+        </view>
+      </uni-group>
 
-          <view class="shu2">
-            <view class="shu2box" v-for="(item,index) in shu2data"  @click="shu2box(item,index)">
-              <u-button :text="item['部门分组名']" size="mini"></u-button>
-            </view>
+      <uni-group title="时段销售分析" top="20">
+        <view class="unit">
+          <view class="charts-box">
+            <qiun-data-charts
+                type="line"
+                :opts="optsG"
+                :chartData="chartDataG"
+            />
           </view>
+        </view>
+      </uni-group>
 
-          <view class="shu3">
-            <view class="shu3box" v-for="(item,index) in Object.entries(xzshu)">
-              <view>{{item[0]}}</view>
-              <view>{{item[1]}}</view>
+      <uni-group title="部门经营分析" top="20">
+        <view class="unit">
+          <view class="charts-box">
+            <qiun-data-charts
+                type="column"
+                :opts="optsA"
+                :chartData="chartDataA"
+            />
+          </view>
+        </view>
+
+      </uni-group>
+
+      <uni-group title="15天数据分析" top="20">
+        <view class="unit">
+          <!-- 折线图 -->
+          <view class="charts-box">
+            <qiun-data-charts type="line" :opts="optsD" :chartData="chartDataD" />
+          </view>
+        </view>
+
+      </uni-group>
+
+      <uni-group title="部门经营概况" top="20">
+        <view class="unit">
+          <view class="shu">
+            <uni-segmented-control :current="current1" :values="list1" @clickItem="onClickItem1" styleType="button" activeColor="#4f99ff"></uni-segmented-control>
+
+            <uni-segmented-control :current="current2" :values="list2" @clickItem="onClickItem2" styleType="text" activeColor="#4f99ff"></uni-segmented-control>
+
+            <view class="shu3" v-if="xzshu.length!=0">
+              <view class="shu3box" v-for="(item,index) in Object.entries(xzshu)">
+                <view>{{item[0]}}</view>
+                <view>{{item[1]}}</view>
+              </view>
             </view>
           </view>
-
-
         </view>
+      </uni-group>
 
-      </view>
 		</view>
 	</view>
 </template>
@@ -184,9 +181,11 @@
 	export default {
 		data() {
 			return {
-        list:[],
-        current:'0',
-        xzshu:'',//选择的显示
+        list1:[],//分段的列表
+        list2:[],//分段的列表
+        current1:'',
+        current2:'',
+        xzshu:[],//选择的显示
         shu2data:'',//二级
         sdays:'',//15天数据
         bfb:'',//百分比图表
@@ -383,6 +382,7 @@
 			this.getServerDataE();
 			this.getServerDataF();
 			this.getServerDataG();
+      this.section1()
 
     },
 		onShow() {
@@ -440,9 +440,7 @@
 			}
 		},
 		methods: {
-      sectionChange(index) {
-        this.current = index;
-      },
+
 			//处理数据
 			manage(e) {
         let table0 = this.ybpdata.table0[0]
@@ -781,6 +779,8 @@ console.log(res)
             console.log('数据', JSON.parse(res.data))
             let data = JSON.parse(res.data)
             this.sdays = data
+            //默认显示数据
+            this.xzshu=this.sdays.table0[0]
           }
         });
         //实际方法
@@ -804,23 +804,41 @@ console.log(res)
         // })
       },
 
-      shu1box(item,index){
-        console.log('当前选择',item,index)
-        this.xzshu=item
-        let shu2=[]
-        this.sdays.table2.forEach((i)=>{
-          if(item['部门ID'] == i['部门ID']){
-            shu2.push(i)
-          }
+      section1(){
+       let list=[]
+        this.sdays.table0.forEach((item)=>{
+          list.push(item['部门名称'])
         })
+        this.list1=list
+      },
+      section2(item){
+        let list=[]
+        let shu2=[]
+          this.sdays.table2.forEach((i)=>{
+            if(item['部门ID'] == i['部门ID']){
+              console.log(i)
+              shu2.push(i)
+              list.push(i['部门分组名'])
+            }
+        })
+        this.list2=list
         this.shu2data=shu2
-        console.log(shu2)
 
       },
-      shu2box(item,index){
-        console.log('当前选择',item,index)
-        this.xzshu=item
+      onClickItem1(e) {
+        if (this.current1 != e.currentIndex) {
+          this.current1 = e.currentIndex;
+        }
+        this.xzshu=this.sdays.table0[e.currentIndex]
+        this.section2(this.sdays.table0[e.currentIndex])
       },
+      onClickItem2(e) {
+        if (this.current2 != e.currentIndex) {
+          this.current2 = e.currentIndex;
+        }
+        this.xzshu=this.shu2data[e.currentIndex]
+      },
+
 			//设置
 			left() {
 				uni.navigateTo({
@@ -846,7 +864,7 @@ console.log(res)
 		width: 100%;
 	}
   .unit{
-    padding: 20rpx 0;
+    padding: 30rpx 0;
     border-bottom: 1px silver dashed;
   }
 .unitname{
@@ -971,20 +989,27 @@ console.log(res)
     font-size: 22rpx;
     .ownbox{
       border-right: 1px silver dashed;
-      padding: 10rpx;
+      padding: 20rpx;
       width: 48%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       .uwntop{
-       margin-bottom: 20rpx;
+       margin-bottom: 30rpx;
       }
       .uwnbottom{
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .uwnbottombox{
+          display: flex;
+          flex-direction: column;
+          padding: 10rpx 0;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
   }
