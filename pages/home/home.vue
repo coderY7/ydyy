@@ -1,6 +1,5 @@
 <template>
 	<view>
-
 		<navbar title='首页' @lefts=left() leftname="设置"></navbar>
 		<view class="container">
 			<view class="unit1">
@@ -151,11 +150,13 @@
             </view>
 
           </view>
+
           <view class="shu2">
             <view class="shu2box" v-for="(item,index) in shu2data"  @click="shu2box(item,index)">
               <u-button :text="item['部门分组名']" size="mini"></u-button>
             </view>
           </view>
+
           <view class="shu3">
             <view class="shu3box" v-for="(item,index) in Object.entries(xzshu)">
               <view>{{item[0]}}</view>
@@ -1004,11 +1005,23 @@ console.log(res)
         margin:  0 10rpx;
       }
     }
-    .shu3box{
-      width: 100%;
-      display: inline-flex;
-      justify-content: space-around;
-      margin: 10rpx;
+    .shu3{
+      margin: 20rpx 50rpx 20rpx 50rpx;
+      padding: 20rpx;
+      background-color: #ffffff;
+      border-radius: 20rpx;
+      border: thick double #85d8f3;
     }
+    .shu3box{
+      display: flex;
+      justify-content: space-between;
+      padding: 10rpx;
+      border-bottom: 0.5px solid #e2e2e2;
+    }
+  }
+  page{
+    background: url('../../static/shilu-login/logobj.png') no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
   }
 </style>

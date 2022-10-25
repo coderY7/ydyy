@@ -1,6 +1,5 @@
 <template>
 	<view>
-		
 		<navbar title='登录' @lefts=left()></navbar>
     <view class="container">
       <view class="header">
@@ -284,6 +283,9 @@
 </script>
 
 <style lang="scss">
+page{
+
+}
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -392,5 +394,7 @@
 			}
 		}
 	}
-	
+
+
+
 </style>

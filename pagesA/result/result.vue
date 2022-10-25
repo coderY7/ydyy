@@ -37,18 +37,21 @@
 <!--        </view>-->
 <!--      </view>-->
 
-      <view v-if="!cut">
-        <view class="tablebox">
-          <kingTable
-              :tableData="tableData"
-              :tableHeadL="tableHeadL"
-              :tableHeadR="tableHeadR"
-              :tableHeadLKey="tableHeadLKey"
-              :tableHeadRKey="tableHeadRKey"
-              @getCellVal="getCellVal()"
-          ></kingTable>
+      <view v-if="result.length!=0">
+        <view v-if="!cut">
+          <view class="tablebox">
+            <kingTable
+                :tableData="tableData"
+                :tableHeadL="tableHeadL"
+                :tableHeadR="tableHeadR"
+                :tableHeadLKey="tableHeadLKey"
+                :tableHeadRKey="tableHeadRKey"
+                @getCellVal="getCellVal()"
+            ></kingTable>
+          </view>
         </view>
       </view>
+
 
 
 
@@ -73,6 +76,9 @@
 
       </view>
     </view>
+
+    <view v-if="result.length==0" style="margin: 0 20rpx">未查询到数据</view>
+
 	</view>
 </template>
 

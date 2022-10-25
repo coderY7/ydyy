@@ -151,4 +151,9 @@
 			}
 		}
 	}
+  page{
+    background: url('../../static/shilu-login/logobj.png') no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+  }
 </style>
