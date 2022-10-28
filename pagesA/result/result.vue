@@ -1,252 +1,1 @@
-<template>
-	<view>
-	<navbar title='查询结果' @lefts=left()></navbar>
-    <view class="container">
-      <view class="fixation">
-        <view class="switch">
-          <selectSwitch @change="changeSwitch" />
-        </view>
-        <view class="box1">
-          <view v-for="(item,index) in Object.entries(sumdata[0])" class="unit4_box">
-            <view>
-              <view class="unit4_box_item">
-                <view class="unit4_box_value">{{item[1]}}</view>
-              </view>
-              <view class="unit4_box_item">
-                <view class="unit4_box_key">{{item[0]}}</view>
-              </view>
-            </view>
-
-          </view>
-        </view>
-      </view>
-      <!--    表格数据展示-->
-<!--      <view v-if="!cut">-->
-<!--        <view class="tablebox">-->
-<!--          <uni-table border stripe emptyText="暂无更多数据">-->
-<!--            &lt;!&ndash; 表头行 &ndash;&gt;-->
-<!--            <uni-tr>-->
-<!--              <uni-th align="center" v-for="(item,index) in bdt" >{{item}}</uni-th>-->
-<!--            </uni-tr>-->
-<!--            &lt;!&ndash; 表格数据行 &ndash;&gt;-->
-<!--            <uni-tr v-for="(item,index) in result">-->
-<!--              <uni-td v-for="(items,key) of Object.values(item)">{{items}}</uni-td>-->
-<!--            </uni-tr>-->
-<!--          </uni-table>-->
-
-<!--        </view>-->
-<!--      </view>-->
-
-      <view v-if="result.length!=0">
-        <view v-if="!cut">
-          <view class="tablebox">
-            <kingTable
-                :tableData="tableData"
-                :tableHeadL="tableHeadL"
-                :tableHeadR="tableHeadR"
-                :tableHeadLKey="tableHeadLKey"
-                :tableHeadRKey="tableHeadRKey"
-                @getCellVal="getCellVal()"
-            ></kingTable>
-          </view>
-        </view>
-      </view>
-
-
-
-
-      <!--    卡片显示-->
-      <view v-if="cut">
-        <view class="card">
-          <view v-for="(item,index) in result" class="box" @click="detail(item,index)">
-            <view class="boxunit1">
-              <text class="boxunit1_name">名称:{{item['商品名称']}}</text>
-              <text class="boxunit1_name">¥{{item['批发价格']}}</text>
-            </view>
-            <view class="boxunit2">
-              <text>编号:{{item['商品编码']}}</text>
-              <text>库存:{{item['库存数量']}}</text>
-            </view>
-            <view class="boxunit3">
-              <view>商家:{{item['商家编号']}}</view>
-            </view>
-
-          </view>
-        </view>
-
-      </view>
-    </view>
-
-    <view v-if="result.length==0" style="margin: 0 20rpx">未查询到数据</view>
-
-	</view>
-</template>
-
-<script>
-	import selectSwitch from "@/components/xuan-switch/xuan-switch.vue";
-  import kingTable from '@/components/kingTable/kingTable.vue';
-	import navbar from '../../components/nav.vue'
-	export default {
-		data() {
-			return {
-        bgColor:'#4f99ff',
-        bdt:[],//表头
-        result:null,//查询结果
-        sumdata:'',//数据汇总
-        cut:false,//切换展示
-        // 是否两个表头
-        isTwoHead: Boolean,
-        // 主表数据（后端返回来）
-        tableData: [],
-        // 左侧表头
-        tableHeadL: [],
-        // 右侧表头
-        tableHeadR: [],
-        // 自定义左侧表头对应的字段（长度一定要跟表头的长度想对应）
-        tableHeadLKey: [],
-        // 自定义右侧表头对应的字段（长度一定要跟表头的长度想对应）
-        tableHeadRKey: []
-
-      };
-		},
-		components: {
-		selectSwitch,
-		navbar,
-      kingTable
-		},
-    onLoad(option){
-      console.log(option)
-      this.bdt=JSON.parse(option.bdt)
-      this.tableHeadL=[this.bdt[0],this.bdt[1]]
-      this.tableHeadLKey=[this.bdt[0],this.bdt[1]]
-      //右侧表头
-      let tableHeadR=[]
-      this.bdt.forEach((item,index)=>{
-        if(index>1){
-          tableHeadR.push(item)
-        }
-      })
-      this.tableHeadR=tableHeadR
-      this.tableHeadRKey=tableHeadR
-
-      this.result=JSON.parse(option.result)
-      this.sumdata=JSON.parse(option.sumdata)
-
-      this.tableData = this.result;
-
-    },
-    methods:{
-      // 点击单元格获取的值
-      getCellVal(e) {
-        console.log(e);
-        let data=JSON.stringify(e[0])
-        console.log(data)
-        uni.navigateTo({
-          url: `../../pagesA/detail/detail?list=${data}`
-        });
-      },
-		//自定义返回
-		    left() {
-		      uni.navigateBack({
-		        delta: 1
-		      });
-		    },
-		changeSwitch(isSwitch){ 
-			// console.log(isSwitch)
-			this.cut=!this.cut
-			},
-      //显示所有数据
-      detail(item,index){
-        console.log('跳转',item)
-        let data=JSON.stringify(item)
-        console.log(data)
-        uni.navigateTo({
-          url: `../../pagesA/detail/detail?list=${data}`
-        });
-      }
-
-    }
-	}
-</script>
-
-<style lang="scss">
-page{
-  background-color: #E5E5E5;
-}
-.container{
-
-}
-.switch{
-  margin: 20rpx;
-}
-.card{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-  .box{
-    margin: 20rpx 0;
-    width: 700rpx;
-    border-radius: 30rpx;
-    background-color: #ffffff;
-    font-weight: 400;
-    .boxunit1{
-      padding: 20rpx 20rpx;
-      display: flex;
-      justify-content: space-between;
-      font-size: 40rpx;
-	  border-bottom: 1px #E5E5E5 solid;
-      .boxunit1_name{
-        color: #52c8f1;
-      }
-    }
-    .boxunit2{
-      font-size: 30rpx;
-      padding: 10rpx 20rpx;
-      display: flex;
-      justify-content: space-between;
-    }
-    .boxunit3{
-      font-size: 30rpx;
-      padding: 10rpx 20rpx;
-      display: flex;
-    }
-  }
-}
-.tablebox{
-  margin: 0 20rpx;
-}
-.box1{
-  margin: 20rpx auto;
-  background-color: #ffffff;
-  border-radius: 30rpx;
-  width: 700rpx;
-  display: flex;
-  justify-content: space-between;
-}
-.unit4_box{
- display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20rpx;
-  .unit4_box_item{
-    font-size: 30rpx;
-    margin: 20rpx;
-    .unit4_box_value{
-      font-size: 40rpx;
-      color: #52c8f1;
-    }
-    .unit4_box_key{
-      font-size: 26rpx;
-    }
-  }
-}
-.fixation{
-  top: 150rpx;
-  position: -webkit-sticky;
-  position: sticky;
-  z-index: 9999999;
-  background-color: #E5E5E5;
-  padding: 20rpx 0;
-}
-</style>
+<template>	<view>		<navbar title='查询结果' @lefts=left()></navbar>		<view class="container">			<view class="fixation">				<view class="switch">					<selectSwitch @change="changeSwitch" />				</view>				<view class="box1">          <u-scroll-list>            <view v-for="(item,index) in Object.entries(sumdata[0])" class="unit4_box">              <view>                <view class="unit4_box_item unit4_box_item1">                  <view class="unit4_box_value">{{item[1]}}</view>                </view>                <view class="unit4_box_item">                  <view class="unit4_box_key">{{item[0]}}</view>                </view>              </view>            </view>          </u-scroll-list>				</view>      </view>			<view v-if="result.length!=0">				<view v-if="!cut">					<view class="tablebox">						<kingTable :tableData="showdata" :tableHeadL="tableHeadL" :tableHeadR="tableHeadR"							:tableHeadLKey="tableHeadLKey" :tableHeadRKey="tableHeadRKey" @getCellVal="getCellVal()">						</kingTable>					</view>					<!--          分页器-->					<uni-pagination title="" :pageSize="pageSize" show-icon="true" :total="total" :current="page"						@change="dj()"></uni-pagination>				</view>			</view>			<!--    卡片显示-->			<view v-if="cut">				<view class="card">					<view v-for="(item,index) in resultcard" class="box" @click="detail(item,index)">						<view class="boxunit1">							<text class="boxunit1_name">名称:{{item['商品名称']}}</text>							<text class="boxunit1_name">¥{{item['批发价格']}}</text>						</view>						<view class="boxunit2">							<text>编号:{{item['商品编码']}}</text>							<text>库存:{{item['库存数量']}}</text>						</view>						<view class="boxunit3">							<view>商家:{{item['商家编号']}}</view>						</view>					</view>				</view>			</view>		</view>		<view v-if="result.length==0" style="margin: 0 20rpx">未查询到数据</view>	</view></template><script>	import selectSwitch from "@/components/xuan-switch/xuan-switch.vue";	import kingTable from '@/components/kingTable/kingTable.vue';	import navbar from '../../components/nav.vue'	export default {		data() {			return {				resultcard: '', //卡片数据				showdata: '', //展示数据				page: '', //当前页				total: '', //数据总量				pageSize: 20, //一页数量				bgColor: '#4f99ff',				bdt: [], //表头				result: null, //查询结果				sumdata: '', //数据汇总				cut: false, //切换展示				// 是否两个表头				isTwoHead: Boolean,				// 主表数据（后端返回来）				tableData: [],				// 左侧表头				tableHeadL: [],				// 右侧表头				tableHeadR: [],				// 自定义左侧表头对应的字段（长度一定要跟表头的长度想对应）				tableHeadLKey: [],				// 自定义右侧表头对应的字段（长度一定要跟表头的长度想对应）				tableHeadRKey: []			};		},		components: {			selectSwitch,			navbar,			kingTable		},		onLoad(option) {			console.log(option)			this.bdt = JSON.parse(option.bdt)			this.tableHeadL = [this.bdt[0], this.bdt[1]]			this.tableHeadLKey = [this.bdt[0], this.bdt[1]]			//右侧表头			let tableHeadR = []			this.bdt.forEach((item, index) => {				if (index > 1) {					tableHeadR.push(item)				}			})			this.tableHeadR = tableHeadR			this.tableHeadRKey = tableHeadR			this.result = JSON.parse(option.result)			this.sumdata = JSON.parse(option.sumdata)			this.tableData = this.result;			this.resultcard = this.result			this.pagination()			this.showdata = this.result[0]		},		onShow() {},		methods: {			dj(e) {				this.showdata = this.result[e.current - 1]			},			//点击分页			pagination() {				this.total = this.result.length				let pageCount = Math.ceil(this.total / this.pageSize);				this.total % this.pageSize == 0 ? pageCount : pageCount + 1				let arr = this.result				let size = this.pageSize				const arrNum = Math.ceil(arr.length / size, 10); // Math.ceil()向上取整的方法，用来计算拆分后数组的长度				let index = 0; // 定义初始索引				let resIndex = 0; // 用来保存每次拆分的长度				const result = [];				while (index < arrNum) {					result[index] = arr.slice(Number(resIndex), Number(size) + Number(resIndex));					resIndex += size;					index++;				}				console.log(result)				this.result = result			},			// 点击单元格获取的值			getCellVal(e) {				console.log(e);				let data = JSON.stringify(e[0])				console.log(data)				uni.navigateTo({					url: `../../pagesA/detail/detail?list=${data}`				});			},			//自定义返回			left() {				uni.navigateBack({					delta: 1				});			},			changeSwitch(isSwitch) {				// console.log(isSwitch)				this.cut = !this.cut			},			//显示所有数据			detail(item, index) {				console.log('跳转', item)				let data = JSON.stringify(item)				console.log(data)				uni.navigateTo({					url: `../../pagesA/detail/detail?list=${data}`				});			}		}	}</script><style lang="scss">	page {		background-color: #E5E5E5;	}	.container {}	.switch {		margin: 20rpx;	}	.card {		display: flex;		justify-content: center;		align-items: center;		flex-direction: column;		.box {			margin: 20rpx 0;			width: 700rpx;			border-radius: 30rpx;			background-color: #ffffff;			font-weight: 400;			.boxunit1 {				padding: 20rpx 20rpx;				display: flex;				justify-content: space-between;				font-size: 40rpx;				border-bottom: 1px #E5E5E5 solid;				.boxunit1_name {					color: #52c8f1;				}			}			.boxunit2 {				font-size: 30rpx;				padding: 10rpx 20rpx;				display: flex;				justify-content: space-between;			}			.boxunit3 {				font-size: 30rpx;				padding: 10rpx 20rpx;				display: flex;			}		}	}	.tablebox {		margin: 0 20rpx;	}	.box1 {		margin: 20rpx auto;		background-color: #ffffff;		border-radius: 30rpx;		width: 700rpx;	}	.unit4_box {		display: flex;		flex-direction: column;		align-items: center;		padding: 20rpx;width: 200px;		.unit4_box_item {			font-size: 30rpx;			margin: 20rpx;			.unit4_box_value {				font-size: 40rpx;				color: #52c8f1;			}			.unit4_box_key {				font-size: 26rpx;			}		}    .unit4_box_item1{      font-size: 30rpx;      margin-bottom: 50rpx;      width: 150rpx;    }	}	.fixation {		top: 150rpx;		position: -webkit-sticky;		position: sticky;		z-index: 9999999;		background-color: #E5E5E5;		padding: 20rpx 0;	}</style>

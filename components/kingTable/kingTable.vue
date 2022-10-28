@@ -122,7 +122,7 @@ export default {
 		uni.getSystemInfo({
 			success: res => {
 				// 给定表格的高度
-				this.tableHeight = res.screenHeight - 60 + 'px';
+				//this.tableHeight = res.screenHeight - 300 + 'px';
 			}
 		});
 	},
