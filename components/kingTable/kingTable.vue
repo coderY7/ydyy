@@ -108,7 +108,7 @@ export default {
 				return {
 					backgroundColor: 'gold',
 					fontSize: '16px',
-					fontWeight: 'bold'
+					fontWeight: 'normal'
 				};
 			}
 		},
