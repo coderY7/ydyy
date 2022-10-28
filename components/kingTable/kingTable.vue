@@ -25,7 +25,7 @@
 				</view>
 			</view>
 			<!-- 右侧可左右滑动部分，结构跟左侧一模一样的，只是这样分开来弄可以解决左右滑动的问题，实现想不出其他方法了，求大佬改进 -->
-			<view class="">
+			<view class="" style="overflow-x: auto;">
 				<view class="kingFlex kingSticky" style="top: 0">
 					<view class="tableHead" v-for="(item, index) in tableHeadR" :key="index">
 						<view
@@ -139,9 +139,10 @@ export default {
 <style lang="scss" scoped>
 .kingTable {
 	// 解决刘海屏的问题
-	// margin-left: var(--status-bar-height);
+	margin-left: var(--status-bar-height);
 	// 一定要有，左右滑动的依据
 	overflow-x: auto;
+  overflow-y: auto;
 	// 改变边框的样式要修改此处
 	border-left: 1px solid #000;
 	.kingLeftCon {
