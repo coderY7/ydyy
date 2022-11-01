@@ -51,7 +51,7 @@
 		background:linear-gradient(-90deg,#52c8f1, #85d8f3);
 		font-size: 16px;
 		position: sticky;
-		z-index: 999;
+		z-index: 99999999999999;
 		top:0;
 		.nav{
 			display: flex;

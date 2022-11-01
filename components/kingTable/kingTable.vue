@@ -3,7 +3,8 @@
 		<view class="kingFlex" v-if="tableData.length != 0">
 			<!-- 左侧固定的主体部分 -->
 			<view class="kingSticky kingLeftCon">
-				<view class="kingFlex kingSticky" style="top: 0">
+
+				<view class="kingFlex kingSticky" style="top:0">
 					<view class="tableHead" v-for="(item, index) in tableHeadL" :key="index">
 						<view
 							class="tableColmn"
@@ -13,7 +14,8 @@
 						</view>
 					</view>
 				</view>
-				<view class="kingFlex first">
+
+				<view class="kingFlex first" style="overflow-y: auto">
 					<!-- 遍历左侧的的表头 -->
 					<block v-for="(item1, index1) in tableHeadLKey" :key="index1">
 						<view class="">
@@ -25,7 +27,8 @@
 				</view>
 			</view>
 			<!-- 右侧可左右滑动部分，结构跟左侧一模一样的，只是这样分开来弄可以解决左右滑动的问题，实现想不出其他方法了，求大佬改进 -->
-			<view class="" style="overflow-x: auto;">
+			<view class="" style="overflow-x: auto; overflow-y: hidden">
+
 				<view class="kingFlex kingSticky" style="top: 0">
 					<view class="tableHead" v-for="(item, index) in tableHeadR" :key="index">
 						<view
@@ -36,7 +39,8 @@
 						</view>
 					</view>
 				</view>
-				<view class="kingFlex">
+
+				<view class="kingFlex" style="">
 					<block v-for="(item1, index1) in tableHeadRKey" :key="index1">
 						<view class="">
 							<block v-for="(item, index) in tableData" :key="index">
@@ -45,17 +49,14 @@
 						</view>
 					</block>
 				</view>
+
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-/**
- * @Date: 2021-05-10
- * @author @拿菜刀砍电线
- * @Description:1、整体构思，左右两部分，可以左右滑动2、左右两部分里面又分上下两部分
- */
+
 export default {
 	data() {
 		return {
@@ -139,10 +140,10 @@ export default {
 <style lang="scss" scoped>
 .kingTable {
 	// 解决刘海屏的问题
-	margin-left: var(--status-bar-height);
+	//margin-left: var(--status-bar-height);
 	// 一定要有，左右滑动的依据
-	overflow-x: auto;
-  overflow-y: auto;
+	//overflow-x: auto;
+  //overflow-y: auto;
 	// 改变边框的样式要修改此处
 	border-left: 1px solid #000;
 	.kingLeftCon {
