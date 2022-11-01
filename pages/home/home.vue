@@ -108,6 +108,7 @@
                 type="column"
                 :opts="optsF"
                 :chartData="chartDataF"
+
             />
           </view>
         </view>
@@ -132,6 +133,7 @@
                 type="column"
                 :opts="optsA"
                 :chartData="chartDataA"
+
             />
           </view>
         </view>
@@ -419,7 +421,7 @@
 					cxfdbh.push(datas)
 				})
 				this.fdlist = cxfdbh
-			}, 1000)
+			}, 2000)
 			this.getdata()
       this.getdata2()
 
