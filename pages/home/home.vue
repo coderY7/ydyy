@@ -989,8 +989,10 @@ console.log(res)
     width: 100%;
     display: inline-flex;
     font-size: 22rpx;
-    .ownbox{
+    .ownbox:not(:last-child){
       border-right: 1px silver dashed;
+    }
+    .ownbox{
       padding: 20rpx;
       width: 48%;
       display: flex;
